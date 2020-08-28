@@ -1,5 +1,12 @@
 name: 'action-generate-docs'
 description: 'a GitHub action that allows you to automatically generate Markdown documentation'
+inputs:
+  type:
+    description: 'type of repository to generate the documentation for'
+    required: true
+  template:
+    description: 'the handlerbars (.hbs) template you would like to use. The documentation will be injected in place of {{>main}}'
+    required: false
 runs:
   using: 'node12'
   pre: 'src/pre.js'
