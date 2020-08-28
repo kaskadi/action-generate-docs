@@ -5,7 +5,7 @@ inputs:
     description: 'type of repository to generate the documentation for'
     required: true
   template:
-    description: 'the handlerbars (.hbs) template you would like to use. The documentation will be injected in place of {{>main}}'
+    description: 'the handlebars (.hbs) template you would like to use. The documentation will be injected in place of {{>main}}'
     required: false
 runs:
   using: 'node12'
