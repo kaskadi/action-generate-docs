@@ -1,5 +1,5 @@
 {
-  "name": "template-action",
+  "name": "action-generate-docs",
   "version": "1.0.0",
   "description": "",
   "main": "action.yml",
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kaskadi/template-action.git"
+    "url": "git+https://github.com/kaskadi/action-generate-docs.git"
   },
   "keywords": [],
   "author": "Klimapartner GmbH <kontakt@klimapartner.de> (https://klimapartner.de)",
@@ -19,9 +19,9 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/kaskadi/template-action/issues"
+    "url": "https://github.com/kaskadi/action-generate-docs/issues"
   },
-  "homepage": "https://github.com/kaskadi/template-action#readme",
+  "homepage": "https://github.com/kaskadi/action-generate-docs#readme",
   "devDependencies": {
     "chai": "^4.2.0",
     "mocha": "^8.1.1",
@@ -36,5 +36,6 @@
       "html"
     ],
     "report-dir": "./coverage"
-  }
+  },
+  "dependencies": {}
 }

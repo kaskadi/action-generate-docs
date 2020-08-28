@@ -1,4 +1,4 @@
-name: 'template-action'
+name: 'action-generate-docs'
 description: ''
 runs:
   using: 'node12'
