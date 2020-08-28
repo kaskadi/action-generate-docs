@@ -1,5 +1,5 @@
 name: 'action-generate-docs'
-description: ''
+description: 'a GitHub action that allows you to automatically generate Markdown documentation'
 runs:
   using: 'node12'
   pre: 'src/pre.js'
