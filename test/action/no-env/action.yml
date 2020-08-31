@@ -1,0 +1,20 @@
+name: 'test-action'
+description: 'this is a test action'
+inputs:
+  input1:
+    description: 'input 1'
+    default: 'hello'
+    required: true
+  input2:
+    description: 'input 2'
+    required: false
+outputs:
+  output1:
+    description: 'output 1'
+  output2:
+    description: 'output 2'
+runs:
+  using: 'node12'
+  pre: 'src/pre.js'
+  main: 'src/main.js'
+  post: 'src/post.js'
