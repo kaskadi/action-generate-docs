@@ -30,11 +30,9 @@ jobs:
     - uses: actions/checkout@v2
     - name: {YOUR-STEP-NAME}
       uses: kaskadi/action-generate-docs@master
-			with:
-				type: {TYPE-VALUE}
-				template: {TEMPLATE-VALUE}
-
-
+      with:
+        type: {TYPE-VALUE}
+        template: {TEMPLATE-VALUE}
 ```
 
 **Note:** everything contained in single curly brackets (`{ }`) needs to be replaced by your desired values
@@ -45,4 +43,25 @@ jobs:
 |   `type`   |  `true`  |         | type of repository to generate the documentation for                                                           |
 | `template` |  `false` |         | the handlebars (.hbs) template you would like to use. The documentation will be injected in place of {{>main}} |
 
-:point_down: **Here goes any extra details on how to use the action** :point_down:
+**In order to sign the commit for your newly generated docs via GPG**: add the following `step` before the actual documentation generation step:
+```
+    - name: Import GPG key
+      uses: crazy-max/ghaction-import-gpg@v2
+      with:
+        git_user_signingkey: true
+        git_commit_gpgsign: true
+      env:
+        GPG_PRIVATE_KEY: ${{ secrets.{YOUR-GPG-PRIVATE-KEY} }}
+        PASSPHRASE: ${{ secrets.{YOUR-GPG-PRIVATE-KEY-PASSPHRASE} }}
+```
+
+**If you do not need to sign your commit via GPG**: simply replace the `Import GPG key` step of the job by:
+```
+    - name: Configure GitHub user
+      run: |
+        git config --global user.name $GH_USER_NAME
+        git config --global user.email $GH_USER_EMAIL
+      env:
+        GH_USER_NAME: ${{ secrets.{YOUR-GITHUB-USER-NAME} }}
+        GH_USER_EMAIL: ${{ secrets.{YOUR-GITHUB-USER-EMAIL} }}
+```
