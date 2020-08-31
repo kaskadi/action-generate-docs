@@ -31,6 +31,11 @@ jobs:
     - uses: actions/checkout@v2
     - name: {YOUR-STEP-NAME}
       uses: kaskadi/action-generate-docs@master
+			with:
+				type: {TYPE-VALUE}
+				template: {TEMPLATE-VALUE}
+
+
 ```
 
 **Note:** everything contained in single curly brackets (`{ }`) needs to be replaced by your desired values
@@ -40,6 +45,5 @@ jobs:
 | :--------: | :------: | :-----: | :------------------------------------------------------------------------------------------------------------- |
 |   `type`   |  `true`  |         | type of repository to generate the documentation for                                                           |
 | `template` |  `false` |         | the handlebars (.hbs) template you would like to use. The documentation will be injected in place of {{>main}} |
-
 
 :point_down: **Here goes any extra details on how to use the action** :point_down:
