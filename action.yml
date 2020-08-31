@@ -1,5 +1,5 @@
 name: 'action-generate-docs'
-description: 'a GitHub action that allows you to automatically generate Markdown documentation'
+description: 'This action allows you to automatically generate Markdown documentation for your repository'
 inputs:
   type:
     description: 'type of repository to generate the documentation for'
