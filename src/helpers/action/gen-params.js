@@ -5,9 +5,9 @@ module.exports = (inputs, env) => {
 }
 
 function addHeader (header, config) {
-  return `\n\t\t\t${header}:\n${config}`
+  return `      ${header}:\n${config}`
 }
 
 function genParams (params) {
-  return Object.keys(params).map(key => `\t\t\t\t${key}: {${key.replace(/ /g, '_').toUpperCase()}-VALUE}`).join('\n')
+  return Object.keys(params).map(key => `        ${key}: {${key.replace(/ /g, '_').toUpperCase()}-VALUE}`).join('\n')
 }
