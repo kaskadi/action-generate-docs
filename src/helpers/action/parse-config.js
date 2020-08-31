@@ -21,7 +21,7 @@ function genInputsTable (inputs) {
     })
   ],
   { align: ['c', 'c', 'c', 'l'] })
-  return `**Inputs:**\n${mdTable}`
+  return addHeader('Inputs', mdTable)
 }
 
 function genOutputsTable (outputs) {
@@ -30,7 +30,7 @@ function genOutputsTable (outputs) {
     ...Object.entries(outputs).map(entry => [`\`${entry[0]}\``, entry[1].description])
   ],
   { align: ['c', 'l'] })
-  return `**Outputs:**\n${mdTable}`
+  return addHeader('Outputs', mdTable)
 }
 
 function genEnvTable (env) {
@@ -42,5 +42,9 @@ function genEnvTable (env) {
     })
   ],
   { align: ['c', 'c', 'l'] })
-  return `**Environment variables:**\n${mdTable}\n\n`
+  return addHeader('Environment variables', mdTable)
+}
+
+function addHeader (header, table) {
+  return `\n**${header}:**\n${table}\n`
 }

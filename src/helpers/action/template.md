@@ -16,10 +16,8 @@ jobs:
     - uses: actions/checkout@v2
     - name: {YOUR-STEP-NAME}
       uses: kaskadi/{{>name}}@{{>branch}}
+
 ```
 
 **Note:** everything contained in single curly brackets (`{ }`) needs to be replaced by your desired values
-
-{{>inputs}}
-{{>outputs}}
-{{>env}}
+{{>inputs}}{{>outputs}}{{>env}}
