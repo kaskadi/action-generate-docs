@@ -2,6 +2,7 @@ const { spawnSync } = require('child_process')
 
 module.exports = test => {
   console.log('INFO: commiting and pushing new documentation...')
+  spawnSync('git', ['add', 'README.md'])
   const gpgSign = spawnSync('git', ['config', 'commit.gpgSign']).stdout
   let commitParams = ['commit', '-am', 'Generated documentation']
   commitParams = gpgSign.length > 0 ? addFlag(commitParams, '-S') : commitParams
