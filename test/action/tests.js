@@ -4,15 +4,12 @@ const steps = ['pre', 'main']
 const fs = require('fs')
 const chai = require('chai')
 chai.should()
-const baseRef = process.env.GITHUB_BASE_REF
 
 describe('action docs generation', function () {
   this.timeout(60000)
   before(async () => {
     process.env.INPUT_TYPE = 'action'
-    if (baseRef) {
-      process.env.GITHUB_BASE_REF = 'ref:head/master'
-    }
+    process.env.GITHUB_BASE_REF = 'ref:head/master'
   })
   it('should generate docs with no template provided', async () => {
     await test('test/action/all-params', 'validation-no-template.md')
@@ -27,7 +24,7 @@ describe('action docs generation', function () {
     await test('test/action/all-params', 'validation-branch.md')
   })
   it('should generate docs with no inputs', async () => {
-    delete process.env.GITHUB_BASE_REF
+    process.env.GITHUB_BASE_REF = 'ref:head/master'
     await test('test/action/no-inputs', 'validation.md')
   })
   it('should generate docs with no env', async () => {
@@ -43,9 +40,6 @@ describe('action docs generation', function () {
   after(() => {
     delete process.env.INPUT_TYPE
     delete process.env.GITHUB_BASE_REF
-    if (baseRef) {
-      process.env.GITHUB_BASE_REF = baseRef
-    }
   })
 })
 
