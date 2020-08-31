@@ -1,6 +1,6 @@
 const core = require('@actions/core')
 
-const test = !process.env.GITHUB_ACTIONS || process.env.GITHUB_REPOSITORY === 'kaskadi/action-generate-docs'
+const test = process.env.TEST_ENV ? JSON.parse(process.env.TEST_ENV) : false
 
 const type = core.getInput('type', { required: true })
 const templatePath = core.getInput('template')

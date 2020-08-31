@@ -4,7 +4,7 @@
   "description": "",
   "main": "action.yml",
   "scripts": {
-    "test": "standard --fix && mocha test/*.test.js --require test/mocha-color-setter.js",
+    "test": "export TEST_ENV=\"true\" && standard --fix && mocha test/*.test.js --require test/mocha-color-setter.js",
     "coverage": "nyc npm run test"
   },
   "repository": {
