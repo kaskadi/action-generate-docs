@@ -1,7 +1,7 @@
 module.exports = (inputs, env) => {
   const inputsConfig = inputs ? addHeader('with', genParams(inputs)) : ''
   const envConfig = env ? addHeader('env', genParams(env)) : ''
-  return `${inputsConfig}\n${envConfig}`
+  return [inputsConfig, envConfig].filter(config => config.length > 0).join('\n')
 }
 
 function addHeader (header, config) {

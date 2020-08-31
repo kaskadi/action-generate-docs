@@ -8,24 +8,40 @@ chai.should()
 describe('action docs generation', function () {
   this.timeout(60000)
   before(async () => {
-    process.chdir('test/action')
     process.env.INPUT_TYPE = 'action'
   })
-  it('should generate template with no template provided', async () => {
-    await runAction(steps)
-    const docs = fs.readFileSync('README.md', 'utf8')
-    const validation = fs.readFileSync('data/validation-no-template.md', 'utf8')
-    docs.should.equal(validation)
+  it('should generate docs with no template provided', async () => {
+    await test('test/action/all-params', 'validation-no-template.md')
   })
-  it('should generate template with template provided', async () => {
-    process.env.INPUT_TEMPLATE = 'data/template.md'
-    await runAction(steps)
-    const docs = fs.readFileSync('README.md', 'utf8')
-    const validation = fs.readFileSync('data/validation.md', 'utf8')
-    docs.should.equal(validation)
+  it('should generate docs with template provided', async () => {
+    process.env.INPUT_TEMPLATE = '../data/template.md'
+    await test('test/action/all-params', 'validation.md')
   })
-  after(() => {
+  it('should generate docs refering to the current branch', async () => {
+    delete process.env.INPUT_TEMPLATE
+    process.env.GITHUB_BASE_REF = 'ref:head/dev'
+    await test('test/action/all-params', 'validation-branch.md')
+  })
+  it('should generate docs with no inputs', async () => {
+    delete process.env.GITHUB_BASE_REF
+    await test('test/action/no-inputs', 'validation.md')
+  })
+  it('should generate docs with no env', async () => {
+    await test('test/action/no-env', 'validation.md')
+  })
+  it('should generate docs with no outputs', async () => {
+    await test('test/action/no-outputs', 'validation.md')
+  })
+  afterEach(() => {
     fs.unlinkSync('README.md')
-    process.chdir('../../')
+    process.chdir('../../../')
   })
 })
+
+async function test (testFolder, validationFile) {
+  process.chdir(testFolder)
+  await runAction(steps)
+  const docs = fs.readFileSync('README.md', 'utf8')
+  const validation = fs.readFileSync(validationFile, 'utf8')
+  docs.should.equal(validation)
+}
