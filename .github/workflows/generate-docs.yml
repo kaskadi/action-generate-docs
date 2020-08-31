@@ -1,0 +1,21 @@
+name: generate-docs
+on:
+  push:
+    branches:
+      - 'master'
+    paths:
+      - 'action.yml'
+      - 'docs/**'
+      - 'package.json'
+jobs:
+  generate-docs:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install dependencies
+      run: npm i
+    - name: Generate documentation
+      run: node src/main
+      env:
+        INPUT_TYPE: action
+        INPUT_TEMPLATE: 'docs/template.md'
