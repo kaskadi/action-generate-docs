@@ -14,7 +14,7 @@
 
 # What is this action for?
 
-a GitHub action that allows you to automatically generate Markdown documentation
+This action allows you to automatically generate Markdown documentation for your repository
 
 # How to use it?
 
