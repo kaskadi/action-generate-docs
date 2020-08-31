@@ -15,8 +15,8 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: {YOUR-STEP-NAME}
-      uses: kaskadi/{{>name}}@{{>branch}}{{>params}}
-
+      uses: kaskadi/{{>name}}@{{>branch}}
+{{>params}}
 ```
 
 **Note:** everything contained in single curly brackets (`{ }`) needs to be replaced by your desired values
