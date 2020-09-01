@@ -9,5 +9,9 @@ function addHeader (header, config) {
 }
 
 function genParams (params) {
-  return Object.keys(params).map(key => `        ${key}: {${key.replace(/ /g, '_').toUpperCase()}-VALUE}`).join('\n')
+  return Object.entries(params).map(entry => {
+    const key = entry[0]
+    const value = entry[1].value || `{${key.replace(/ /g, '_').toUpperCase()}-VALUE}`
+    return `        ${key}: ${value}`
+  }).join('\n')
 }
