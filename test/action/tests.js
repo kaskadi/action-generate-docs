@@ -17,14 +17,17 @@ describe('action docs generation', function () {
   it('should generate docs with template provided', async () => {
     process.env.INPUT_TEMPLATE = '../data/template.md'
     await test('test/action/all-params', 'validation.md')
+    delete process.env.INPUT_TEMPLATE
   })
   it('should generate docs refering to the current branch', async () => {
-    delete process.env.INPUT_TEMPLATE
     process.env.GITHUB_BASE_REF = 'ref:head/dev'
     await test('test/action/all-params', 'validation-branch.md')
+    process.env.GITHUB_BASE_REF = 'ref:head/master'
+  })
+  it('should use placeholder values for value in configuration example', async () => {
+    await test('test/action/ph-value', 'validation.md')
   })
   it('should generate docs with no inputs', async () => {
-    process.env.GITHUB_BASE_REF = 'ref:head/master'
     await test('test/action/no-inputs', 'validation.md')
   })
   it('should generate docs with no env', async () => {
