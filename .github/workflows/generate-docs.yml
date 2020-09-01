@@ -22,7 +22,7 @@ jobs:
         GPG_PRIVATE_KEY: ${{ secrets.KASKADI_BOT_GPG_PRIVATE_KEY }}
         PASSPHRASE: ${{ secrets.KASKADI_BOT_GPG_PRIVATE_PASSPHRASE }}
     - name: Generate documentation
-      run: node src/main
+      run: node src/pre && node src/main
       env:
         INPUT_TYPE: action
         INPUT_TEMPLATE: 'docs/template.md'
