@@ -5,7 +5,8 @@
   "main": "action.yml",
   "scripts": {
     "test": "export TEST_ENV=\"true\" && standard --fix && mocha test/*.test.js --require test/mocha-color-setter.js",
-    "coverage": "nyc npm run test"
+    "coverage": "nyc npm run test",
+    "exec": "export TEST_ENV=\"true\" && export INPUT_TEMPLATE=\"docs/template.md\" && export INPUT_TYPE=\"action\" && node src/main"
   },
   "repository": {
     "type": "git",
@@ -41,7 +42,7 @@
     "@actions/core": "^1.2.5",
     "jsdoc-to-markdown": "^6.0.1",
     "markdown-table": "^2.0.0",
-    "markshell": "0.0.6-beta6",
+    "markshell": "0.0.7-beta7",
     "yaml": "^1.10.0"
   }
 }
