@@ -4,7 +4,6 @@ inputs:
   type:
     description: 'type of repository to generate the documentation for'
     required: true
-    value: 'action, api, etc.'
   template:
     description: 'the template (.md) you would like to use. The documentation will be injected in place of {{>main}}'
     required: false
