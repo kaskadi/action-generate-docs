@@ -26,3 +26,5 @@ jobs:
       with:
         type: action
         template: 'docs/template.md'
+      env:
+        FORCE_COLOR: 3
