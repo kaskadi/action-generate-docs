@@ -33,6 +33,8 @@ jobs:
       with:
         type: {TYPE-VALUE}
         template: {TEMPLATE-VALUE}
+      env:
+        FORCE_COLOR: {FORCE_COLOR-VALUE}
 ```
 
 **Note:** everything contained in single curly brackets (`{ }`) needs to be replaced by your desired values
@@ -42,6 +44,11 @@ jobs:
 | :--------: | :------: | :-----: | :------------------------------------------------------------------------------------------------- |
 |   `type`   |  `true`  |         | type of repository to generate the documentation for                                               |
 | `template` |  `false` |         | the template (.md) you would like to use. The documentation will be injected in place of {{>main}} |
+
+**Environment variables:**
+|    Variable   | Required | Description                                                                                                                                                                   |
+| :-----------: | :------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `FORCE_COLOR` |  `false` | Allows to force colorized output for the documentation preview. Values accepted are ranging from 0 to 3, 3 being the most colorized output and 0 being a non colorized output |
 
 **In order to sign the commit for your newly generated docs via GPG**: add the following `step` before the actual documentation generation step:
 ```yaml
