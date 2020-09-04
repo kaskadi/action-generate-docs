@@ -42,7 +42,7 @@
     "@actions/core": "^1.2.5",
     "jsdoc-to-markdown": "^6.0.1",
     "markdown-table": "^2.0.0",
-    "markshell": "0.0.8",
+    "markshell": "0.0.9",
     "yaml": "^1.10.0"
   }
 }
