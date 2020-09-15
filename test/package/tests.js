@@ -13,6 +13,9 @@ describe('package docs generation', function () {
   it('should generate docs with no template provided', async () => {
     await test('test/package/no-template', 'validation.md')
   })
+  it('should generate docs for nested files', async () => {
+    await test('test/package/nested', 'validation.md')
+  })
   it('should generate docs with a template provided', async () => {
     process.env.INPUT_TEMPLATE = '../data/template.md'
     await test('test/package/with-template', 'validation.md')
