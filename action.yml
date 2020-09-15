@@ -2,7 +2,7 @@ name: 'action-generate-docs'
 description: 'This action allows you to automatically generate Markdown documentation for your repository'
 inputs:
   type:
-    description: 'type of repository to generate the documentation for'
+    description: 'type of repository to generate the documentation for. Accepted values: `action`, `package`'
     required: true
   template:
     description: 'the template (.md) you would like to use. The documentation will be injected in place of {{>main}}'
