@@ -7,7 +7,7 @@ chai.should()
 
 describe('action docs generation', function () {
   this.timeout(60000)
-  before(async () => {
+  before(() => {
     process.env.INPUT_TYPE = 'action'
     process.env.GITHUB_BASE_REF = 'ref:head/master'
   })

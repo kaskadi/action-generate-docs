@@ -6,4 +6,5 @@ describe('template-action', function () {
   // *******
 
   require('./action/tests.js')
+  require('./package/tests.js')
 })
