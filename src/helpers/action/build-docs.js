@@ -1,4 +1,5 @@
 const path = require('path')
+const replaceInFile = require('../replace-in-file.js')
 
 module.exports = (fs, config, templatePath) => {
   let main = fs.readFileSync(path.join(__dirname, 'template.md'), 'utf8')
@@ -14,11 +15,6 @@ module.exports = (fs, config, templatePath) => {
     return fs.readFileSync(`${process.cwd()}/${templatePath}`, 'utf8').replace(regExp, main)
   }
   return main
-}
-
-function replaceInFile (file, key, value) {
-  const regExp = new RegExp(`{{>${key}}}`, 'g')
-  return file.replace(regExp, value)
 }
 
 function getCurrentBranchName () {
