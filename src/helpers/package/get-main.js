@@ -3,7 +3,7 @@ const jsdoc2md = require('jsdoc-to-markdown')
 module.exports = ({ replaceInFile, fs, path }) => {
   const pjson = JSON.parse(fs.readFileSync('package.json', 'utf8'))
   const replaceOpts = {
-    flags: pjson.bin ? '-g' : '',
+    flags: pjson.bin ? '-g ' : '',
     'repo-name': pjson.name,
     main: genBaseDocs()
   }
