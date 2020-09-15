@@ -1,11 +1,7 @@
-# Hello
-
-Test
-
 # Installation
 
 ```
-npm i test-repo
+npm i -g test-repo
 ```
 
 # Usage
@@ -21,5 +17,3 @@ A quite wonderful function.
 | --- | --- | --- |
 | cloak | <code>object</code> | Privacy gown |
 | dagger | <code>object</code> | Security |
-
-End of the test

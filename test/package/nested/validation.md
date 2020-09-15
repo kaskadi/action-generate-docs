@@ -1,3 +1,11 @@
+# Installation
+
+```
+npm i test-repo
+```
+
+# Usage
+
 ## Functions
 
 <dl>
