@@ -18,7 +18,8 @@ function genBaseDocs () {
   const opts = {
     files: '**/**.js',
     'example-lang': 'js',
-    'no-cache': true
+    'no-cache': true,
+    'heading-depth': 2
   }
   return jsdoc2md.renderSync(opts).trim()
 }
