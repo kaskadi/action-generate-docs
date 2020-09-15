@@ -1,3 +1,11 @@
+# Installation
+
+```
+npm i test-repo
+```
+
+# Usage
+
 <a name="protection"></a>
 
 ## protection(cloak, dagger) ⇒ <code>survival</code>

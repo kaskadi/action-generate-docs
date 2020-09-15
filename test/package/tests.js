@@ -16,6 +16,9 @@ describe('package docs generation', function () {
   it('should generate docs for nested files', async () => {
     await test('test/package/nested', 'validation.md')
   })
+  it('should handle CLI type of packages', async () => {
+    await test('test/package/cli-pkg', 'validation.md')
+  })
   it('should generate docs with a template provided', async () => {
     process.env.INPUT_TEMPLATE = '../data/template.md'
     await test('test/package/with-template', 'validation.md')
@@ -25,7 +28,7 @@ describe('package docs generation', function () {
     await test('test/package/wrong-template', 'validation.md')
   })
   afterEach(() => {
-    fs.unlinkSync('README.md')
+    // fs.unlinkSync('README.md')
     process.chdir('../../../')
   })
   after(() => {
