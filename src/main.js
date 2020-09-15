@@ -1,10 +1,16 @@
 const core = require('@actions/core')
+const fs = require('fs')
 const markshell = require('markshell')
 
 const test = process.env.TEST_ENV ? JSON.parse(process.env.TEST_ENV) : false
 
 const type = core.getInput('type', { required: true })
 const templatePath = core.getInput('template')
+
+if (!fs.existsSync(`./helpers/${type}`)) {
+  console.log(`WARNING: ${type} is not a supported repository type... Please see action documentation for more information. Aborting job...`)
+  process.exit(0)
+}
 
 require(`./helpers/${type}/index.js`)(templatePath)
 try {
