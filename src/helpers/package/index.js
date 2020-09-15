@@ -12,5 +12,6 @@ module.exports = templatePath => {
     'no-cache': true
   }
   const docs = jsdoc2md.renderSync(opts).trim()
+  console.log('SUCCESS: documentation successfully generated!')
   fs.writeFileSync('README.md', docs, 'utf8')
 }
