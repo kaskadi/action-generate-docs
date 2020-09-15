@@ -1,13 +1,13 @@
 /* eslint-env mocha */
 const runAction = require('../helpers/run-action.js')
-const steps = ['pre', 'main']
 const fs = require('fs')
 const chai = require('chai')
 chai.should()
 
 describe('package docs generation', function () {
   this.timeout(60000)
-  before(() => {
+  before(async () => {
+    await runAction(['pre'])
     process.env.INPUT_TYPE = 'package'
   })
   it('should generate docs with no template provided', async () => {
@@ -40,7 +40,7 @@ describe('package docs generation', function () {
 
 async function test (testFolder, validationFile) {
   process.chdir(testFolder)
-  await runAction(steps)
+  await runAction(['main'])
   const docs = fs.readFileSync('README.md', 'utf8')
   const validation = fs.readFileSync(validationFile, 'utf8')
   docs.should.equal(validation)
