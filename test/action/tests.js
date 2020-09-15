@@ -15,7 +15,7 @@ describe('action docs generation', function () {
     await test('test/action/all-params', 'validation-no-template.md')
   })
   it('should generate docs with template provided', async () => {
-    process.env.INPUT_TEMPLATE = '../data/template.md'
+    process.env.INPUT_TEMPLATE = '../template.md'
     await test('test/action/all-params', 'validation.md')
     delete process.env.INPUT_TEMPLATE
   })

@@ -20,20 +20,21 @@ describe('package docs generation', function () {
     await test('test/package/cli-pkg', 'validation.md')
   })
   it('should generate docs with a template provided', async () => {
-    process.env.INPUT_TEMPLATE = '../data/template.md'
+    process.env.INPUT_TEMPLATE = '../template.md'
     await test('test/package/with-template', 'validation.md')
+    delete process.env.INPUT_TEMPLATE
   })
   it('should generate docs as if no template was provided if the template file does not exist', async () => {
-    process.env.INPUT_TEMPLATE = '../data/template-not-existing.md'
+    process.env.INPUT_TEMPLATE = '../template-not-existing.md'
     await test('test/package/wrong-template', 'validation.md')
+    delete process.env.INPUT_TEMPLATE
   })
   afterEach(() => {
-    // fs.unlinkSync('README.md')
+    fs.unlinkSync('README.md')
     process.chdir('../../../')
   })
   after(() => {
     delete process.env.INPUT_TYPE
-    delete process.env.INPUT_TEMPLATE
   })
 })
 
