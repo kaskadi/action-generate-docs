@@ -1,7 +1,6 @@
 module.exports = ({ replaceInFile, fs, path }, templatePath, main) => {
-  const absTemplatePath = path.join(process.cwd(), templatePath)
-  if (!fs.existsSync(absTemplatePath)) {
+  if (!fs.existsSync(templatePath) || !templatePath) {
     return main
   }
-  return replaceInFile(fs.readFileSync(absTemplatePath, 'utf8'), 'main', main)
+  return replaceInFile(fs.readFileSync(templatePath, 'utf8'), 'main', main)
 }
