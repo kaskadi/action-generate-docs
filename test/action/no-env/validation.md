@@ -6,7 +6,7 @@ this is a test action
 
 You can use the following code as a new _GitHub Actions Workflow_:
 
-```
+```yaml
 name: {YOUR-ACTION-NAME}
 on: [{YOUR-ACTION-EVENT}]
 jobs:
