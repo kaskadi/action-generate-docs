@@ -40,7 +40,7 @@ jobs:
 **Inputs:**
 |    Input   | Required | Default | Description                                                                                        |
 | :--------: | :------: | :-----: | :------------------------------------------------------------------------------------------------- |
-|   `type`   |  `true`  |         | type of repository to generate the documentation for                                               |
+|   `type`   |  `true`  |         | type of repository to generate the documentation for. Accepted values: `action`, `package`         |
 | `template` |  `false` |         | the template (.md) you would like to use. The documentation will be injected in place of {{>main}} |
 
 **In order to sign the commit for your newly generated docs via GPG**: add the following `step` before the actual documentation generation step:
