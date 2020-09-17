@@ -1,4 +1,5 @@
 [![Build status](https://img.shields.io/github/workflow/status/kaskadi/action-generate-docs/build?label=build&logo=mocha)](https://github.com/kaskadi/action-generate-docs/actions?query=workflow%3Abuild)
+[![Docs generation status](https://img.shields.io/github/workflow/status/kaskadi/action-generate-docs/generate-docs?label=docs&logo=read-the-docs)](https://github.com/kaskadi/action-generate-docs/actions?query=workflow%3Agenerate-docs)
 
 **CodeClimate**
 
