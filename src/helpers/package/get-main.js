@@ -1,4 +1,6 @@
 const jsdoc2md = require('jsdoc-to-markdown')
+const { spawnSync } = require('child_process')
+const glob = require('glob')
 
 module.exports = ({ replaceInFile, fs, path }) => {
   const pjson = JSON.parse(fs.readFileSync('package.json', 'utf8'))
@@ -16,16 +18,14 @@ module.exports = ({ replaceInFile, fs, path }) => {
 
 function genBaseDocs (path) {
   const opts = {
-    files: '**/**.js',
+    files: glob.sync('**/*.js', { ignore: 'node_modules/**' }),
     'example-lang': 'js',
     'no-cache': true,
     'heading-depth': 2,
     plugin: '@godaddy/dmd'
   }
-  const oldPath = process.env.NODE_PATH
-  const pluginDir = path.join(__dirname, '../../../node_modules')
-  process.env.NODE_PATH = `${oldPath}:${pluginDir}`
+  spawnSync('npm', ['i', '@godaddy/dmd'])
   const main = jsdoc2md.renderSync(opts).trim()
-  process.env.NODE_PATH = oldPath
+  spawnSync('npm', ['rm', '@godaddy/dmd'])
   return main
 }

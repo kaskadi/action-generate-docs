@@ -1,3 +1,4 @@
 {
-  "name": "test-repo"
+  "name": "test-repo",
+  "dependencies": {}
 }
