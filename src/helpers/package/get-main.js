@@ -5,7 +5,7 @@ module.exports = ({ replaceInFile, fs, path }) => {
   const replaceOpts = {
     flags: pjson.bin ? '-g ' : '',
     'repo-name': pjson.name,
-    main: genBaseDocs()
+    main: genBaseDocs(path)
   }
   let main = fs.readFileSync(path.join(__dirname, 'template.md'), 'utf8')
   for (const key in replaceOpts) {
@@ -14,7 +14,7 @@ module.exports = ({ replaceInFile, fs, path }) => {
   return main
 }
 
-function genBaseDocs () {
+function genBaseDocs (path) {
   const opts = {
     files: '**/**.js',
     'example-lang': 'js',
@@ -22,5 +22,10 @@ function genBaseDocs () {
     'heading-depth': 2,
     plugin: '@godaddy/dmd'
   }
-  return jsdoc2md.renderSync(opts).trim()
+  const oldPath = process.env.NODE_PATH
+  const pluginDir = path.join(__dirname, '../../../node_modules')
+  process.env.NODE_PATH = `${oldPath}:${pluginDir}`
+  const main = jsdoc2md.renderSync(opts).trim()
+  process.env.NODE_PATH = oldPath
+  return main
 }
