@@ -4,6 +4,6 @@
 npm i {{>flags}}{{>repo-name}}
 ```
 
-# Usage
+# API documentation
 
 {{>main}}

@@ -8,7 +8,7 @@ Test
 npm i test-repo
 ```
 
-# Usage
+# API documentation
 
 ## protection(cloak, dagger)
 

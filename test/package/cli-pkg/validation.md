@@ -4,7 +4,7 @@
 npm i -g test-repo
 ```
 
-# Usage
+# API documentation
 
 ## protection(cloak, dagger)
 
