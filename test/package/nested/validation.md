@@ -8,35 +8,36 @@ npm i test-repo
 
 ## Functions
 
-<dl>
-<dt><a href="#protection">protection(cloak, dagger)</a> ⇒ <code>survival</code></dt>
-<dd><p>A quite wonderful function.</p>
-</dd>
-<dt><a href="#help">help(message, destination)</a> ⇒ <code>call</code></dt>
-<dd><p>A function to call for help.</p>
-</dd>
-</dl>
+Name | Description
+------ | -----------
+[protection(cloak, dagger)] | A quite wonderful function.
+[help(message, destination)] | A function to call for help.
 
-<a name="protection"></a>
 
-## protection(cloak, dagger) ⇒ <code>survival</code>
+## protection(cloak, dagger)
+
 A quite wonderful function.
 
 **Kind**: global function  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| cloak | <code>object</code> | Privacy gown |
-| dagger | <code>object</code> | Security |
+| cloak | `object` | Privacy gown |
+| dagger | `object` | Security |
 
-<a name="help"></a>
 
-## help(message, destination) ⇒ <code>call</code>
+## help(message, destination)
+
 A function to call for help.
 
 **Kind**: global function  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| message | <code>string</code> | Message to send |
-| destination | <code>object</code> | Destination for message |
+| message | `string` | Message to send |
+| destination | `object` | Destination for message |
+
+<!-- LINKS -->
+
+[protection(cloak, dagger)]:#protectioncloak-dagger
+[help(message, destination)]:#helpmessage-destination

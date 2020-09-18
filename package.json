@@ -39,6 +39,7 @@
   },
   "dependencies": {
     "@actions/core": "^1.2.5",
+    "@godaddy/dmd": "^1.0.3",
     "jsdoc-to-markdown": "^6.0.1",
     "markdown-table": "^2.0.0",
     "markshell": "0.0.9",

@@ -6,14 +6,15 @@ npm i test-repo
 
 # Usage
 
-<a name="protection"></a>
+## protection(cloak, dagger)
 
-## protection(cloak, dagger) ⇒ <code>survival</code>
 A quite wonderful function.
 
 **Kind**: global function  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| cloak | <code>object</code> | Privacy gown |
-| dagger | <code>object</code> | Security |
+| cloak | `object` | Privacy gown |
+| dagger | `object` | Security |
+
+<!-- LINKS -->

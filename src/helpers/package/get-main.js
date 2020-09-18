@@ -19,7 +19,8 @@ function genBaseDocs () {
     files: '**/**.js',
     'example-lang': 'js',
     'no-cache': true,
-    'heading-depth': 2
+    'heading-depth': 2,
+    plugin: '@godaddy/dmd'
   }
   return jsdoc2md.renderSync(opts).trim()
 }
