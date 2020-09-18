@@ -9,6 +9,7 @@ describe('template-action', function () {
   require('./pre/tests.js')
   // *******
   it('should error when using a non supported repository type', async function () {
+    this.timeout(30000)
     process.env.INPUT_TYPE = 'hello'
     await runAction(['main'])
     existsSync('test/README.md').should.equal(false)
