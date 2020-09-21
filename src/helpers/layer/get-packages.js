@@ -5,5 +5,5 @@ module.exports = (layerPath, fs) => {
 
 function buildDepList (dependencies) {
   dependencies = Object.keys(dependencies)
-  return dependencies.map(dependency => `- \`${dependency}\` (see [here](https://www.npmjs.com/package/${dependency}) on NPM)`).join('\n')
+  return dependencies.map(dependency => `- \`${dependency}\` ([see on NPM](https://www.npmjs.com/package/${dependency}))`).join('\n')
 }
