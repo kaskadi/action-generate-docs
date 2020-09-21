@@ -1,6 +1,6 @@
 module.exports = (layerPath, fs) => {
   const { dependencies } = JSON.parse(fs.readFileSync(`${layerPath}/nodejs/package.json`, 'utf8'))
-  return dependencies ? buildDepList(dependencies) : ''
+  return dependencies ? buildDepList(dependencies) : 'No NPM dependencies installed...'
 }
 
 function buildDepList (dependencies) {
