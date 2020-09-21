@@ -4,6 +4,8 @@ const fs = require('fs')
 const chai = require('chai')
 chai.should()
 
+const cwd = process.cwd()
+
 describe('action docs generation', function () {
   this.timeout(60000)
   before(async () => {
@@ -22,6 +24,11 @@ describe('action docs generation', function () {
   it('should generate docs refering to the current branch', async () => {
     process.env.GITHUB_BASE_REF = 'ref:head/dev'
     await test('test/action/all-params', 'validation-branch.md')
+    process.chdir(cwd)
+    delete process.env.GITHUB_BASE_REF
+    process.env.GITHUB_REF = 'ref:head/dev'
+    await test('test/action/all-params', 'validation-branch.md')
+    delete process.env.GITHUB_REF
     process.env.GITHUB_BASE_REF = 'ref:head/master'
   })
   it('should use placeholder values for value in configuration example', async () => {
@@ -38,7 +45,7 @@ describe('action docs generation', function () {
   })
   afterEach(() => {
     fs.unlinkSync('README.md')
-    process.chdir('../../../')
+    process.chdir(cwd)
   })
   after(() => {
     delete process.env.INPUT_TYPE

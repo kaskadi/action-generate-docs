@@ -9,7 +9,7 @@ module.exports = ({ replaceInFile, fs, path }) => {
     'repo-name': pjson.name,
     main: genBaseDocs(path)
   }
-  let main = fs.readFileSync(path.join(__dirname, 'template.md'), 'utf8')
+  let main = fs.readFileSync(path.join(__dirname, 'package-partial.md'), 'utf8')
   for (const key in replaceOpts) {
     main = replaceInFile(main, key, replaceOpts[key])
   }

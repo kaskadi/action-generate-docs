@@ -10,26 +10,27 @@ describe('package docs generation', function () {
   this.timeout(60000)
   before(async () => {
     await runAction(['pre'])
-    process.env.INPUT_TYPE = 'package'
+    process.env.INPUT_TYPE = 'layer'
   })
   it('should generate docs with no template provided', async () => {
-    await test('test/package/no-template', 'validation.md')
-  })
-  it('should generate docs for nested files', async () => {
-    await test('test/package/nested', 'validation.md')
-  })
-  it('should handle CLI type of packages', async () => {
-    await test('test/package/cli-pkg', 'validation.md')
+    await test('test/layer/no-template', 'validation.md')
   })
   it('should generate docs with a template provided', async () => {
     process.env.INPUT_TEMPLATE = '../template.md'
-    await test('test/package/with-template', 'validation.md')
+    await test('test/layer/with-template', 'validation.md')
     delete process.env.INPUT_TEMPLATE
   })
-  it('should generate docs as if no template was provided if the template file does not exist', async () => {
-    process.env.INPUT_TEMPLATE = '../template-not-existing.md'
-    await test('test/package/wrong-template', 'validation.md')
-    delete process.env.INPUT_TEMPLATE
+  it('should generate docs with any path to nodejs folder', async () => {
+    await test('test/layer/layer-path', 'validation.md')
+  })
+  it('should generate docs with no description provided in package.json', async () => {
+    await test('test/layer/no-description', 'validation.md')
+  })
+  it('should generate docs with no packages installed yet', async () => {
+    const validationPath = '../validation.md'
+    await test('test/layer/no-packages/no-deps', validationPath)
+    process.chdir(cwd)
+    await test('test/layer/no-packages/empty-deps', validationPath)
   })
   afterEach(() => {
     fs.unlinkSync('README.md')
