@@ -4,6 +4,8 @@ const fs = require('fs')
 const chai = require('chai')
 chai.should()
 
+const cwd = process.cwd()
+
 describe('package docs generation', function () {
   this.timeout(60000)
   before(async () => {
@@ -31,7 +33,7 @@ describe('package docs generation', function () {
   })
   afterEach(() => {
     fs.unlinkSync('README.md')
-    process.chdir('../../../')
+    process.chdir(cwd)
   })
   after(() => {
     delete process.env.INPUT_TYPE
