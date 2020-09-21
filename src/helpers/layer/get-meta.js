@@ -4,7 +4,7 @@ module.exports = (fs) => {
   const { name, description } = JSON.parse(fs.readFileSync('package.json', 'utf8'))
   const layerName = snakeToCamel(name)
   const sls = YAML.parse(fs.readFileSync('serverless.yml', 'utf8'))
-  const layerPath = sls.layer[layerName].path
+  const layerPath = sls.layers[layerName].path
   return { description, layerPath }
 }
 
