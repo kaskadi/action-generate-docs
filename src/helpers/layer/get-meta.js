@@ -5,7 +5,10 @@ module.exports = (fs) => {
   const layerName = snakeToCamel(name)
   const sls = YAML.parse(fs.readFileSync('serverless.yml', 'utf8'))
   const layerPath = sls.layers[layerName].path
-  return { description, layerPath }
+  return {
+    description: description.length > 0 ? description : 'No description found in package.json...',
+    layerPath
+  }
 }
 
 function snakeToCamel (str) {
