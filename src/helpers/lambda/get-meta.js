@@ -11,7 +11,7 @@ module.exports = ({ fs }) => {
     description: description.length > 0 ? description : 'No description found in package.json...',
     details: {
       name,
-      sources: lambdaConfig.events ? `<ul>${lambdaConfig.events.map(event => `<li>${getEventName(event)}</li>`).join('')}</ul>` : [],
+      sources: lambdaConfig.events.length > 0 ? `<ul>${lambdaConfig.events.map(event => `<li>${getEventName(event)}</li>`).join('')}</ul>` : 'No source defined',
       timeout: lambdaConfig.timeout || 'default',
       handler: lambdaConfig.handler,
       ...lambdaConfig.destinations && { destinations: `<ul><li>On success: ${lambdaConfig.destinations.onSuccess}</li><li>On failure: ${lambdaConfig.destinations.onFailure}</li></ul>` }
