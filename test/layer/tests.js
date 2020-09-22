@@ -18,9 +18,9 @@ describe('layer docs generation', function () {
   it('should generate docs with a template provided', async () => {
     process.env.INPUT_TEMPLATE = '../template.md'
     await test('test/layer/with-template', 'validation.md')
-    delete process.env.INPUT_TEMPLATE
   })
   it('should generate docs with any path to nodejs folder', async () => {
+    delete process.env.INPUT_TEMPLATE
     await test('test/layer/layer-path', 'validation.md')
   })
   it('should generate docs with no description provided in package.json', async () => {
