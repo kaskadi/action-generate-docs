@@ -1,5 +1,6 @@
 const YAML = require('yaml')
 const getSls = require('../get-sls.js')
+const snakeToCamel = require('../snake-to-camel.js')
 
 module.exports = ({ fs }) => {
   const { name, description } = JSON.parse(fs.readFileSync('package.json', 'utf8'))
@@ -10,9 +11,4 @@ module.exports = ({ fs }) => {
     description: description.length > 0 ? description : 'No description found in package.json...',
     layerPath
   }
-}
-
-function snakeToCamel (str) {
-  const camelCasedStr = str.toLowerCase().replace(/([-_][a-z])/g, group => group.toUpperCase().replace('-', '').replace('_', ''))
-  return camelCasedStr.charAt(0).toUpperCase() + camelCasedStr.slice(1)
 }
