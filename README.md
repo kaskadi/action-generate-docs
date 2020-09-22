@@ -88,13 +88,19 @@ The documentation generation for NPM packages is using `JSDOC` to auto-generate 
 ---
 **Layer documentation generation:**
 
-The documentation generation for AWS Lambda layers is using the main `package.json` and `serverless.yml` files. It extracts the `description` field from `package.json` and the path to the layer folder from the `layers.LayerName.path` field in `serverless.yml`.
+The documentation generation for AWS Lambda layers is using the main `serverless.yml` configuration file. It extracts the meta data for all layers found in this file and generate its documentation based on those data.
 
-**Note:** the name given to the layer in `package.json` needs to be consistent with the one given in `serverless.yml`.
+**Notes:**
+- supports multi-layer
+- supports file referencing and Serverless variables resolution
+- won't reflect resolved values for references to CloudFormation resources via intrinsic functions (like `!GetAtt`, etc.)
 
 ---
-**Lambda documentation generation:**
+**Lambda functions documentation generation:**
 
-The documentation generation for AWS Lambda functions is using the main `package.json` and `serverless.yml` files. It extracts the `description` and `name` fields from `package.json` and the function meta data from `serverless.yml`. It then builds the docs based on those data, describing the lambda purpose and configuration.
+The documentation generation for AWS Lambda functions is using the main `serverless.yml` configuration file. It extracts the meta data for all Lambda functions found in this file and generate its documentation based on those data.
 
-**Note:** the name given to the lambda function in `package.json` needs to be consistent with the one given in `serverless.yml`.
+**Notes:**
+- supports multi-lambda
+- supports file referencing and Serverless variables resolution
+- won't reflect resolved values for references to CloudFormation resources via intrinsic functions (like `!GetAtt`, etc.)
