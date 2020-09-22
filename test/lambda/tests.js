@@ -12,6 +12,11 @@ describe('lambda docs generation', function () {
     await runAction(['pre'])
     process.env.INPUT_TYPE = 'lambda'
   })
+  it('should not generate docs if no serverless configuration file exists', async () => {
+    process.chdir('test/lambda/no-config-file')
+    await runAction(['main'])
+    fs.existsSync('README.md').should.equal(false)
+  })
   it('should generate docs with no template provided', async () => {
     await test('test/lambda/no-template', 'validation.md')
   })
@@ -42,7 +47,9 @@ describe('lambda docs generation', function () {
     await test('test/lambda/sls-var', 'validation.md')
   })
   afterEach(() => {
-    fs.unlinkSync('README.md')
+    if (fs.existsSync('README.md')) {
+      fs.unlinkSync('README.md')
+    }
     process.chdir(cwd)
   })
   after(() => {
