@@ -1,11 +1,12 @@
-# What is this lambda for?
+# Lambda functions
 
-This is a template
+The following lambda functions are defined in this repository:
+- [template-kaskadi-lambda](#template-kaskadi-lambda)
 
-# Details
+## template-kaskadi-lambda <a name="template-kaskadi-lambda"></a>
 
 |           Name          | Sources                                     | Timeout |                 Handler                 |
 | :---------------------: | :------------------------------------------ | :-----: | :-------------------------------------: |
 | template-kaskadi-lambda | <ul><li>HTTP</li><li>Event Bridge</li></ul> | default | [handler](./template-kaskadi-lambda.js) |
 
-See [lambda configuration file](./serverless.yml) for more details.
+See [configuration file](./serverless.yml) for more details.

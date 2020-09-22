@@ -37,3 +37,16 @@ functions:
           method: get
           path: hello
           cors: true
+  TemplateKaskadiLambda2:
+    handler: template-kaskadi-lambda.handler
+    name: ${self:service.name}-2
+    package:
+      include:
+        - 'template-kaskadi-lambda.js'
+        - 'node_modules/**'
+    # configure here the proper event(s) that should trigger your lambda
+    events:
+      - http:
+          method: get
+          path: hello
+          cors: true
