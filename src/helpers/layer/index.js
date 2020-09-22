@@ -1,15 +1,17 @@
 const modules = {
   fs: require('fs'),
-  path: require('path')
+  path: require('path'),
+  YAML: require('yaml')
 }
 
 module.exports = templatePath => {
-  console.log('INFO: retrieving meta data from layer package.json and serverless.yml file...')
-  const { description, layerPath } = require('./get-meta.js')(modules)
+  console.log('INFO: retrieving layers data from serverless.yml file...')
+  const layersData = require('../get-sls.js')(modules, __dirname).layers
+  const layers = Object.values(layersData)
   console.log('SUCCESS: extracted layer meta data!')
-  const packages = require('./get-packages.js')(modules, layerPath)
+  const data = require('./get-packages.js')(modules, layers)
   console.log('INFO: generating documentation...')
-  const docs = require('./build-docs.js')(modules, { description, packages }, templatePath)
+  const docs = require('./build-docs.js')(modules, data, templatePath)
   console.log('SUCCESS: documentation successfully generated!')
   modules.fs.writeFileSync('README.md', docs, 'utf8')
 }
