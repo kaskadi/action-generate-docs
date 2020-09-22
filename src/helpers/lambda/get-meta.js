@@ -11,12 +11,17 @@ module.exports = ({ fs }) => {
     description: description.length > 0 ? description : 'No description found in package.json...',
     details: {
       name,
-      sources: lambdaConfig.events ? lambdaConfig.events.map(event => `- ${camelToSentence(Object.keys(event)[0])}`).join('\n') : [],
+      sources: lambdaConfig.events ? lambdaConfig.events.map(event => `- ${getEventName(event)}`).join('\n') : [],
       timeout: lambdaConfig.timeout || 'default',
       handler: lambdaConfig.handler,
-      destinations: lambdaConfig.destinations ? `- On success: ${lambdaConfig.destinations.onSuccess}\n- On failure: ${lambdaConfig.destinations.onFailure}` : undefined
+      ...lambdaConfig.destinations && { destinations: `- On success: ${lambdaConfig.destinations.onSuccess}\n- On failure: ${lambdaConfig.destinations.onFailure}` }
     }
   }
+}
+
+function getEventName (event) {
+  const semEvent = camelToSentence(Object.keys(event)[0])
+  return semEvent.split(' ').length === 1 ? semEvent.toUpperCase() : semEvent
 }
 
 function camelToSentence (str) {
