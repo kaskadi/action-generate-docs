@@ -23,11 +23,10 @@ function getTableEntryValue (key, details, fs, path) {
 }
 
 function findHandler (handler, fs, path) {
-  const splitHandler = handler.split('.')
-  const fileName = splitHandler.slice(0, splitHandler.length - 1).join('.')
-  const root = path.dirname(fileName)
+  const fileName = path.basename(handler).split('.')[0]
+  const filePath = path.dirname(handler)
   return fs
-    .readdirSync(root, { withFileTypes: true })
+    .readdirSync(filePath, { withFileTypes: true })
     .filter(dirent => !dirent.isDirectory())
     .map(dirent => dirent.name)
     .filter(file => file.includes(fileName))[0]
