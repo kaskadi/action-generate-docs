@@ -7,7 +7,7 @@ module.exports = ({ fs, path }, data, templatePath) => {
   let main = fs.readFileSync(path.join(__dirname, 'main-partial.md'), 'utf8')
   const lambdaPartial = fs.readFileSync(path.join(__dirname, 'lambda-partial.md'), 'utf8')
   data = data.map(addDetails(fs, path))
-  const lambdas = data.map(buildLambdaDocs(lambdaPartial)).join('\n\n').trim()
+  const lambdas = data.map(buildLambdaDocs(lambdaPartial, 'lambda function')).join('\n\n').trim()
   main = replaceInFile(main, 'lambdas', lambdas)
   main = replaceInFile(main, 'lambdas-list', buildLambdaList(data))
   if (!fs.existsSync(templatePath) || !templatePath) {
