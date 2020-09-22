@@ -1,20 +1,34 @@
 const replaceInFile = require('../replace-in-file.js')
 const table = require('markdown-table')
+const buildLambdaList = require('../build-list.js')
+const buildLambdaDocs = require('../build-partial.js')
 
 module.exports = ({ fs, path }, data, templatePath) => {
-  let main = fs.readFileSync(path.join(__dirname, 'lambda-partial.md'), 'utf8')
-  main = replaceInFile(main, 'description', data.description)
-  const tableKeys = Object.keys(data.details)
-  const detailsTable = table([
-    tableKeys.map(key => key.charAt(0).toUpperCase() + key.slice(1)),
-    tableKeys.map(key => getTableEntryValue(key, data.details, fs, path))
-  ],
-  { align: tableKeys.map(getTableEntryAlign) })
-  main = replaceInFile(main, 'details', detailsTable)
+  let main = fs.readFileSync(path.join(__dirname, 'main-partial.md'), 'utf8')
+  const lambdaPartial = fs.readFileSync(path.join(__dirname, 'lambda-partial.md'), 'utf8')
+  data = data.map(addDetails(fs, path))
+  const lambdas = data.map(buildLambdaDocs(lambdaPartial)).join('\n\n').trim()
+  main = replaceInFile(main, 'lambdas', lambdas)
+  main = replaceInFile(main, 'lambdas-list', buildLambdaList(data))
   if (!fs.existsSync(templatePath) || !templatePath) {
     return main
   }
   return replaceInFile(fs.readFileSync(templatePath, 'utf8'), 'main', main)
+}
+
+function addDetails (fs, path) {
+  return lambda => {
+    const detailsKeys = Object.keys(lambda)
+    const details = table([
+      detailsKeys.map(key => key.charAt(0).toUpperCase() + key.slice(1)),
+      detailsKeys.map(key => getTableEntryValue(key, lambda, fs, path))
+    ],
+    { align: detailsKeys.map(getTableEntryAlign) })
+    return {
+      ...lambda,
+      details
+    }
+  }
 }
 
 function getTableEntryValue (key, details, fs, path) {
