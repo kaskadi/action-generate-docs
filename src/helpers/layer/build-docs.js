@@ -1,4 +1,6 @@
 const replaceInFile = require('../replace-in-file.js')
+const buildLayersList = require('../build-list.js')
+const buildLayerDocs = require('../build-partial.js')
 
 module.exports = ({ fs, path }, data, templatePath) => {
   let main = fs.readFileSync(path.join(__dirname, 'main-partial.md'), 'utf8')
@@ -10,12 +12,4 @@ module.exports = ({ fs, path }, data, templatePath) => {
     return main
   }
   return replaceInFile(fs.readFileSync(templatePath, 'utf8'), 'main', main)
-}
-
-function buildLayerDocs (layerPartial) {
-  return layer => Object.keys(layer).reduce((partial, key) => replaceInFile(partial, key, layer[key] || `No ${key} found for this layer...`), layerPartial)
-}
-
-function buildLayersList (data) {
-  return data.map(layer => `- [${layer.name}](#${layer.name})`).join('\n')
 }
