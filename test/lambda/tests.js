@@ -12,6 +12,12 @@ describe('lambda docs generation', function () {
     await runAction(['pre'])
     process.env.INPUT_TYPE = 'lambda'
   })
+  it('should not generate docs if no serverless configuration file exists', async () => {
+    process.chdir('test/lambda/no-config-file')
+    await runAction(['main'])
+    fs.existsSync('README.md').should.equal(false)
+    process.chdir(cwd)
+  })
   it('should generate docs with no template provided', async () => {
     await test('test/lambda/no-template', 'validation.md')
   })
@@ -19,9 +25,9 @@ describe('lambda docs generation', function () {
     process.env.INPUT_TEMPLATE = '../template.md'
     await test('test/lambda/with-template', 'validation.md')
   })
-  it('should generate docs with no description provided in package.json', async () => {
+  it('should support multi-lambda situations', async () => {
     delete process.env.INPUT_TEMPLATE
-    await test('test/lambda/no-description', 'validation.md')
+    await test('test/lambda/multi-lambda', 'validation.md')
   })
   it('should generate docs with complex path to lambda handler', async () => {
     await test('test/lambda/handler-path', 'validation.md')
@@ -41,10 +47,6 @@ describe('lambda docs generation', function () {
   it('should generate docs when using variable in serverless configuration file', async () => {
     await test('test/lambda/sls-var', 'validation.md')
   })
-  afterEach(() => {
-    fs.unlinkSync('README.md')
-    process.chdir(cwd)
-  })
   after(() => {
     delete process.env.INPUT_TYPE
   })
@@ -55,5 +57,7 @@ async function test (testFolder, validationFile) {
   await runAction(['main'])
   const docs = fs.readFileSync('README.md', 'utf8')
   const validation = fs.readFileSync(validationFile, 'utf8')
+  fs.unlinkSync('README.md')
+  process.chdir(cwd)
   docs.should.equal(validation)
 }

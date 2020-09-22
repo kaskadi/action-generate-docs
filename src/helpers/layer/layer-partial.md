@@ -1,7 +1,9 @@
-# What is this layer for?
+## {{>name}} <a name="{{>name}}"></a>
+
+### Description
 
 {{>description}}
 
-# Installed NPM packages
+### Installed NPM dependencies
 
-{{>packages}}
+{{>dependencies}}

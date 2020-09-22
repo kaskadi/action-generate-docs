@@ -1,9 +1,5 @@
-# What is this lambda for?
-
-{{>description}}
-
-# Details
+## {{>name}} <a name="{{>name}}"></a>
 
 {{>details}}
 
-See [lambda configuration file](./serverless.yml) for more details.
+See [configuration file](./serverless.yml) for more details.

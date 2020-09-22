@@ -1,7 +1,14 @@
-# What is this layer for?
+# Layers
 
-This is a template
+The following layers are defined in this repository:
+- [template-kaskadi-layer](#template-kaskadi-layer)
 
-# Installed NPM packages
+## template-kaskadi-layer <a name="template-kaskadi-layer"></a>
+
+### Description
+
+This is a template layer
+
+### Installed NPM dependencies
 
 No NPM packages installed...

@@ -1,14 +1,16 @@
 const modules = {
   fs: require('fs'),
-  path: require('path')
+  path: require('path'),
+  YAML: require('yaml')
 }
 
 module.exports = templatePath => {
-  console.log('INFO: retrieving meta data from lambda package.json and serverless.yml file...')
-  const meta = require('./get-meta.js')(modules)
-  console.log('SUCCESS: extracted lambda meta data!')
+  console.log('INFO: retrieving lambda functions data from serverless.yml file...')
+  const functionsData = require('../get-sls.js')(modules, __dirname).functions
+  const data = require('./process-meta.js')(Object.values(functionsData))
+  console.log('SUCCESS: extracted lambda functions meta data!')
   console.log('INFO: generating documentation...')
-  const docs = require('./build-docs.js')(modules, meta, templatePath)
+  const docs = require('./build-docs.js')(modules, data, templatePath)
   console.log('SUCCESS: documentation successfully generated!')
   modules.fs.writeFileSync('README.md', docs, 'utf8')
 }

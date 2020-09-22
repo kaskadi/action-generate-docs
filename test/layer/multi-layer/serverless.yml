@@ -28,6 +28,14 @@ layers:
       - nodejs10.x
       - nodejs12.x
     licenseInfo: MIT
+  TemplateKaskadiLayer2:
+    path: layer
+    name: ${self:service.name}-2
+    description: This is a template layer
+    compatibleRuntimes:
+      - nodejs10.x
+      - nodejs12.x
+    licenseInfo: MIT
 
 resources:
   Outputs:
