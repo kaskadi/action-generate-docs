@@ -23,7 +23,7 @@ layers:
   TemplateKaskadiLayer:
     path: layer
     name: ${self:service.name}
-    description: # your description here
+    description: This is a template layer
     compatibleRuntimes:
       - nodejs10.x
       - nodejs12.x
