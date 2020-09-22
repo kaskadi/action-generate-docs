@@ -91,3 +91,10 @@ The documentation generation for NPM packages is using `JSDOC` to auto-generate 
 The documentation generation for AWS Lambda layers is using the main `package.json` and `serverless.yml` files. It extracts the `description` field from `package.json` and the path to the layer folder from the `layers.LayerName.path` field in `serverless.yml`.
 
 **Note:** the name given to the layer in `package.json` needs to be consistent with the one given in `serverless.yml`.
+
+---
+**Lambda documentation generation:**
+
+The documentation generation for AWS Lambda functions is using the main `package.json` and `serverless.yml` files. It extracts the `description` and `name` fields from `package.json` and the function meta data from `serverless.yml`. It then builds the docs based on those data, describing the lambda purpose and configuration.
+
+**Note:** the name given to the lambda function in `package.json` needs to be consistent with the one given in `serverless.yml`.
