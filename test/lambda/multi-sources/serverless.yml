@@ -37,4 +37,5 @@ functions:
           method: get
           path: hello
           cors: true
-      - sqs: arn:aws:sqs:region:XXXXXX:MyFirstQueue
+      - eventBridge:
+          schedule: rate(10 minutes)
