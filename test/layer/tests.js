@@ -6,7 +6,7 @@ chai.should()
 
 const cwd = process.cwd()
 
-describe('package docs generation', function () {
+describe('layer docs generation', function () {
   this.timeout(60000)
   before(async () => {
     await runAction(['pre'])
