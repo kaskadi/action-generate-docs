@@ -23,13 +23,14 @@ function getTableEntryValue (key, details, fs, path) {
 }
 
 function findHandler (handler, fs, path) {
-  const fileName = path.basename(handler).split('.')[0]
+  const baseFileName = path.basename(handler).split('.')[0] // handler contains a reference to the export but misses the extension of the file for referencing
   const filePath = path.dirname(handler)
-  return fs
+  const fileName = fs
     .readdirSync(filePath, { withFileTypes: true })
     .filter(dirent => !dirent.isDirectory())
     .map(dirent => dirent.name)
-    .filter(file => file.includes(fileName))[0]
+    .filter(file => file.includes(baseFileName))[0]
+  return path.join(filePath, fileName)
 }
 
 function getTableEntryAlign (key) {
