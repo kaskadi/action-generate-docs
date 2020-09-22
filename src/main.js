@@ -1,4 +1,5 @@
 const core = require('@actions/core')
+const path = require('path')
 const fs = require('fs')
 const markshell = require('markshell')
 
@@ -12,7 +13,10 @@ if (!fs.existsSync(`${__dirname}/helpers/${type}`)) {
   process.exit(0)
 }
 
-require(`./helpers/${type}/index.js`)(templatePath)
+const modulePath = `helpers/${type}`
+
+require('./helpers/install-deps.js')(path.join(__dirname, modulePath))
+require(`./${modulePath}/index.js`)(templatePath)
 try {
   console.log('\n********* Documentation preview *********\n')
   markshell.toConsole('README.md')

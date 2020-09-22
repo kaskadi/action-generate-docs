@@ -29,13 +29,13 @@ describe('package docs generation', function () {
   it('should generate docs as if no template was provided if the template file does not exist', async () => {
     process.env.INPUT_TEMPLATE = '../template-not-existing.md'
     await test('test/package/wrong-template', 'validation.md')
-    delete process.env.INPUT_TEMPLATE
   })
   afterEach(() => {
     fs.unlinkSync('README.md')
     process.chdir(cwd)
   })
   after(() => {
+    delete process.env.INPUT_TEMPLATE
     delete process.env.INPUT_TYPE
   })
 })

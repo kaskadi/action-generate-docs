@@ -6,7 +6,7 @@ chai.should()
 
 const cwd = process.cwd()
 
-describe('package docs generation', function () {
+describe('layer docs generation', function () {
   this.timeout(60000)
   before(async () => {
     await runAction(['pre'])
@@ -18,9 +18,9 @@ describe('package docs generation', function () {
   it('should generate docs with a template provided', async () => {
     process.env.INPUT_TEMPLATE = '../template.md'
     await test('test/layer/with-template', 'validation.md')
-    delete process.env.INPUT_TEMPLATE
   })
   it('should generate docs with any path to nodejs folder', async () => {
+    delete process.env.INPUT_TEMPLATE
     await test('test/layer/layer-path', 'validation.md')
   })
   it('should generate docs with no description provided in package.json', async () => {
@@ -31,6 +31,9 @@ describe('package docs generation', function () {
     await test('test/layer/no-packages/no-deps', validationPath)
     process.chdir(cwd)
     await test('test/layer/no-packages/empty-deps', validationPath)
+  })
+  it('should generate docs when using variables in serverless.yml', async () => {
+    await test('test/layer/sls-var', 'validation.md')
   })
   afterEach(() => {
     fs.unlinkSync('README.md')

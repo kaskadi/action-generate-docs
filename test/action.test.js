@@ -17,4 +17,5 @@ describe('template-action', function () {
   require('./action/tests.js')
   require('./package/tests.js')
   require('./layer/tests.js')
+  require('./lambda/tests.js')
 })
