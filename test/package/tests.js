@@ -30,10 +30,6 @@ describe('package docs generation', function () {
     process.env.INPUT_TEMPLATE = '../template-not-existing.md'
     await test('test/package/wrong-template', 'validation.md')
   })
-  afterEach(() => {
-    fs.unlinkSync('README.md')
-    process.chdir(cwd)
-  })
   after(() => {
     delete process.env.INPUT_TEMPLATE
     delete process.env.INPUT_TYPE
@@ -45,5 +41,7 @@ async function test (testFolder, validationFile) {
   await runAction(['main'])
   const docs = fs.readFileSync('README.md', 'utf8')
   const validation = fs.readFileSync(validationFile, 'utf8')
+  fs.unlinkSync('README.md')
+  process.chdir(cwd)
   docs.should.equal(validation)
 }
