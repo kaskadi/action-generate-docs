@@ -32,6 +32,9 @@ describe('package docs generation', function () {
     process.chdir(cwd)
     await test('test/layer/no-packages/empty-deps', validationPath)
   })
+  it('should generate docs when using variables in serverless.yml', async () => {
+    await test('test/layer/sls-var', 'validation.md')
+  })
   afterEach(() => {
     fs.unlinkSync('README.md')
     process.chdir(cwd)
