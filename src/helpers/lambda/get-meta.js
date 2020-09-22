@@ -11,10 +11,10 @@ module.exports = ({ fs }) => {
     description: description.length > 0 ? description : 'No description found in package.json...',
     details: {
       name,
-      sources: lambdaConfig.events ? lambdaConfig.events.map(event => `- ${getEventName(event)}`).join('\n') : [],
+      sources: lambdaConfig.events ? `<ul>${lambdaConfig.events.map(event => `<li>${getEventName(event)}</li>`).join('')}</ul>` : [],
       timeout: lambdaConfig.timeout || 'default',
       handler: lambdaConfig.handler,
-      ...lambdaConfig.destinations && { destinations: `- On success: ${lambdaConfig.destinations.onSuccess}\n- On failure: ${lambdaConfig.destinations.onFailure}` }
+      ...lambdaConfig.destinations && { destinations: `<ul><li>On success: ${lambdaConfig.destinations.onSuccess}</li><li>On failure: ${lambdaConfig.destinations.onFailure}</li></ul>` }
     }
   }
 }
