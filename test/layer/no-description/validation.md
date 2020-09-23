@@ -1,4 +1,4 @@
-# Layers
+# Resources documentation
 
 The following layers are defined in this repository:
 - [template-kaskadi-layer](#template-kaskadi-layer)
@@ -14,3 +14,5 @@ No description found for this layer...
 - `chai` ([see on NPM](https://www.npmjs.com/package/chai))
 - `mocha` ([see on NPM](https://www.npmjs.com/package/mocha))
 - `standard` ([see on NPM](https://www.npmjs.com/package/standard))
+
+See [configuration file](./serverless.yml) for more details.

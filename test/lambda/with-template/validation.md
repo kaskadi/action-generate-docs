@@ -42,7 +42,7 @@ Deploying to AWS is done automatically via a `deploy` workflow (see [here](./.gi
 
 ****
 
-# Lambda functions
+# Resources documentation
 
 The following lambda functions are defined in this repository:
 - [template-kaskadi-lambda](#template-kaskadi-lambda)
