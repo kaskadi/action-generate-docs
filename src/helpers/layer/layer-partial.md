@@ -7,3 +7,5 @@
 ### Installed NPM dependencies
 
 {{>dependencies}}
+
+See [configuration file](./serverless.yml) for more details.

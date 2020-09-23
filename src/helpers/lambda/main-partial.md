@@ -1,4 +1,4 @@
-# Lambda functions
+# Resources documentation
 
 The following lambda functions are defined in this repository:
 {{>lambdas-list}}
