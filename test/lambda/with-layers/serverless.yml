@@ -32,6 +32,7 @@ functions:
       - !Ref TemplateKaskadiLayerLambdaLayer
       - { "Fn::Join" : [ '-', ['just', 'for', 'testing'] ] }
       - !Join [ '-', ['just', 'for', 'testing'] ]
+      - !GetAtt TemplateKaskadiLayerLambdaLayer.Arn
       - arn:aws:lambda:eu-central-1:111111111111:layer:test-layer:23
       - just-for-testing
     package:
