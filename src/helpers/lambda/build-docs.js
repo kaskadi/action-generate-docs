@@ -6,23 +6,27 @@ const buildPartial = require('../build-partial.js')
 module.exports = ({ fs, path }, data, templatePath) => {
   const { functions, layers } = data
   let main = fs.readFileSync(path.join(__dirname, 'main-partial.md'), 'utf8')
-  const lambdaPartial = fs.readFileSync(path.join(__dirname, 'lambda-partial.md'), 'utf8')
-  const layerPartial = fs.readFileSync(path.join(__dirname, '../layer/layer-partial.md'), 'utf8')
+  const lambdaDocType = 'lambda function'
+  const layerDocType = 'layer'
   const lambdas = functions.map(addDetails(fs, path))
-  main = getMain(main, lambdas, lambdaPartial, 'lambdas', 'lambdas-list', 'lambda function')
-  main = getMain(main, layers, layerPartial, 'layers', 'layers-list', 'layer')
+  const getPartial = (data, partialPath, docType) => {
+    const partial = fs.readFileSync(path.join(__dirname, partialPath), 'utf8')
+    return data.map(buildPartial(partial, docType)).join('\n\n').trim()
+  }
+  const replaceData = {
+    lambdas: getPartial(lambdas, 'lambda-partial.md', lambdaDocType),
+    'lambdas-list': buildList(lambdas, lambdaDocType),
+    layers: getPartial(layers, '../layer/layer-partial.md', layerDocType),
+    'layers-list': buildList(layers, layerDocType)
+  }
+  for (const key in replaceData) {
+    main = replaceInFile(main, key, replaceData[key])
+  }
   main = main.trim()
   if (!fs.existsSync(templatePath) || !templatePath) {
     return main
   }
   return replaceInFile(fs.readFileSync(templatePath, 'utf8'), 'main', main)
-}
-
-function getMain (main, data, partial, key, listKey, docType) {
-  const docs = data.map(buildPartial(partial, docType)).join('\n\n').trim()
-  main = replaceInFile(main, key, docs)
-  main = replaceInFile(main, listKey, buildList(data, docType))
-  return main
 }
 
 function addDetails (fs, path) {
