@@ -20,7 +20,7 @@ function getLayerName (layer, layersMeta) {
   const matchArn = layer.match(arnRegex)
   const matchRef = layer.match(refRegex)
   if (matchRef) {
-    const layerName = layersMeta[matchRef[1].replace('LambdaLayer', '')].name
+    const layerName = layersMeta[matchRef[1].replace('LambdaLayer', '').trim()].name
     return `[${layerName}](#${layerName})`
   }
   if (matchArn) {
