@@ -6,7 +6,7 @@ const modules = {
 
 module.exports = templatePath => {
   console.log('INFO: retrieving layers data from serverless.yml file...')
-  const layersData = require('../get-sls.js')(modules, __dirname).layers
+  const layersData = require('../get-sls.js')(modules, __dirname).layers || {}
   const layers = Object.values(layersData)
   console.log('SUCCESS: extracted layer meta data!')
   const data = require('./get-packages.js')(modules, layers)

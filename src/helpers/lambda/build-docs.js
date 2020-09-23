@@ -1,15 +1,28 @@
 const replaceInFile = require('../replace-in-file.js')
 const table = require('markdown-table')
-const buildLambdaList = require('../build-list.js')
-const buildLambdaDocs = require('../build-partial.js')
+const buildList = require('../build-list.js')
+const buildPartial = require('../build-partial.js')
 
 module.exports = ({ fs, path }, data, templatePath) => {
+  const { functions, layers } = data
   let main = fs.readFileSync(path.join(__dirname, 'main-partial.md'), 'utf8')
-  const lambdaPartial = fs.readFileSync(path.join(__dirname, 'lambda-partial.md'), 'utf8')
-  data = data.map(addDetails(fs, path))
-  const lambdas = data.map(buildLambdaDocs(lambdaPartial, 'lambda function')).join('\n\n').trim()
-  main = replaceInFile(main, 'lambdas', lambdas)
-  main = replaceInFile(main, 'lambdas-list', buildLambdaList(data))
+  const lambdaDocType = 'lambda function'
+  const layerDocType = 'layer'
+  const lambdas = functions.map(addDetails(fs, path))
+  const getPartial = (data, partialPath, docType) => {
+    const partial = fs.readFileSync(path.join(__dirname, partialPath), 'utf8')
+    return data.map(buildPartial(partial, docType)).join('\n\n').trim()
+  }
+  const replaceData = {
+    lambdas: getPartial(lambdas, 'lambda-partial.md', lambdaDocType),
+    'lambdas-list': buildList(lambdas, lambdaDocType),
+    layers: getPartial(layers, '../layer/layer-partial.md', layerDocType),
+    'layers-list': buildList(layers, layerDocType)
+  }
+  for (const key in replaceData) {
+    main = replaceInFile(main, key, replaceData[key])
+  }
+  main = main.trim()
   if (!fs.existsSync(templatePath) || !templatePath) {
     return main
   }
@@ -48,5 +61,5 @@ function findHandler (handler, fs, path) {
 }
 
 function getTableEntryAlign (key) {
-  return ['sources', 'destinations'].includes(key) ? 'l' : 'c'
+  return ['sources', 'destinations', 'layers'].includes(key) ? 'l' : 'c'
 }

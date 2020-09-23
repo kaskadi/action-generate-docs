@@ -1,4 +1,4 @@
 // used for building list from layers and lambda functions metadata
-module.exports = (arr) => {
-  return arr.map(data => `- [${data.name}](#${data.name})`).join('\n')
+module.exports = (arr, docType) => {
+  return arr.length > 0 ? arr.map(data => `- [${data.name}](#${data.name})`).join('\n') : `_no ${docType} defined in the configuration file..._`
 }

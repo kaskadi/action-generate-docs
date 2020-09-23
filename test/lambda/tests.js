@@ -25,8 +25,11 @@ describe('lambda docs generation', function () {
     process.env.INPUT_TEMPLATE = '../template.md'
     await test('test/lambda/with-template', 'validation.md')
   })
-  it('should support multi-lambda situations', async () => {
+  it('should generate docs when no lambdas are defined', async () => {
     delete process.env.INPUT_TEMPLATE
+    await test('test/lambda/no-lambda', 'validation.md')
+  })
+  it('should support multi-lambda situations', async () => {
     await test('test/lambda/multi-lambda', 'validation.md')
   })
   it('should generate docs with complex path to lambda handler', async () => {
@@ -46,6 +49,9 @@ describe('lambda docs generation', function () {
   })
   it('should generate docs when using variable in serverless configuration file', async () => {
     await test('test/lambda/sls-var', 'validation.md')
+  })
+  it('should support layers', async () => {
+    await test('test/lambda/with-layers', 'validation.md')
   })
   after(() => {
     delete process.env.INPUT_TYPE

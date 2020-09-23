@@ -4,6 +4,9 @@ The following lambda functions are defined in this repository:
 - [template-kaskadi-lambda](#template-kaskadi-lambda)
 - [template-kaskadi-lambda-2](#template-kaskadi-lambda-2)
 
+The following layers are defined in this repository:
+_no layer defined in the configuration file..._
+
 ## template-kaskadi-lambda <a name="template-kaskadi-lambda"></a>
 
 |           Name          | Sources                | Timeout |                 Handler                 |

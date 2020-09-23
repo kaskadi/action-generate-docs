@@ -47,6 +47,9 @@ Deploying to AWS is done automatically via a `deploy` workflow (see [here](./.gi
 The following lambda functions are defined in this repository:
 - [template-kaskadi-lambda](#template-kaskadi-lambda)
 
+The following layers are defined in this repository:
+_no layer defined in the configuration file..._
+
 ## template-kaskadi-lambda <a name="template-kaskadi-lambda"></a>
 
 |           Name          | Sources                | Timeout |                 Handler                 |
