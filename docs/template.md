@@ -74,4 +74,4 @@ The documentation generation for AWS Lambda functions is using the main `serverl
 - supports multi-lambda
 - support layers: if layers are attached to lambdas, it will be reflected in the documentation. Layers defined inside of the current stack will also be documented like with the [`layer` module](#layer)
 - supports file referencing and Serverless variables resolution
-- won't reflect resolved values for references to CloudFormation resources via intrinsic functions (like `!GetAtt`, etc.)
+- won't reflect resolved values for references to CloudFormation resources via intrinsic functions (like `!GetAtt`, etc.). Exception: layer referencing via `Fn::Join` and `Ref` intrinsic functions. The action will be able to resolve this kind of reference to your layer for the related lambda function in those cases. Regular ARNs are also valid references for layers.
