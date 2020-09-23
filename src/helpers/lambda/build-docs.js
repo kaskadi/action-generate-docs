@@ -21,7 +21,7 @@ module.exports = ({ fs, path }, data, templatePath) => {
 function getMain (main, data, partial, key, listKey, docType) {
   const docs = data.map(buildPartial(partial, docType)).join('\n\n').trim()
   main = replaceInFile(main, key, docs)
-  main = replaceInFile(main, listKey, buildList(data))
+  main = replaceInFile(main, listKey, buildList(data, docType))
   return main
 }
 
