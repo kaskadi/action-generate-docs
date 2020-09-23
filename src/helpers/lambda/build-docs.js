@@ -11,6 +11,7 @@ module.exports = ({ fs, path }, data, templatePath) => {
   const lambdas = functions.map(addDetails(fs, path))
   main = getMain(main, lambdas, lambdaPartial, 'lambdas', 'lambdas-list', 'lambda function')
   main = getMain(main, layers, layerPartial, 'layers', 'layers-list', 'layer')
+  main = main.trim()
   if (!fs.existsSync(templatePath) || !templatePath) {
     return main
   }
