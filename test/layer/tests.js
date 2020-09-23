@@ -29,6 +29,9 @@ describe('layer docs generation', function () {
     delete process.env.INPUT_TEMPLATE
     await test('test/layer/multi-layer', 'validation.md')
   })
+  it('should generate docs with no layer', async () => {
+    await test('test/layer/no-layer', 'validation.md')
+  })
   it('should generate docs with any path to nodejs folder', async () => {
     await test('test/layer/layer-path', 'validation.md')
   })
