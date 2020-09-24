@@ -41,6 +41,9 @@ function getLocalDeps (fs, pjson) {
   fs.writeFileSync('package.json', JSON.stringify(tempPjson, null, 2), 'utf8')
   spawnSync('npm', ['i', '--only=prod'])
   fs.writeFileSync('package.json', JSON.stringify(pjson, null, 2), 'utf8')
+  if (!fs.existsSync('node_modules')) {
+    return []
+  }
   return fs.readdirSync('node_modules', { withFileTypes: true })
     .filter(dirent => dirent.isDirectory())
     .map(dirent => dirent.name)
