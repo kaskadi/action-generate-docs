@@ -10,7 +10,7 @@ The following layers are defined in this repository:
 
 This is a template layer
 
-### Installed NPM dependencies
+### Dependencies
 
 - `chai`, version: `^4.2.0` ([see on NPM](https://www.npmjs.com/package/chai))
 - `mocha`, version: `^8.1.3` ([see on NPM](https://www.npmjs.com/package/mocha))
@@ -24,7 +24,7 @@ See [configuration file](./serverless.yml) for more details.
 
 This is a template layer
 
-### Installed NPM dependencies
+### Dependencies
 
 - `chai`, version: `^4.2.0` ([see on NPM](https://www.npmjs.com/package/chai))
 - `mocha`, version: `^8.1.3` ([see on NPM](https://www.npmjs.com/package/mocha))

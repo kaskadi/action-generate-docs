@@ -9,7 +9,7 @@ The following layers are defined in this repository:
 
 This is a template layer
 
-### Installed NPM dependencies
+### Dependencies
 
 No NPM packages or local utilities found for this layer...
 
