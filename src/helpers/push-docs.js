@@ -6,7 +6,7 @@ module.exports = test => {
   stageParams = test ? addFlag(stageParams, '--dry-run') : stageParams
   spawnSync('git', stageParams, { stdio: 'inherit' })
   const gpgSign = spawnSync('git', ['config', 'commit.gpgSign']).stdout
-  let commitParams = ['commit', '-am', 'Generated documentation']
+  let commitParams = ['commit', '-m', 'Generated documentation']
   commitParams = gpgSign.length > 0 ? addFlag(commitParams, '-S') : commitParams
   commitParams = test ? addFlag(commitParams, '--dry-run') : commitParams
   spawnSync('git', commitParams, { stdio: 'inherit' })
