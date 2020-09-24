@@ -4,7 +4,7 @@
 
 {{>description}}
 
-### Installed NPM dependencies
+### Dependencies
 
 {{>dependencies}}
 
