@@ -17,7 +17,7 @@ describe('pre step', function () {
     delete tempPjson.dependencies
     delete tempPjson.devDependencies
     writeFileSync('../../package.json', JSON.stringify(tempPjson, null, 2), 'utf8')
-    spawnSync('npm', ['i'])
+    spawnSync('npm', ['i'], { stdio: 'inherit' })
     writeFileSync('../../package.json', JSON.stringify(pjson, null, 2), 'utf8')
   })
   it('should install the action dependencies when ran from action folder', async function () {
