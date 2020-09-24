@@ -94,6 +94,7 @@ The documentation generation for AWS Lambda layers is using the main `serverless
 - supports multi-layer
 - supports file referencing and Serverless variables resolution
 - won't reflect resolved values for references to CloudFormation resources via intrinsic functions (like `!GetAtt`, etc.)
+- supports custom utilities in layer: any folder in `node_modules` inside of a layer which is not an NPM package will also be listed as dependency
 
 ---
 **Lambda functions documentation generation:**
