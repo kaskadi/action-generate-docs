@@ -3,7 +3,7 @@ module.exports = ({ fs, path }, layers) => {
     const dependencies = getDeps(fs, path, layer.path)
     return {
       ...layer,
-      dependencies: dependencies.length > 0 ? buildDepList(dependencies) : 'No dependencies (NPM or local) found...'
+      dependencies: dependencies.length > 0 ? buildDepList(dependencies) : 'No NPM packages or local utilities found for this layer...'
     }
   })
 }
