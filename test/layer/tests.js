@@ -46,6 +46,9 @@ describe('layer docs generation', function () {
   it('should generate docs when using variables in serverless.yml', async () => {
     await test('test/layer/sls-var', 'validation.md')
   })
+  it('should generate docs with local utilities in dependencies', async () => {
+    await test('test/layer/local-utils', 'validation.md')
+  })
   after(() => {
     delete process.env.INPUT_TYPE
   })

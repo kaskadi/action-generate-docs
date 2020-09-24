@@ -11,6 +11,6 @@ This is a template layer
 
 ### Installed NPM dependencies
 
-No NPM packages installed...
+No NPM packages or local utilities found for this layer...
 
 See [configuration file](./serverless.yml) for more details.
