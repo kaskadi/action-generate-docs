@@ -7,6 +7,10 @@ inputs:
   template:
     description: 'the template (.md) you would like to use. The documentation will be injected in place of {{>main}}'
     required: false
+env:
+  sls-1:
+    description: 'an environment variable you are using inside of your serverless configuration file'
+    required: false
 runs:
   using: 'node12'
   pre: 'src/pre.js'
