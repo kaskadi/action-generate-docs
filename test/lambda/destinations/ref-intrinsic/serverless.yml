@@ -38,8 +38,4 @@ functions:
           path: hello
           cors: true
     destinations:
-      onSuccess: MyFunction
-      onFailure: !GetAtt SomeResources.Arn
-  MyFunction:
-    handler: template-kaskadi-lambda.handler
-    name: my-function
+      onSuccess: !Ref SomeResources

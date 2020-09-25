@@ -10,8 +10,8 @@ module.exports = templatePath => {
   const functions = meta.functions || {}
   const layers = meta.layers || {}
   const data = {
-    functions: require('./process-meta.js')(Object.values(functions, layers), layers),
-    layers: require('../layer/get-packages.js')(modules, Object.values(layers))
+    functions: require('./process-meta.js')(functions, layers),
+    layers: require('../layer/get-packages.js')(modules, layers)
   }
   console.log('SUCCESS: extracted lambda functions meta data!')
   console.log('INFO: generating documentation...')

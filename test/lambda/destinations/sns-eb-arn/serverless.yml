@@ -38,8 +38,8 @@ functions:
           path: hello
           cors: true
     destinations:
-      onSuccess: MyFunction
-      onFailure: !GetAtt SomeResources.Arn
+      onSuccess: arn:aws:sns:eu-central-1:111111111111:my-topic
+      onFailure: arn:aws:events:eu-central-1:111111111111:event-bus/my-bus
   MyFunction:
     handler: template-kaskadi-lambda.handler
     name: my-function

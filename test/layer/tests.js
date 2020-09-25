@@ -38,10 +38,13 @@ describe('layer docs generation', function () {
   it('should generate docs with no description provided', async () => {
     await test('test/layer/no-description', 'validation.md')
   })
-  it('should generate docs with no packages installed yet', async () => {
-    const validationPath = '../validation.md'
-    await test('test/layer/no-packages/no-deps', validationPath)
-    await test('test/layer/no-packages/empty-deps', validationPath)
+  describe('with no packages installed', () => {
+    it('should generate docs when there is no dependencies field in package.json', async () => {
+      await test('test/layer/no-packages/no-deps', '../validation.md')
+    })
+    it('should generate docs when dependencies value in package.json is an empty object', async () => {
+      await test('test/layer/no-packages/empty-deps', '../validation.md')
+    })
   })
   it('should generate docs when using variables in serverless.yml', async () => {
     await test('test/layer/sls-var', 'validation.md')

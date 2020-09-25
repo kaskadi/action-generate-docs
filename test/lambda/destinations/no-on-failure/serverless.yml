@@ -38,4 +38,4 @@ functions:
           path: hello
           cors: true
     destinations:
-      onSuccess: someOtherFunction
+      onSuccess: arn:aws:lambda:eu-central-1:111111111111:function:my-function

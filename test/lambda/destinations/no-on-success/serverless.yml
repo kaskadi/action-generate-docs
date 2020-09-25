@@ -38,4 +38,4 @@ functions:
           path: hello
           cors: true
     destinations:
-      onFailure: arn:of:some:existing:resource
+      onFailure: arn:aws:sqs:eu-central-1:111111111111:my-queue

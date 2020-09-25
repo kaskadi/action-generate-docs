@@ -27,6 +27,7 @@ functions:
   TemplateKaskadiLambda:
     handler: template-kaskadi-lambda.handler
     name: ${self:service.name}
+    timeout: 60
     package:
       include:
         - 'template-kaskadi-lambda.js'
@@ -37,9 +38,3 @@ functions:
           method: get
           path: hello
           cors: true
-    destinations:
-      onSuccess: MyFunction
-      onFailure: !GetAtt SomeResources.Arn
-  MyFunction:
-    handler: template-kaskadi-lambda.handler
-    name: my-function

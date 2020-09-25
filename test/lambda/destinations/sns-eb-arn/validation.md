@@ -9,9 +9,9 @@ _no layer defined in the configuration file..._
 
 ## template-kaskadi-lambda <a name="template-kaskadi-lambda"></a>
 
-|           Name          | Sources                | Timeout |                 Handler                 | Destinations                                                                                                                                           |
-| :---------------------: | :--------------------- | :-----: | :-------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| template-kaskadi-lambda | <ul><li>HTTP</li></ul> | default | [handler](./template-kaskadi-lambda.js) | <ul><li>On success: [my-function](#my-function)</li><li>On failure: `Fn::GetAtt: ["SomeResources","Arn"]` _(defined via intrinsic function)_</li></ul> |
+|           Name          | Sources                | Timeout |                 Handler                 | Destinations                                                                                                                             |
+| :---------------------: | :--------------------- | :-----: | :-------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------- |
+| template-kaskadi-lambda | <ul><li>HTTP</li></ul> | default | [handler](./template-kaskadi-lambda.js) | <ul><li>On success: my-topic _(type: SNS, defined via ARN)_</li><li>On failure: my-bus _(type: Event Bridge, defined via ARN)_</li></ul> |
 
 See [configuration file](./serverless.yml) for more details.
 

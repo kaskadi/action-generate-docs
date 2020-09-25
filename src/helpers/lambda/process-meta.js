@@ -1,19 +1,40 @@
 module.exports = (functions, layersMeta) => {
-  return functions.map(processFunction(layersMeta))
+  return Object.values(functions).map(processFunction(layersMeta, functions))
 }
 
-function processFunction (layersMeta) {
+function processFunction (layersMeta, functions) {
   return lambda => {
     const { name, events, timeout, handler, destinations, layers } = lambda
     return {
       name,
       sources: events.length > 0 ? `<ul>${events.map(event => `<li>${getEventName(event)}</li>`).join('')}</ul>` : 'No source defined',
-      timeout: timeout || 'default',
+      timeout: timeout ? `${timeout}s` : 'default',
       handler,
       ...layers && { layers: `<ul>${layers.map(layer => `<li>${getLayerName(layer, layersMeta)}</li>`).join('')}</ul>` },
-      ...destinations && { destinations: `<ul>${destinations.onSuccess ? `<li>On success: ${destinations.onSuccess}</li>` : ''}${destinations.onFailure ? `<li>On failure: ${destinations.onFailure}</li>` : ''}</ul>` }
+      ...destinations && { destinations: `<ul>${destinations.onSuccess ? `<li>On success: ${getDestination(destinations.onSuccess, functions)}</li>` : ''}${destinations.onFailure ? `<li>On failure: ${getDestination(destinations.onFailure, functions)}</li>` : ''}</ul>` }
     }
   }
+}
+
+function getDestination (destination, functions) {
+  if (typeof destination === 'object' && destination !== null) {
+    const entry = Object.entries(destination)[0]
+    return processIntrinsicFct(entry[0], entry[1], functions, 'lambda')
+  }
+  const regexps = {
+    lambda: new RegExp(/arn:[a-zA-Z0-9-]+:lambda:[a-zA-Z0-9-]+:\d{12}:function:([a-zA-Z0-9-_]+)/),
+    SQS: new RegExp(/arn:[a-zA-Z0-9-]+:sqs:[a-zA-Z0-9-]+:\d{12}:([a-zA-Z0-9-_]+)/),
+    SNS: new RegExp(/arn:[a-zA-Z0-9-]+:sns:[a-zA-Z0-9-]+:\d{12}:([a-zA-Z0-9-_]+)/),
+    eventBridge: new RegExp(/arn:[a-zA-Z0-9-]+:events:[a-zA-Z0-9-]+:\d{12}:event-bus\/([a-zA-Z0-9-_]+)/)
+  }
+  let i = 0
+  let match = null
+  const entries = Object.entries(regexps)
+  while (!match && i < entries.length) {
+    match = destination.match(entries[i][1])
+    i++
+  }
+  return match ? `${match[1]} _(type: ${camelToSentence(entries[i - 1][0])}, defined via ARN)_` : `[${functions[destination].name}](#${functions[destination].name})`
 }
 
 function getLayerName (layer, layersMeta) {
@@ -23,24 +44,25 @@ function getLayerName (layer, layersMeta) {
   }
   const arnRegex = new RegExp(/arn:[a-zA-Z0-9-]+:lambda:[a-zA-Z0-9-]+:\d{12}:layer:([a-zA-Z0-9-_]+)/)
   const matchArn = layer.match(arnRegex)
-  console.log(matchArn)
   if (matchArn) {
-    return `${matchArn[1]} _(defined via ARN: "${layer}")_`
+    return `${matchArn[1]} _(defined via ARN)_`
   }
   return layer
 }
 
-function processIntrinsicFct (key, value, layersMeta) {
+function processIntrinsicFct (key, value, meta, type = 'layer') {
   switch (key) {
     case 'Ref': {
-      const layerName = layersMeta[value.replace('LambdaLayer', '')].name
+      if (type === 'lambda') {
+        return `${value} _(referencing to \`${value}\` in CloudFormation stack via \`Ref\` intrinsic function)_`
+      }
+      const layerName = meta[value.replace('LambdaLayer', '')].name
       return `[${layerName}](#${layerName})`
     }
     case 'Fn::Join':
       return value[1].join(value[0])
     default:
-      // this case should pretty much never happen in production because then the reference to the layer would be wrong
-      return JSON.stringify(value)
+      return `\`${key}: ${JSON.stringify(value)}\` _(defined via intrinsic function)_`
   }
 }
 
@@ -50,6 +72,6 @@ function getEventName (event) {
 }
 
 function camelToSentence (str) {
-  const sentenceCasedStr = str.replace(/([A-Z])/g, ' $1')
+  const sentenceCasedStr = str.replace(/([a-z])([A-Z])/g, '$1 $2')
   return sentenceCasedStr.charAt(0).toUpperCase() + sentenceCasedStr.slice(1)
 }
