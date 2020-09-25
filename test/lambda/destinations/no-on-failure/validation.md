@@ -8,8 +8,8 @@ _no layer defined in the configuration file..._
 
 ## template-kaskadi-lambda <a name="template-kaskadi-lambda"></a>
 
-|           Name          | Sources                | Timeout |                 Handler                 | Destinations                                    |
-| :---------------------: | :--------------------- | :-----: | :-------------------------------------: | :---------------------------------------------- |
-| template-kaskadi-lambda | <ul><li>HTTP</li></ul> | default | [handler](./template-kaskadi-lambda.js) | <ul><li>On success: someOtherFunction</li></ul> |
+|           Name          | Sources                | Timeout |                 Handler                 | Destinations                                                  |
+| :---------------------: | :--------------------- | :-----: | :-------------------------------------: | :------------------------------------------------------------ |
+| template-kaskadi-lambda | <ul><li>HTTP</li></ul> | default | [handler](./template-kaskadi-lambda.js) | <ul><li>On success: my-function _(defined via ARN)_</li></ul> |
 
 See [configuration file](./serverless.yml) for more details.

@@ -41,11 +41,22 @@ describe('lambda docs generation', function () {
   it('should generate docs without any sources defined', async () => {
     await test('test/lambda/no-source', 'validation.md')
   })
-  it('should generate docs with destinations', async () => {
-    const validationPath = 'validation.md'
-    await test('test/lambda/destinations/regular', validationPath)
-    await test('test/lambda/destinations/no-on-failure', validationPath)
-    await test('test/lambda/destinations/no-on-success', validationPath)
+  describe('when using destinations', () => {
+    it('should handle on success and on failure', async () => {
+      await test('test/lambda/destinations/regular', 'validation.md')
+    })
+    it('should handle absence of on failure', async () => {
+      await test('test/lambda/destinations/no-on-failure', 'validation.md')
+    })
+    it('should handle absence of on success', async () => {
+      await test('test/lambda/destinations/no-on-success', 'validation.md')
+    })
+    it('should handle SNS and Event Bridge ARNs', async () => {
+      await test('test/lambda/destinations/sns-eb-arn', 'validation.md')
+    })
+    it('should handle Ref intrinsic function', async () => {
+      await test('test/lambda/destinations/ref-intrinsic', 'validation.md')
+    })
   })
   it('should generate docs with split configuration file', async () => {
     await test('test/lambda/split-config', 'validation.md')
