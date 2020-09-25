@@ -1,8 +1,8 @@
 module.exports = (functions, layersMeta) => {
-  return functions.map(processFunction(layersMeta))
+  return functions.map(processFunction(layersMeta, functions))
 }
 
-function processFunction (layersMeta) {
+function processFunction (layersMeta, functions) {
   return lambda => {
     const { name, events, timeout, handler, destinations, layers } = lambda
     return {
@@ -11,9 +11,30 @@ function processFunction (layersMeta) {
       timeout: `${timeout}s` || 'default',
       handler,
       ...layers && { layers: `<ul>${layers.map(layer => `<li>${getLayerName(layer, layersMeta)}</li>`).join('')}</ul>` },
-      ...destinations && { destinations: `<ul>${destinations.onSuccess ? `<li>On success: ${destinations.onSuccess}</li>` : ''}${destinations.onFailure ? `<li>On failure: ${destinations.onFailure}</li>` : ''}</ul>` }
+      ...destinations && { destinations: `<ul>${destinations.onSuccess ? `<li>On success: ${getDestination(destinations.onSuccess, functions)}</li>` : ''}${destinations.onFailure ? `<li>On failure: ${getDestination(destinations.onFailure, functions)}</li>` : ''}</ul>` }
     }
   }
+}
+
+function getDestination (destination, functions) {
+  if (typeof destination === 'string') {
+    // the only valid definition when using directly a string is to refer to a lambda function part of the same stack!
+    const lambdaName = functions[destination].name
+    return `[${lambdaName}](#${lambdaName})`
+  }
+  const regexps = [
+    new RegExp(/arn:[a-zA-Z0-9-]+:lambda:[a-zA-Z0-9-]+:\d{12}:function:([a-zA-Z0-9-_]+)/), // lambda
+    new RegExp(/arn:[a-zA-Z0-9-]+:sqs:[a-zA-Z0-9-]+:\d{12}:([a-zA-Z0-9-_]+)/), // SQS
+    new RegExp(/arn:[a-zA-Z0-9-]+:sns:[a-zA-Z0-9-]+:\d{12}:([a-zA-Z0-9-_]+)/), // SNS
+    new RegExp(/arn:[a-zA-Z0-9-]+:events:[a-zA-Z0-9-]+:\d{12}:event-bus\/([a-zA-Z0-9-_]+)/) // Event bridge bus
+  ]
+  let i = 0
+  let match = null
+  while (!match && i < regexps.length) {
+    match = destination.match(regexps[i])
+    i++
+  }
+  return match || destination
 }
 
 function getLayerName (layer, layersMeta) {
