@@ -34,6 +34,8 @@ jobs:
       with:
         type: {TYPE-VALUE}
         template: {TEMPLATE-VALUE}
+      env:
+        sls-1: {SLS-1-VALUE}
 ```
 
 **Note:** everything contained in single curly brackets (`{ }`) needs to be replaced by your desired values
@@ -43,6 +45,11 @@ jobs:
 | :--------: | :------: | :-----: | :------------------------------------------------------------------------------------------------- |
 |   `type`   |  `true`  |         | type of repository to generate the documentation for. Accepted values: `action`, `package`         |
 | `template` |  `false` |         | the template (.md) you would like to use. The documentation will be injected in place of {{>main}} |
+
+**Environment variables:**
+| Variable | Required | Description                                                                        |
+| :------: | :------: | :--------------------------------------------------------------------------------- |
+|  `sls-1` |  `false` | an environment variable you are using inside of your serverless configuration file |
 
 **In order to sign the commit for your newly generated docs via GPG**: add the following `step` before the actual documentation generation step:
 ```yaml
@@ -91,6 +98,7 @@ The documentation generation for NPM packages is using `JSDOC` to auto-generate 
 The documentation generation for AWS Lambda layers is using the main `serverless.yml` configuration file. It extracts the meta data for all layers found in this file and generate its documentation based on those data.
 
 **Notes:**
+- **Warning:** if you are using environment variables inside of your `serverless.yml` file, you should also add those as an `env` for the step that generates the documentation (see action configuration above)
 - supports multi-layer
 - supports file referencing and Serverless variables resolution
 - won't reflect resolved values for references to CloudFormation resources via intrinsic functions (like `!GetAtt`, etc.)
@@ -102,6 +110,7 @@ The documentation generation for AWS Lambda layers is using the main `serverless
 The documentation generation for AWS Lambda functions is using the main `serverless.yml` configuration file. It extracts the meta data for all Lambda functions found in this file and generate its documentation based on those data.
 
 **Notes:**
+- **Warning:** if you are using environment variables inside of your `serverless.yml` file, you should also add those as an `env` for the step that generates the documentation (see action configuration above)
 - supports multi-lambda
 - support layers: if layers are attached to lambdas, it will be reflected in the documentation. Layers defined inside of the current stack will also be documented like with the [`layer` module](#layer)
 - supports file referencing and Serverless variables resolution
