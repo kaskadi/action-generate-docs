@@ -7,11 +7,11 @@ function processFunction (layersMeta) {
     const { name, events, timeout, handler, destinations, layers } = lambda
     return {
       name,
-      sources: events.length > 0 ? `<ul style="margin: 0 !important;">${events.map(event => `<li>${getEventName(event)}</li>`).join('')}</ul>` : 'No source defined',
+      sources: events.length > 0 ? `<ul>${events.map(event => `<li>${getEventName(event)}</li>`).join('')}</ul>` : 'No source defined',
       timeout: timeout || 'default',
       handler,
-      ...layers && { layers: `<ul style="margin: 0 !important;">${layers.map(layer => `<li>${getLayerName(layer, layersMeta)}</li>`).join('')}</ul>` },
-      ...destinations && { destinations: `<ul style="margin: 0 !important;"><li>On success: ${destinations.onSuccess}</li><li>On failure: ${destinations.onFailure}</li></ul>` }
+      ...layers && { layers: `<ul>${layers.map(layer => `<li>${getLayerName(layer, layersMeta)}</li>`).join('')}</ul>` },
+      ...destinations && { destinations: `<ul><li>On success: ${destinations.onSuccess}</li><li>On failure: ${destinations.onFailure}</li></ul>` }
     }
   }
 }
