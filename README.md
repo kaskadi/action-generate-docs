@@ -47,9 +47,9 @@ jobs:
 | `template` |  `false` |         | the template (.md) you would like to use. The documentation will be injected in place of {{>main}} |
 
 **Environment variables:**
-| Variable | Required | Description                                                                        |
-| :------: | :------: | :--------------------------------------------------------------------------------- |
-|  `sls-1` |  `false` | an environment variable you are using inside of your serverless configuration file |
+| Variable | Required | Description                                                                                                                                                                        |
+| :------: | :------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|  `sls-1` |  `false` | an environment variable used inside of your `serverless.yml` configuration files. Feel free to add more! Only relevant when generating `layer`, `lambda` and `api` documentations. |
 
 **In order to sign the commit for your newly generated docs via GPG**: add the following `step` before the actual documentation generation step:
 ```yaml
