@@ -8,7 +8,7 @@ function processFunction (layersMeta) {
     return {
       name,
       sources: events.length > 0 ? `<ul>${events.map(event => `<li>${getEventName(event)}</li>`).join('')}</ul>` : 'No source defined',
-      timeout: timeout || 'default',
+      timeout: `${timeout}s` || 'default',
       handler,
       ...layers && { layers: `<ul>${layers.map(layer => `<li>${getLayerName(layer, layersMeta)}</li>`).join('')}</ul>` },
       ...destinations && { destinations: `<ul>${destinations.onSuccess ? `<li>On success: ${destinations.onSuccess}</li>` : ''}${destinations.onFailure ? `<li>On failure: ${destinations.onFailure}</li>` : ''}</ul>` }
