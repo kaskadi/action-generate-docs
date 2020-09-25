@@ -1,5 +1,5 @@
 module.exports = (functions, layersMeta) => {
-  return functions.map(processFunction(layersMeta, functions))
+  return Object.values(functions).map(processFunction(layersMeta, functions))
 }
 
 function processFunction (layersMeta, functions) {
@@ -17,10 +17,9 @@ function processFunction (layersMeta, functions) {
 }
 
 function getDestination (destination, functions) {
-  if (typeof destination === 'string') {
-    // the only valid definition when using directly a string is to refer to a lambda function part of the same stack!
-    const lambdaName = functions[destination].name
-    return `[${lambdaName}](#${lambdaName})`
+  if (typeof destination === 'object' && destination !== null) {
+    const entry = Object.entries(destination)[0]
+    return processIntrinsicFct(entry[0], entry[1], functions, 'lambda')
   }
   const regexps = [
     new RegExp(/arn:[a-zA-Z0-9-]+:lambda:[a-zA-Z0-9-]+:\d{12}:function:([a-zA-Z0-9-_]+)/), // lambda
@@ -34,7 +33,7 @@ function getDestination (destination, functions) {
     match = destination.match(regexps[i])
     i++
   }
-  return match || destination
+  return `${match[1]} _(defined via ARN)_` || `[${functions[destination].name}](#${functions[destination].name})`
 }
 
 function getLayerName (layer, layersMeta) {
@@ -50,17 +49,19 @@ function getLayerName (layer, layersMeta) {
   return layer
 }
 
-function processIntrinsicFct (key, value, layersMeta) {
+function processIntrinsicFct (key, value, meta, type = 'layer') {
   switch (key) {
     case 'Ref': {
-      const layerName = layersMeta[value.replace('LambdaLayer', '')].name
+      if (type === 'lambda') {
+        return `${value} _(referencing to resource in CloudFormation stack via \`Ref\` intrinsic function)_`
+      }
+      const layerName = meta[value.replace('LambdaLayer', '')].name
       return `[${layerName}](#${layerName})`
     }
     case 'Fn::Join':
       return value[1].join(value[0])
     default:
-      // this case should pretty much never happen in production because then the reference to the layer would be wrong
-      return JSON.stringify(value)
+      return `\`${key}: ${JSON.stringify(value)}\` _(using intrinsic function)_`
   }
 }
 
