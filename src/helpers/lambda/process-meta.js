@@ -53,7 +53,7 @@ function processIntrinsicFct (key, value, meta, type = 'layer') {
   switch (key) {
     case 'Ref': {
       if (type === 'lambda') {
-        return `${value} _(referencing to resource in CloudFormation stack via \`Ref\` intrinsic function)_`
+        return `${value} _(referencing to \`${value}\` in CloudFormation stack via \`Ref\` intrinsic function)_`
       }
       const layerName = meta[value.replace('LambdaLayer', '')].name
       return `[${layerName}](#${layerName})`
