@@ -9,7 +9,7 @@ inputs:
     required: false
 env:
   sls-1:
-    description: 'an environment variable you are using inside of your serverless configuration file'
+    description: 'an environment variable used inside of your `serverless.yml` configuration files. Feel free to add more! Only relevant when generating `layer`, `lambda` and `api` documentations.'
     required: false
 runs:
   using: 'node12'
