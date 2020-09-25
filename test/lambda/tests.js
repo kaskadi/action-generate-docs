@@ -42,7 +42,10 @@ describe('lambda docs generation', function () {
     await test('test/lambda/no-source', 'validation.md')
   })
   it('should generate docs with destinations', async () => {
-    await test('test/lambda/destinations', 'validation.md')
+    const validationPath = 'validation.md'
+    await test('test/lambda/destinations/regular', validationPath)
+    await test('test/lambda/destinations/no-on-failure', validationPath)
+    await test('test/lambda/destinations/no-on-success', validationPath)
   })
   it('should generate docs with split configuration file', async () => {
     await test('test/lambda/split-config', 'validation.md')

@@ -11,7 +11,7 @@ function processFunction (layersMeta) {
       timeout: timeout || 'default',
       handler,
       ...layers && { layers: `<ul>${layers.map(layer => `<li>${getLayerName(layer, layersMeta)}</li>`).join('')}</ul>` },
-      ...destinations && { destinations: `<ul><li>On success: ${destinations.onSuccess}</li><li>On failure: ${destinations.onFailure}</li></ul>` }
+      ...destinations && { destinations: `<ul>${destinations.onSuccess ? `<li>On success: ${destinations.onSuccess}</li>` : ''}${destinations.onFailure ? `<li>On failure: ${destinations.onFailure}</li>` : ''}</ul>` }
     }
   }
 }
