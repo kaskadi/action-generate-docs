@@ -33,7 +33,7 @@ function getDestination (destination, functions) {
     match = destination.match(regexps[i])
     i++
   }
-  return `${match[1]} _(defined via ARN)_` || `[${functions[destination].name}](#${functions[destination].name})`
+  return match ? `${match[1]} _(defined via ARN)_` : `[${functions[destination].name}](#${functions[destination].name})`
 }
 
 function getLayerName (layer, layersMeta) {
