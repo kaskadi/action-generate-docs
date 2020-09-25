@@ -61,7 +61,7 @@ function processIntrinsicFct (key, value, meta, type = 'layer') {
     case 'Fn::Join':
       return value[1].join(value[0])
     default:
-      return `\`${key}: ${JSON.stringify(value)}\` _(using intrinsic function)_`
+      return `\`${key}: ${JSON.stringify(value)}\` _(defined via intrinsic function)_`
   }
 }
 
