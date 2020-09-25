@@ -71,6 +71,6 @@ function getEventName (event) {
 }
 
 function camelToSentence (str) {
-  const sentenceCasedStr = str.replace(/([A-Z])/g, ' $1')
+  const sentenceCasedStr = str.replace(/([a-z])([A-Z])/g, '$1 $2')
   return sentenceCasedStr.charAt(0).toUpperCase() + sentenceCasedStr.slice(1)
 }
