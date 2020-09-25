@@ -23,9 +23,8 @@ function getLayerName (layer, layersMeta) {
   }
   const arnRegex = new RegExp(/arn:[a-zA-Z0-9-]+:lambda:[a-zA-Z0-9-]+:\d{12}:layer:([a-zA-Z0-9-_]+)/)
   const matchArn = layer.match(arnRegex)
-  console.log(matchArn)
   if (matchArn) {
-    return `${matchArn[1]} _(defined via ARN: "${layer}")_`
+    return `${matchArn[1]} _(defined via ARN)_`
   }
   return layer
 }
