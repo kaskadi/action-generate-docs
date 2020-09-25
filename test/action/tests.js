@@ -32,6 +32,9 @@ describe('action docs generation', function () {
       process.env.GITHUB_REF = 'ref:head/dev'
       await test('test/action/all-params', 'validation-branch.md')
       delete process.env.GITHUB_REF
+    })
+    it('should default branch to master if no reference exists', async () => {
+      await test('test/action/all-params', 'validation-no-template.md')
       process.env.GITHUB_BASE_REF = 'ref:head/master'
     })
   })

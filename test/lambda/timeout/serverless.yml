@@ -1,0 +1,40 @@
+service:
+  name: template-kaskadi-lambda
+
+package:
+  individually: true
+  exclude:
+    - '**/**'
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stackName: ${self:service.name}-stack
+  stage: ${opt:stage, 'prod'}
+  region: eu-central-1
+  deploymentBucket:
+    name: kaskadi-serverless-deployment-bucket
+  # update this section to use proper tags for your lambda and stack
+  stackTags: 
+    app: your-app-name
+  tags:
+    app: your-app-name
+    service: ${self:service.name}
+    logical-unit: api-logical-unit
+    type: 's3, sns, etc.'
+
+functions:
+  TemplateKaskadiLambda:
+    handler: template-kaskadi-lambda.handler
+    name: ${self:service.name}
+    timeout: 60
+    package:
+      include:
+        - 'template-kaskadi-lambda.js'
+        - 'node_modules/**'
+    # configure here the proper event(s) that should trigger your lambda
+    events:
+      - http:
+          method: get
+          path: hello
+          cors: true
