@@ -15,7 +15,7 @@ function getEventData (event) {
   const { method, path } = data
   const kaskadiDocs = data['kaskadi-docs']
   return {
-    method,
+    method: method.toUpperCase(),
     path,
     ...kaskadiDocs && {
       description: kaskadiDocs.description,
