@@ -14,7 +14,7 @@ module.exports = templatePath => {
     functions: require('../lambda/process-meta.js')(functions, layers),
     layers: require('../layer/get-packages.js')(modules, layers)
   }
-  console.log(data)
+  console.log(JSON.stringify(data.endpoints, null, 2))
   // console.log('SUCCESS: extracted meta data!')
   // console.log('INFO: generating documentation...')
   // const docs = require('./build-docs.js')(modules, data, templatePath)
