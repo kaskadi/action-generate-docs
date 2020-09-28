@@ -9,3 +9,12 @@ events:
       method: get
       path: hello
       cors: true
+      kaskadi-docs:
+        description: placeholder endpoint
+        queryStringParameters:
+          key1: first key
+          key2: second key
+        # doesn't make sense with GET but that's just for testing here
+        body:
+          param1: first body param
+          param2: second body param
