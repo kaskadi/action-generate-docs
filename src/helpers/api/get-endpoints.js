@@ -14,12 +14,13 @@ function getEventData (event) {
   const data = event.http
   const { method, path } = data
   const kaskadiDocs = data['kaskadi-docs']
-  const { description, queryStringParameters, body } = kaskadiDocs
   return {
     method,
     path,
-    description,
-    queryStringParameters,
-    body
+    ...kaskadiDocs && {
+      description: kaskadiDocs.description,
+      queryStringParameters: kaskadiDocs.queryStringParameters,
+      body: kaskadiDocs.body
+    }
   }
 }
