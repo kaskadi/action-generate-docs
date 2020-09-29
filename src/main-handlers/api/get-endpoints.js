@@ -16,15 +16,13 @@ function processEndpoint (lambda) {
 
 function getEventData (event) {
   let { method } = event
-  const kaskadiDocs = event['kaskadi-docs']
+  const kaskadiDocs = event['kaskadi-docs'] || {}
   method = method.toUpperCase()
   return {
     name: method,
     method,
-    ...kaskadiDocs && {
-      description: kaskadiDocs.description,
-      queryStringParameters: kaskadiDocs.queryStringParameters,
-      body: kaskadiDocs.body
-    }
+    description: kaskadiDocs.description || '',
+    queryStringParameters: kaskadiDocs.queryStringParameters || [],
+    body: kaskadiDocs.body || []
   }
 }
