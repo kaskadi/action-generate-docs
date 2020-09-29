@@ -19,19 +19,25 @@ describe('action docs generation', function () {
   it('should generate docs with template provided', async () => {
     process.env.INPUT_TEMPLATE = '../template.md'
     await test('test/action/all-params', 'validation.md')
-    delete process.env.INPUT_TEMPLATE
+      .finally(() => {
+        delete process.env.INPUT_TEMPLATE
+      })
   })
   describe('when working in a branch', () => {
     it('should generate docs refering to the current branch when triggered by PR', async () => {
       process.env.GITHUB_BASE_REF = 'ref:head/dev'
       delete process.env.GITHUB_REF
       await test('test/action/all-params', 'validation-branch.md')
-      delete process.env.GITHUB_BASE_REF
+        .finally(() => {
+          delete process.env.GITHUB_BASE_REF
+        })
     })
     it('should generate docs refering to the current branch when triggered by non PR events', async () => {
       process.env.GITHUB_REF = 'ref:head/dev'
       await test('test/action/all-params', 'validation-branch.md')
-      delete process.env.GITHUB_REF
+        .finally(() => {
+          delete process.env.GITHUB_REF
+        })
     })
     it('should default branch to master if no reference exists', async () => {
       await test('test/action/all-params', 'validation-no-template.md')

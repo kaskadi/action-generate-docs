@@ -7,7 +7,7 @@ The following layers are defined in this repository:
 
 ### Description
 
-No description found for this layer...
+No Description found for this layer...
 
 ### Dependencies
 
@@ -16,3 +16,10 @@ No description found for this layer...
 - `standard`, version: `^14.3.4` ([see on NPM](https://www.npmjs.com/package/standard))
 
 See [configuration file](./serverless.yml) for more details.
+
+# Stack tags
+
+- app: your-app-name
+- service: template-kaskadi-layer
+- logical-unit: api-logical-unit
+- type: s3, sns, etc.

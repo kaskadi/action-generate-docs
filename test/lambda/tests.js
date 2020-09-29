@@ -24,7 +24,9 @@ describe('lambda docs generation', function () {
   it('should generate docs with a template provided', async () => {
     process.env.INPUT_TEMPLATE = '../template.md'
     await test('test/lambda/with-template', 'validation.md')
-    delete process.env.INPUT_TEMPLATE
+      .finally(() => {
+        delete process.env.INPUT_TEMPLATE
+      })
   })
   it('should generate docs with specific timeout', async () => {
     await test('test/lambda/timeout', 'validation.md')

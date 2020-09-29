@@ -17,3 +17,10 @@ This is a template layer
 - `foo` (local utility)
 
 See [configuration file](./serverless.yml) for more details.
+
+# Stack tags
+
+- app: your-app-name
+- service: template-kaskadi-layer
+- logical-unit: api-logical-unit
+- type: s3, sns, etc.

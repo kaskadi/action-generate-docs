@@ -5,7 +5,7 @@ The following lambda functions are defined in this repository:
 - [my-function](#my-function)
 
 The following layers are defined in this repository:
-_no layer defined in the configuration file..._
+_no layer defined in the [configuration file](./serverless.yml)..._
 
 ## template-kaskadi-lambda <a name="template-kaskadi-lambda"></a>
 
@@ -22,3 +22,10 @@ See [configuration file](./serverless.yml) for more details.
 | my-function | No source defined | default | [handler](./template-kaskadi-lambda.js) |
 
 See [configuration file](./serverless.yml) for more details.
+
+# Stack tags
+
+- app: your-app-name
+- service: template-kaskadi-lambda
+- logical-unit: api-logical-unit
+- type: s3, sns, etc.
