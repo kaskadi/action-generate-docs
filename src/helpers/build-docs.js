@@ -37,8 +37,8 @@ function getLambdasData (fs, path, data) {
   const partialPath = path.join(__dirname, 'lambda/lambda-partial.md')
   const lambdas = functions.map(addDetails(fs, path))
   return {
-    ...getLayersData(data),
-    lambdas: getPartial(fs, path, lambdas, partialPath, lambdaDocType),
+    ...getLayersData(fs, path, data),
+    lambdas: getPartial(fs, lambdas, partialPath, lambdaDocType),
     'lambdas-list': buildList(lambdas, lambdaDocType)
   }
 }
