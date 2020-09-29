@@ -24,9 +24,14 @@ describe('layer docs generation', function () {
   it('should generate docs with a template provided', async () => {
     process.env.INPUT_TEMPLATE = '../template.md'
     await test('test/layer/with-template', 'validation.md')
+      .then(() => {
+        delete process.env.INPUT_TEMPLATE
+      })
+      .catch(() => {
+        delete process.env.INPUT_TEMPLATE
+      })
   })
   it('should support multi-layer situations', async () => {
-    delete process.env.INPUT_TEMPLATE
     await test('test/layer/multi-layer', 'validation.md')
   })
   it('should generate docs with no layer', async () => {
