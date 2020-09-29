@@ -16,3 +16,7 @@ The following layers are used in this API:
 {{>lambdas}}
 
 {{>layers}}
+
+# Stack tags
+
+{{>tags}}

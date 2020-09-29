@@ -9,3 +9,7 @@ The following layers are defined in this repository:
 {{>lambdas}}
 
 {{>layers}}
+
+# Stack tags
+
+{{>tags}}
