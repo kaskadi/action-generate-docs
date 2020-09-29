@@ -3,7 +3,6 @@ module.exports = (modules, templatePath, type) => {
   const meta = require('./get-sls.js')(modules)
   console.log('SUCCESS: extracted meta data!')
   const data = require('./get-data.js')(modules, meta, type)
-  console.log(JSON.stringify(data, null, 2))
   console.log('INFO: generating documentation...')
   const docs = require('./build-docs.js')(data, templatePath, type)
   console.log('SUCCESS: documentation successfully generated!')
