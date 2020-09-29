@@ -1,4 +1,4 @@
-module.exports = ({ replaceInFile, fs, path }, templatePath, main) => {
+module.exports = ({ replaceInFile, fs }, templatePath, main) => {
   if (!fs.existsSync(templatePath) || !templatePath) {
     return main
   }

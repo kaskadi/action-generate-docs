@@ -1,5 +1,5 @@
 const path = require('path')
-const replaceInFile = require('../replace-in-file.js')
+const replaceInFile = require('../../helpers/replace-in-file.js')
 
 module.exports = (fs, config, templatePath) => {
   let main = fs.readFileSync(path.join(__dirname, 'action-partial.md'), 'utf8')

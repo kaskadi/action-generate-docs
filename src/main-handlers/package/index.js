@@ -1,7 +1,7 @@
 const modules = {
   fs: require('fs'),
   path: require('path'),
-  replaceInFile: require('../replace-in-file.js')
+  replaceInFile: require('../../helpers/replace-in-file.js')
 }
 const getMain = require('./get-main.js')
 const buildDocs = require('./build-docs.js')

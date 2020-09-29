@@ -2,7 +2,7 @@ const { getPartial, buildList } = require('./utils.js')
 const replaceInFile = require('./replace-in-file.js')
 
 module.exports = ({ fs, path }, data, templatePath, type) => {
-  let main = fs.readFileSync(path.join(__dirname, `${type}/main-partial.md`), 'utf8')
+  let main = fs.readFileSync(path.join(__dirname, '..', `main-handlers/${type}/main-partial.md`), 'utf8')
   const handlers = {
     layer: getLayersData,
     lambda: getLambdasData,
@@ -19,11 +19,10 @@ module.exports = ({ fs, path }, data, templatePath, type) => {
   return replaceInFile(fs.readFileSync(templatePath, 'utf8'), 'main', main)
 }
 
-// replacement data builders
 function getLayersData (fs, path, data) {
   const { layers } = data
   const layerDocType = 'layer'
-  const partialPath = path.join(__dirname, 'layer/layer-partial.md')
+  const partialPath = path.join(__dirname, '..', 'main-handlers/layer/layer-partial.md')
   return {
     layers: getPartial(fs, layers, partialPath, layerDocType),
     'layers-list': buildList(layers, layerDocType)
@@ -31,10 +30,10 @@ function getLayersData (fs, path, data) {
 }
 
 function getLambdasData (fs, path, data) {
-  const addDetails = require('./lambda/add-details.js')
+  const addDetails = require('../main-handlers/lambda/add-details.js')
   const { functions } = data
   const lambdaDocType = 'lambda function'
-  const partialPath = path.join(__dirname, 'lambda/lambda-partial.md')
+  const partialPath = path.join(__dirname, '..', 'main-handlers/lambda/lambda-partial.md')
   const lambdas = functions.map(addDetails(fs, path))
   return {
     ...getLayersData(fs, path, data),
