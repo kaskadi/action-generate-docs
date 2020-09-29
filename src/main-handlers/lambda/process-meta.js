@@ -1,3 +1,5 @@
+const camelToSentence = require('../../helpers/camel-to-sentence.js')
+
 module.exports = (functions, layersMeta) => {
   return Object.values(functions).map(processFunction(layersMeta, functions))
 }
@@ -69,9 +71,4 @@ function processIntrinsicFct (key, value, meta, type = 'layer') {
 function getEventName (event) {
   const semEvent = camelToSentence(Object.keys(event)[0])
   return semEvent.split(' ').length === 1 ? semEvent.toUpperCase() : semEvent
-}
-
-function camelToSentence (str) {
-  const sentenceCasedStr = str.replace(/([a-z])([A-Z])/g, '$1 $2')
-  return sentenceCasedStr.charAt(0).toUpperCase() + sentenceCasedStr.slice(1)
 }
