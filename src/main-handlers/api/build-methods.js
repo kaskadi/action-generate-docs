@@ -15,8 +15,8 @@ function processMethod (endpoint) {
   return method => {
     return {
       ...method,
-      queryStringParameters: `**Query string parameters:**\n\n${buildTable(method.queryStringParameters)}`,
-      body: `**Request body:**\n\n${buildTable(method.body)}`,
+      queryStringParameters: method.queryStringParameters.length > 0 ? buildTable(method.queryStringParameters) : '',
+      body: method.body.length > 0 ? buildTable(method.body) : '',
       example: buildExample(method, endpoint)
     }
   }
@@ -24,9 +24,11 @@ function processMethod (endpoint) {
 
 function buildExample (methodData, endpoint) {
   const { method, queryStringParameters, body } = methodData
-  const qs = queryStringParameters.map(param => `${param.key}=${param.key}_value`).join('&')
-  const reqBody = Object.fromEntries(body.map(param => [param.key, `${param.key}_value`]))
-  const example = `${method} ${endpoint.path}?${qs}\n\n${JSON.stringify(reqBody, null, 2)}`
+  let qs = queryStringParameters.map(param => `${param.key}=${param.key}_value`).join('&')
+  qs = `?${qs}`
+  const payload = Object.fromEntries(body.map(param => [param.key, `${param.key}_value`]))
+  const reqBody = Object.keys(payload).length > 0 ? `\n\n${JSON.stringify(payload, null, 2)}` : ''
+  const example = `${method} ${endpoint.path}${qs}${reqBody}`
   return `\`\`\`HTTP\n${example}\n\`\`\``
 }
 
