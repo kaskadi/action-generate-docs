@@ -4,26 +4,25 @@ module.exports = (modules, meta, type) => {
     lambda: getLambdaData,
     api: getApiData
   }
-  return handlers[type](modules, meta.provider.tags, meta.layers || {}, meta.functions || {})
+  return handlers[type](modules, meta.layers || {}, meta.functions || {})
 }
 
-function getLayerData (modules, tags, layers) {
+function getLayerData (modules, layers) {
   return {
-    tags: Object.entries(tags).map(entry => `- ${entry[0]}: ${entry[1]}`).join('\n'),
     layers: require('../../main-handlers/layer/get-packages.js')(modules, layers)
   }
 }
 
-function getLambdaData (modules, tags, layers, functions) {
+function getLambdaData (modules, layers, functions) {
   return {
-    ...getLayerData(modules, tags, layers),
+    ...getLayerData(modules, layers),
     functions: require('../../main-handlers/lambda/process-meta.js')(functions, layers)
   }
 }
 
-function getApiData (modules, tags, layers, functions) {
+function getApiData (modules, layers, functions) {
   return {
-    ...getLambdaData(modules, tags, layers, functions),
+    ...getLambdaData(modules, layers, functions),
     endpoints: require('../../main-handlers/api/get-endpoints.js')(functions)
   }
 }

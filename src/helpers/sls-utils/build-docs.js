@@ -10,7 +10,10 @@ module.exports = (data, templatePath, type) => {
     lambda: getLambdasData,
     api: getEndpointsData
   }
-  const replaceData = handlers[type](data)
+  const replaceData = {
+    ...handlers[type](data),
+    tags: Object.entries(data.tags).map(entry => `- ${entry[0]}: ${entry[1]}`).join('\n')
+  }
   for (const key in replaceData) {
     main = replaceInFile(main, key, replaceData[key])
   }
