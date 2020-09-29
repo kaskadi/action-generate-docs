@@ -15,8 +15,8 @@ function processMethod (endpoint) {
   return method => {
     return {
       ...method,
-      queryStringParameters: buildTable(method.queryStringParameters),
-      body: buildTable(method.body),
+      queryStringParameters: `**Query string parameters:**\n\n${buildTable(method.queryStringParameters)}`,
+      body: `**Request body:**\n\n${buildTable(method.body)}`,
       example: buildExample(method, endpoint)
     }
   }
