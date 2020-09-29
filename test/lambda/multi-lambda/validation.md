@@ -22,3 +22,10 @@ See [configuration file](./serverless.yml) for more details.
 | template-kaskadi-lambda-2 | <ul><li>HTTP</li></ul> | default | [handler](./template-kaskadi-lambda.js) |
 
 See [configuration file](./serverless.yml) for more details.
+
+# Stack tags
+
+- app: your-app-name
+- service: template-kaskadi-lambda
+- logical-unit: api-logical-unit
+- type: s3, sns, etc.

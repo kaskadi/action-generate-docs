@@ -10,3 +10,10 @@ _no lambda function defined in the [configuration file](./serverless.yml)..._
 
 The following layers are used in this API:
 _no layer defined in the [configuration file](./serverless.yml)..._
+
+# Stack tags
+
+- app: your-app-name
+- service: template-kaskadi-api
+- logical-unit: api-logical-unit
+- type: s3, sns, etc.

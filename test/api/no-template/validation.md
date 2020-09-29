@@ -54,3 +54,10 @@ _no layer defined in the [configuration file](./serverless.yml)..._
 | hello-world | <ul><li>HTTP</li></ul> | default | [handler](./lambdas/hello-world/index.js) |
 
 See [configuration file](./serverless.yml) for more details.
+
+# Stack tags
+
+- app: your-app-name
+- service: template-kaskadi-api
+- logical-unit: api-logical-unit
+- type: s3, sns, etc.

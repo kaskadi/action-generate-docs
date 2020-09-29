@@ -66,3 +66,10 @@ Layer for template-kaskadi-api
 No NPM packages or local utilities found for this layer...
 
 See [configuration file](./serverless.yml) for more details.
+
+# Stack tags
+
+- app: your-app-name
+- service: template-kaskadi-api
+- logical-unit: api-logical-unit
+- type: s3, sns, etc.

@@ -13,3 +13,10 @@ _no layer defined in the [configuration file](./serverless.yml)..._
 | template-kaskadi-lambda | <ul><li>HTTP</li></ul> | default | [handler](./nested/folder/template-kaskadi-lambda.js) |
 
 See [configuration file](./serverless.yml) for more details.
+
+# Stack tags
+
+- app: your-app-name
+- service: template-kaskadi-lambda
+- logical-unit: api-logical-unit
+- type: s3, sns, etc.
