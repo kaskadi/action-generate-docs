@@ -1,11 +1,3 @@
-## `{{>method}}` `{{>path}}` (target lambda → [{{>name}}](#{{>name}}))
+## `{{>path}}` (target lambda → [{{>name}}](#{{>name}}))
 
-{{>description}}
-
-{{>queryStringParameters}}
-
-{{>body}}
-
-_Example:_
-
-{{>example}}
+{{>methods}}
