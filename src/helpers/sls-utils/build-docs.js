@@ -1,14 +1,18 @@
 const { getPartial, buildList } = require('./utils.js')
-const replaceInFile = require('./replace-in-file.js')
+const fs = require('fs')
+const path = require('path')
+const replaceInFile = require('../replace-in-file.js')
 
-module.exports = ({ fs, path }, data, templatePath, type) => {
-  let main = fs.readFileSync(path.join(__dirname, '..', `main-handlers/${type}/main-partial.md`), 'utf8')
+const srcDir = path.join(__dirname, '../../')
+
+module.exports = (data, templatePath, type) => {
+  let main = fs.readFileSync(path.join(srcDir, `main-handlers/${type}/main-partial.md`), 'utf8')
   const handlers = {
     layer: getLayersData,
     lambda: getLambdasData,
     api: getEndpointsData
   }
-  const replaceData = handlers[type](fs, path, data)
+  const replaceData = handlers[type](data)
   for (const key in replaceData) {
     main = replaceInFile(main, key, replaceData[key])
   }
@@ -19,33 +23,33 @@ module.exports = ({ fs, path }, data, templatePath, type) => {
   return replaceInFile(fs.readFileSync(templatePath, 'utf8'), 'main', main)
 }
 
-function getLayersData (fs, path, data) {
+function getLayersData (data) {
   const { layers } = data
   const layerDocType = 'layer'
-  const partialPath = path.join(__dirname, '..', 'main-handlers/layer/layer-partial.md')
+  const partialPath = path.join(srcDir, 'main-handlers/layer/layer-partial.md')
   return {
     layers: getPartial(fs, layers, partialPath, layerDocType),
     'layers-list': buildList(layers, layerDocType)
   }
 }
 
-function getLambdasData (fs, path, data) {
-  const addDetails = require('../main-handlers/lambda/add-details.js')
+function getLambdasData (data) {
+  const addDetails = require('../../main-handlers/lambda/add-details.js')
   const { functions } = data
   const lambdaDocType = 'lambda function'
-  const partialPath = path.join(__dirname, '..', 'main-handlers/lambda/lambda-partial.md')
+  const partialPath = path.join(srcDir, 'main-handlers/lambda/lambda-partial.md')
   const lambdas = functions.map(addDetails(fs, path))
   return {
-    ...getLayersData(fs, path, data),
+    ...getLayersData(data),
     lambdas: getPartial(fs, lambdas, partialPath, lambdaDocType),
     'lambdas-list': buildList(lambdas, lambdaDocType)
   }
 }
 
-function getEndpointsData (fs, path, data) {
+function getEndpointsData (data) {
   const { endpoints } = data
   return {
-    ...getLambdasData(fs, path, data),
+    ...getLambdasData(data),
     endpoints
   }
 }

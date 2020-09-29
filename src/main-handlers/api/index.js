@@ -6,11 +6,11 @@ const modules = {
 
 module.exports = templatePath => {
   console.log('INFO: retrieving data from serverless.yml file...')
-  const meta = require('../../helpers/get-sls.js')(modules, __dirname)
-  const data = require('../../helpers/get-data.js')(modules, meta, 'api')
+  const meta = require('../../helpers/sls-utils/get-sls.js')(modules, __dirname)
   console.log('SUCCESS: extracted meta data!')
+  const data = require('../../helpers/sls-utils/get-data.js')(modules, meta, 'api')
   console.log('INFO: generating documentation...')
-  const docs = require('../../helpers/build-docs.js')(modules, data, templatePath, 'api')
+  const docs = require('../../helpers/sls-utils/build-docs.js')(data, templatePath, 'api')
   console.log('SUCCESS: documentation successfully generated!')
   console.log(docs)
   // modules.fs.writeFileSync('README.md', docs, 'utf8')

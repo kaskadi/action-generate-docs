@@ -1,7 +1,6 @@
 const { spawnSync } = require('child_process')
-const path = require('path')
 
-module.exports = ({ YAML, fs }, callingDir) => {
+module.exports = ({ YAML, fs, path }, callingDir) => {
   if (!fs.existsSync('serverless.yml')) {
     console.log('ERROR: no serverless.yml configuration file found, aborting...')
     process.exit(0)

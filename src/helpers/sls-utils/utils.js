@@ -1,5 +1,5 @@
 function buildPartial (partialDoc, docType) {
-  const replaceInFile = require('./replace-in-file.js')
+  const replaceInFile = require('../replace-in-file.js')
   return data => Object.keys(data).reduce((partial, key) => replaceInFile(partial, key, data[key] || `No ${key} found for this ${docType}...`), partialDoc)
 }
 
