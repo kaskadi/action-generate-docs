@@ -6,12 +6,15 @@ function processEndpoint (lambda) {
   const { name, events } = lambda
   return {
     name,
-    methods: events.filter(event => Object.keys(event)[0] === 'http').map(getEventData)
+    methods: events.map(getEventData).filter(method => method)
   }
 }
 
 function getEventData (event) {
   const data = event.http
+  if (!data) {
+    return
+  }
   const { method, path } = data
   const kaskadiDocs = data['kaskadi-docs']
   return {
