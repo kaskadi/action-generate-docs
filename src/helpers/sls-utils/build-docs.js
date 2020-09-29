@@ -14,7 +14,7 @@ module.exports = (data, templatePath, type) => {
   for (const key in replaceData) {
     main = replaceInFile(main, key, replaceData[key])
   }
-  main = main.trim()
+  main = main.replace(/\n\n\n/g, '\n').trim()
   if (!fs.existsSync(templatePath) || !templatePath) {
     return main
   }
