@@ -24,10 +24,7 @@ describe('lambda docs generation', function () {
   it('should generate docs with a template provided', async () => {
     process.env.INPUT_TEMPLATE = '../template.md'
     await test('test/lambda/with-template', 'validation.md')
-      .then(() => {
-        delete process.env.INPUT_TEMPLATE
-      })
-      .catch(() => {
+      .finally(() => {
         delete process.env.INPUT_TEMPLATE
       })
   })

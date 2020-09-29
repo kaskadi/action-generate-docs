@@ -19,10 +19,7 @@ describe('action docs generation', function () {
   it('should generate docs with template provided', async () => {
     process.env.INPUT_TEMPLATE = '../template.md'
     await test('test/action/all-params', 'validation.md')
-      .then(() => {
-        delete process.env.INPUT_TEMPLATE
-      })
-      .catch(() => {
+      .finally(() => {
         delete process.env.INPUT_TEMPLATE
       })
   })
@@ -31,20 +28,14 @@ describe('action docs generation', function () {
       process.env.GITHUB_BASE_REF = 'ref:head/dev'
       delete process.env.GITHUB_REF
       await test('test/action/all-params', 'validation-branch.md')
-        .then(() => {
-          delete process.env.GITHUB_BASE_REF
-        })
-        .catch(() => {
+        .finally(() => {
           delete process.env.GITHUB_BASE_REF
         })
     })
     it('should generate docs refering to the current branch when triggered by non PR events', async () => {
       process.env.GITHUB_REF = 'ref:head/dev'
       await test('test/action/all-params', 'validation-branch.md')
-        .then(() => {
-          delete process.env.GITHUB_REF
-        })
-        .catch(() => {
+        .finally(() => {
           delete process.env.GITHUB_REF
         })
     })
