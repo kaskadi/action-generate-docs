@@ -1,0 +1,11 @@
+handler: lambdas/hello-world/index.handler
+name: hello-world
+package:
+  include:
+    - lambdas/hello-world/index.js
+    - lambdas/hello-world/node_modules/**
+events:
+  - http:
+      method: get
+      path: hello
+      cors: true

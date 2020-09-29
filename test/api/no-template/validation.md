@@ -10,19 +10,25 @@ Supported methods:
 
 ### `GET`
 
+**Description:**
+
 placeholder endpoint
+
+**Query string parameters:**
 
 |   Key  | Default | Description |
 | :----: | :-----: | :---------- |
 | `key1` |         | first key   |
 | `key2` |   `35`  | second key  |
 
+**Request body:**
+
 |    Key   | Default | Description       |
 | :------: | :-----: | :---------------- |
 | `param1` | `hello` | first body param  |
 | `param2` |  `true` | second body param |
 
-_Example:_
+_Example request:_
 
 ```HTTP
 GET /hello?key1=key1_value&key2=key2_value
@@ -39,7 +45,7 @@ The following lambda functions are used in this API:
 - [hello-world](#hello-world)
 
 The following layers are used in this API:
-_no layer defined in the configuration file..._
+_no layer defined in the [configuration file](./serverless.yml)..._
 
 ## hello-world <a name="hello-world"></a>
 

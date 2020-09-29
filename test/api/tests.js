@@ -12,8 +12,30 @@ describe('lambda docs generation', function () {
     await runAction(['pre'])
     process.env.INPUT_TYPE = 'api'
   })
+  it('should not generate docs if no serverless configuration file exists', async () => {
+    process.chdir('test/layer/no-config-file')
+    await runAction(['main'])
+    fs.existsSync('README.md').should.equal(false)
+    process.chdir(cwd)
+  })
   it('should generate docs with no template provided', async () => {
     await test('test/api/no-template', 'validation.md')
+  })
+  it('should generate docs with a template provided', async () => {
+    process.env.INPUT_TEMPLATE = '../template.md'
+    await test('test/api/with-template', 'validation.md')
+      .finally(() => {
+        delete process.env.INPUT_TEMPLATE
+      })
+  })
+  it('should generate docs with no endpoints defined', async () => {
+    await test('test/api/no-lambda', 'validation.md')
+  })
+  it('should generate docs with layers attached to an endpoint', async () => {
+    await test('test/api/with-layer', 'validation.md')
+  })
+  it('should generate docs when no kaskadi-docs field has been provided for a given method', async () => {
+    await test('test/api/no-custom-field', 'validation.md')
   })
   after(() => {
     delete process.env.INPUT_TYPE
