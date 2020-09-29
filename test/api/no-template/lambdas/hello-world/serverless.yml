@@ -12,9 +12,16 @@ events:
       kaskadi-docs:
         description: placeholder endpoint
         queryStringParameters:
-          key1: first key
-          key2: second key
+          - key: key1
+            description: first key
+          - key: key2
+            description: second key
+            default: 35 
         # doesn't make sense with GET but that's just for testing here
         body:
-          param1: first body param
-          param2: second body param
+          - key: param1
+            description: first body param
+            default: 'hello'
+          - key: param2
+            description: second body param
+            default: true

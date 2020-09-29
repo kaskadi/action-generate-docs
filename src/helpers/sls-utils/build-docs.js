@@ -47,9 +47,23 @@ function getLambdasData (data) {
 }
 
 function getEndpointsData (data) {
-  const { endpoints } = data
+  const buildMethods = require('../../main-handlers/api/build-methods.js')
+  let { endpoints } = data
+  const endpointDocType = 'endpoint'
+  const methodDocType = 'method'
+  const methodPartialPath = path.join(srcDir, 'main-handlers/api/method-partial.md')
+  const endpointPartialPath = path.join(srcDir, 'main-handlers/api/endpoint-partial.md')
+  endpoints = buildMethods(endpoints)
+  endpoints = endpoints.map(endpoint => {
+    return {
+      ...endpoint,
+      'methods-list': buildList(endpoint.methods, methodDocType),
+      methods: getPartial(fs, endpoint.methods, methodPartialPath, methodDocType)
+    }
+  })
   return {
     ...getLambdasData(data),
-    endpoints
+    endpoints: getPartial(fs, endpoints, endpointPartialPath, endpointDocType),
+    'endpoints-list': buildList(endpoints, endpointDocType)
   }
 }

@@ -1,5 +1,8 @@
 # API endpoints
 
+The following endpoints are defined in this API:
+{{>endpoints-list}}
+
 {{>endpoints}}
 
 # API resources

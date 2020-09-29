@@ -4,22 +4,23 @@ module.exports = (functions) => {
 
 function processEndpoint (lambda) {
   const { name, events } = lambda
+  const httpEvents = events.filter(event => Object.keys(event)[0] === 'http').map(event => event.http)
+  const path = `/${httpEvents[0].path}` // we cannot have different paths calling the same lambda: bad API design. At best we would have different methods with the same path (DELETE, GET, POST)
   return {
-    name,
-    methods: events.map(getEventData).filter(method => method)
+    name: path, // we want to use path here to be able to reference the proper endpoint in the documentation
+    'lambda-name': name, // this helps us reference to the lambda attached to this endpoint
+    path,
+    methods: httpEvents.map(getEventData)
   }
 }
 
 function getEventData (event) {
-  const data = event.http
-  if (!data) {
-    return
-  }
-  const { method, path } = data
-  const kaskadiDocs = data['kaskadi-docs']
+  let { method } = event
+  const kaskadiDocs = event['kaskadi-docs']
+  method = method.toUpperCase()
   return {
-    method: method.toUpperCase(),
-    path,
+    name: method,
+    method,
     ...kaskadiDocs && {
       description: kaskadiDocs.description,
       queryStringParameters: kaskadiDocs.queryStringParameters,
