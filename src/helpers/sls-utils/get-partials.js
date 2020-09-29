@@ -1,5 +1,6 @@
 const fs = require('fs')
 const path = require('path')
+const camelToSentence = require('../camel-to-sentence.js')
 
 const handlersDir = path.join(__dirname, '../../main-handlers')
 const docTypes = {
@@ -31,7 +32,7 @@ module.exports = (data, type) => {
 
 function buildPartial (partialDoc, docType) {
   const replaceInFile = require('../replace-in-file.js')
-  return data => Object.keys(data).reduce((partial, key) => replaceInFile(partial, key, data[key] || `No ${key} found for this ${docType}...`), partialDoc)
+  return data => Object.keys(data).reduce((partial, key) => replaceInFile(partial, key, data[key] || `No ${camelToSentence(key)} found for this ${docType}...`), partialDoc)
 }
 
 function getPartial (data, partialPath, docType) {
