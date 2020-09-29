@@ -7,17 +7,27 @@ module.exports = endpoints => {
 function processEndpoint (endpoint) {
   return {
     ...endpoint,
-    methods: endpoint.methods.map(processMethod)
+    methods: endpoint.methods.map(processMethod(endpoint))
   }
 }
 
-function processMethod (method) {
-  return {
-    ...method,
-    queryStringParameters: buildTable(method.queryStringParameters),
-    body: buildTable(method.body),
-    example: '```\nplaceholder\n```'
+function processMethod (endpoint) {
+  return method => {
+    return {
+      ...method,
+      queryStringParameters: buildTable(method.queryStringParameters),
+      body: buildTable(method.body),
+      example: buildExample(method, endpoint)
+    }
   }
+}
+
+function buildExample (methodData, endpoint) {
+  const { method, queryStringParameters, body } = methodData
+  const qs = queryStringParameters.map(param => `${param.key}=${param.key}_value`).join('&')
+  const reqBody = Object.fromEntries(body.map(param => [param.key, `${param.key}_value`]))
+  const example = `${method} ${endpoint.path}?${qs}\n\n${JSON.stringify(reqBody, null, 2)}`
+  return `\`\`\`HTTP\n${example}\n\`\`\``
 }
 
 function buildTable (params) {
