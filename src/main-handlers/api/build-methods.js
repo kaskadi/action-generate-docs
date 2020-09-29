@@ -25,7 +25,7 @@ function processMethod (endpoint) {
 function buildExample (methodData, endpoint) {
   const { method, queryStringParameters, body } = methodData
   let qs = queryStringParameters.map(param => `${param.key}=${param.key}_value`).join('&')
-  qs = `?${qs}`
+  qs = qs.length > 0 ? `?${qs}` : qs
   const payload = Object.fromEntries(body.map(param => [param.key, `${param.key}_value`]))
   const reqBody = Object.keys(payload).length > 0 ? `\n\n${JSON.stringify(payload, null, 2)}` : ''
   const example = `${method} ${endpoint.path}${qs}${reqBody}`
