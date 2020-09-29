@@ -1,11 +1,17 @@
 ### `{{>method}}`
 
+**Description:**
+
 {{>description}}
+
+**Query string parameters:**
 
 {{>queryStringParameters}}
 
+**Request body:**
+
 {{>body}}
 
-_Example:_
+_Example request:_
 
 {{>example}}
