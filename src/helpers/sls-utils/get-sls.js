@@ -6,6 +6,5 @@ module.exports = ({ YAML, fs, slsCli }) => {
     process.exit(0)
   }
   const sls = spawnSync('node', [slsCli, 'print']).stdout.toString().trim()
-  console.log(sls)
   return YAML.parse(sls)
 }
