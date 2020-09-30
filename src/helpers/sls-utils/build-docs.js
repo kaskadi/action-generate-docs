@@ -28,7 +28,7 @@ function getTags ({ table }, tags) {
     ['Tag', 'Value'],
     ...Object.entries(tags)
   ],
-  { align: ['c', 'c'] }
+  { align: ['l', 'l'] }
   )
 }
 
