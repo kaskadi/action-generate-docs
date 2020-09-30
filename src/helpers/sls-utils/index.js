@@ -7,7 +7,7 @@ module.exports = (modules, templatePath, type) => {
     tags: meta.provider.tags
   }
   console.log('INFO: generating documentation...')
-  const docs = require('./build-docs.js')(data, templatePath, type)
+  const docs = require('./build-docs.js')(modules, data, templatePath, type)
   console.log('SUCCESS: documentation successfully generated!')
   modules.fs.writeFileSync('README.md', docs, 'utf8')
 }

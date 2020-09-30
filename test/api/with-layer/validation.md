@@ -69,7 +69,11 @@ See [configuration file](./serverless.yml) for more details.
 
 # Stack tags
 
-- app: your-app-name
-- service: template-kaskadi-api
-- logical-unit: api-logical-unit
-- type: s3, sns, etc.
+You can use any tags (and their respective values) visible below to find ressources related to this stack on AWS. See [here](https://docs.amazonaws.cn/en_us/AWSCloudFormation/latest/UserGuide/aws-properties-resource-tags.html) for more details.
+
+| Tag          | Value                |
+| :----------- | :------------------- |
+| app          | your-app-name        |
+| service      | template-kaskadi-api |
+| logical-unit | api-logical-unit     |
+| type         | s3, sns, etc.        |
