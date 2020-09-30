@@ -1,6 +1,4 @@
-const table = require('markdown-table')
-
-module.exports = (fs, path) => {
+module.exports = ({ fs, path, table }) => {
   return lambda => {
     const detailsKeys = Object.keys(lambda)
     const details = table([

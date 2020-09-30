@@ -1,22 +1,22 @@
-const table = require('markdown-table')
-
-module.exports = endpoints => {
-  return endpoints.map(processEndpoint)
+module.exports = (modules, endpoints) => {
+  return endpoints.map(processEndpoint(modules))
 }
 
-function processEndpoint (endpoint) {
-  return {
-    ...endpoint,
-    methods: endpoint.methods.map(processMethod(endpoint))
+function processEndpoint (modules) {
+  return endpoint => {
+    return {
+      ...endpoint,
+      methods: endpoint.methods.map(processMethod(modules, endpoint))
+    }
   }
 }
 
-function processMethod (endpoint) {
+function processMethod (modules, endpoint) {
   return method => {
     return {
       ...method,
       queryStringParameters: method.queryStringParameters.length > 0 ? buildTable(method.queryStringParameters) : '',
-      body: method.body.length > 0 ? buildTable(method.body) : '',
+      body: method.body.length > 0 ? buildTable(modules, method.body) : '',
       example: buildExample(method, endpoint)
     }
   }
@@ -32,7 +32,7 @@ function buildExample (methodData, endpoint) {
   return `\`\`\`HTTP\n${example}\n\`\`\``
 }
 
-function buildTable (params) {
+function buildTable ({ table }, params) {
   const headers = ['key', 'default', 'description']
   return table([
     headers.map(header => header.charAt(0).toUpperCase() + header.slice(1)),
