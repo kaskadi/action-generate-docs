@@ -15,7 +15,7 @@ function processMethod (modules, endpoint) {
   return method => {
     return {
       ...method,
-      queryStringParameters: method.queryStringParameters.length > 0 ? buildTable(method.queryStringParameters) : '',
+      queryStringParameters: method.queryStringParameters.length > 0 ? buildTable(modules, method.queryStringParameters) : '',
       body: method.body.length > 0 ? buildTable(modules, method.body) : '',
       example: buildExample(method, endpoint)
     }

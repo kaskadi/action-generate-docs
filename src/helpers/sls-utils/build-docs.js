@@ -57,7 +57,7 @@ function getEndpointsData (data, modules) {
     }
   })
   return {
-    ...getLambdasData(data),
+    ...getLambdasData(data, modules),
     ...getPartials(endpoints, 'endpoints')
   }
 }
