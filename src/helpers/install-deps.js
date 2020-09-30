@@ -5,9 +5,7 @@ const cwd = process.cwd()
 module.exports = (path = cwd) => {
   process.chdir(path)
   console.log(`INFO: installing dependencies in directory ${path}...`)
-  console.log('************ NPM ouput ************')
-  spawnSync('npm', ['i'], { stdio: 'inherit' })
-  console.log('************ End of NPM ouput ************')
+  spawnSync('npm', ['i'])
   console.log('SUCCESS: dependencies installed!')
   process.chdir(cwd)
 }
