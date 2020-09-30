@@ -4,6 +4,16 @@ package:
   individually: true
   exclude:
     - '**/**'
+plugins:
+  - serverless-aws-documentation
+  - serverless-offline
+custom:
+  documentation:
+    api:
+      info:
+        version: 1.0.0
+        title: ${self:service.name}
+        description: Template API
 provider:
   name: aws
   runtime: nodejs12.x

@@ -7,7 +7,7 @@ chai.should()
 const cwd = process.cwd()
 
 describe('lambda docs generation', function () {
-  this.timeout(60000)
+  this.timeout(120000)
   before(async () => {
     await runAction(['pre'])
     process.env.INPUT_TYPE = 'lambda'
