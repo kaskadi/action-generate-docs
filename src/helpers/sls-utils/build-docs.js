@@ -1,9 +1,8 @@
-const fs = require('fs')
-const path = require('path')
 const getPartials = require('./get-partials.js')
 const replaceInFile = require('../replace-in-file.js')
 
 module.exports = (modules, data, templatePath, type) => {
+  const { fs, path } = modules
   let main = fs.readFileSync(path.join(__dirname, `../../main-handlers/${type}/main-partial.md`), 'utf8')
   const handlers = {
     layer: getLayersData,
@@ -12,7 +11,7 @@ module.exports = (modules, data, templatePath, type) => {
   }
   const replaceData = {
     ...handlers[type](data, modules),
-    tags: Object.entries(data.tags).map(entry => `- ${entry[0]}: ${entry[1]}`).join('\n')
+    tags: getTags(modules, data.tags)
   }
   for (const key in replaceData) {
     main = replaceInFile(main, key, replaceData[key])
@@ -22,6 +21,15 @@ module.exports = (modules, data, templatePath, type) => {
     return main
   }
   return replaceInFile(fs.readFileSync(templatePath, 'utf8'), 'main', main)
+}
+
+function getTags ({ table }, tags) {
+  return table([
+    ['Tag', 'Value'],
+    ...Object.entries(tags)
+  ],
+  { align: ['c', 'c'] }
+  )
 }
 
 function getLayersData (data) {
