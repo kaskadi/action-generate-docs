@@ -1,4 +1,5 @@
 module.exports = (modules, templatePath, type) => {
+  require('../install-deps')()
   console.log('INFO: retrieving data from serverless.yml file...')
   const meta = require('./get-sls.js')(modules)
   console.log('SUCCESS: extracted meta data!')

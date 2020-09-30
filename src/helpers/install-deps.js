@@ -1,9 +1,10 @@
 const { spawnSync } = require('child_process')
 
-module.exports = path => {
-  const cwd = process.cwd()
+const cwd = process.cwd()
+
+module.exports = (path = cwd) => {
   process.chdir(path)
-  console.log('INFO: installing module dependencies...')
+  console.log(`INFO: installing dependencies in directory ${path}...`)
   console.log('************ NPM ouput ************')
   spawnSync('npm', ['i'], { stdio: 'inherit' })
   console.log('************ End of NPM ouput ************')
