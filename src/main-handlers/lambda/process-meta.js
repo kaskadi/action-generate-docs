@@ -1,7 +1,8 @@
 const camelToSentence = require('../../helpers/camel-to-sentence.js')
 
-module.exports = (functions, layersMeta) => {
-  return Object.values(functions).map(processFunction(layersMeta, functions))
+module.exports = meta => {
+  const { layers, functions } = meta
+  return Object.values(functions).map(processFunction(layers, functions))
 }
 
 function processFunction (layersMeta, functions) {
@@ -29,14 +30,16 @@ function getDestination (destination, functions) {
     SNS: new RegExp(/arn:[a-zA-Z0-9-]+:sns:[a-zA-Z0-9-]+:\d{12}:([a-zA-Z0-9-_]+)/),
     eventBridge: new RegExp(/arn:[a-zA-Z0-9-]+:events:[a-zA-Z0-9-]+:\d{12}:event-bus\/([a-zA-Z0-9-_]+)/)
   }
-  let i = 0
   let match = null
-  const entries = Object.entries(regexps)
-  while (!match && i < entries.length) {
-    match = destination.match(entries[i][1])
-    i++
+  let type = ''
+  for (const key in regexps) {
+    match = destination.match(regexps[key])
+    if (match) {
+      type = key
+      break
+    }
   }
-  return match ? `${match[1]} _(type: ${camelToSentence(entries[i - 1][0])}, defined via ARN)_` : `[${functions[destination].name}](#${functions[destination].name})`
+  return match ? `${match[1]} _(type: ${camelToSentence(type)}, defined via ARN)_` : `[${functions[destination].name}](#${functions[destination].name})`
 }
 
 function getLayerName (layer, layersMeta) {

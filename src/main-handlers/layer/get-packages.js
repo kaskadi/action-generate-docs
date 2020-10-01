@@ -1,4 +1,5 @@
-module.exports = ({ fs, path }, layers) => {
+module.exports = ({ fs, path }, meta) => {
+  const { layers } = meta
   return Object.values(layers).map(layer => {
     const dependencies = getDeps(fs, path, layer.path)
     return {
