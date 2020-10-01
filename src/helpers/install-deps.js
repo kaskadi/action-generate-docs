@@ -1,11 +1,16 @@
 const { spawnSync } = require('child_process')
 
-const cwd = process.cwd()
-
-module.exports = (path = cwd) => {
+module.exports = opts => {
+  const cwd = process.cwd()
+  opts = {
+    path: cwd,
+    deps: [],
+    ...opts
+  }
+  const { path, deps } = opts
   process.chdir(path)
   console.log(`INFO: installing dependencies in directory ${path}...`)
-  spawnSync('npm', ['i'])
+  spawnSync('npm', ['i', ...deps])
   console.log('SUCCESS: dependencies installed!')
   process.chdir(cwd)
 }
