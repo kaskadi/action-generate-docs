@@ -15,7 +15,7 @@ if (!fs.existsSync(`${__dirname}/main-handlers/${type}`)) {
 
 const modulePath = `main-handlers/${type}`
 
-require('./helpers/install-deps.js')({ path: path.join(__dirname, modulePath) }) // install all dependencies for selected module
+require('./helpers/install-deps.js')(path.join(__dirname, modulePath))
 require(`./${modulePath}/index.js`)(templatePath)
 try {
   console.log('\n********* Documentation preview *********\n')
