@@ -1,36 +1,36 @@
-module.exports = (modules, meta, type) => {
-  const handlers = {
-    layer: getLayerData,
-    lambda: getLambdaData,
-    api: getApiData
+const types = {
+  layer: {
+    key: 'layers',
+    getDataHandler: (modules, meta) => require('../../main-handlers/layer/get-packages.js')(modules, meta)
+  },
+  lambda: {
+    key: 'functions',
+    getDataHandler: (modules, meta) => require('../../main-handlers/lambda/process-meta.js')(meta)
+  },
+  api: {
+    key: 'endpoints',
+    getDataHandler: (modules, meta) => require('../../main-handlers/api/get-endpoints.js')(meta)
   }
+}
+
+module.exports = (modules, meta, type) => {
   meta = {
     layers: {},
     functions: {},
     ...meta
   }
-  return handlers[type](modules, meta)
+  return getData4Type(modules, meta, type)
 }
 
-function getLayerData (modules, meta) {
-  const { layers } = meta
-  return {
-    layers: require('../../main-handlers/layer/get-packages.js')(modules, layers)
+function getData4Type (modules, meta, type) {
+  var data = {}
+  for (const typeKey in types) {
+    const key = types[typeKey].key
+    const value = types[typeKey].getDataHandler(modules, meta)
+    data[key] = value
+    if (typeKey === type) {
+      break
+    }
   }
-}
-
-function getLambdaData (modules, meta) {
-  const { layers, functions } = meta
-  return {
-    ...getLayerData(modules, layers),
-    functions: require('../../main-handlers/lambda/process-meta.js')(functions, layers)
-  }
-}
-
-function getApiData (modules, meta) {
-  const { layers, functions } = meta
-  return {
-    ...getLambdaData(modules, layers, functions),
-    endpoints: require('../../main-handlers/api/get-endpoints.js')(functions)
-  }
+  return data
 }

@@ -1,16 +1,37 @@
 const getPartials = require('./get-partials.js')
 const replaceInFile = require('../replace-in-file.js')
 
+const types = {
+  layer: {
+    key: 'layers',
+    getPartialData: (data, modules) => data.layers
+  },
+  lambda: {
+    key: 'lambdas',
+    getPartialData: (data, modules) => {
+      const addDetails = require('../../main-handlers/lambda/add-details.js')
+      return data.functions.map(addDetails(modules))
+    }
+  },
+  api: {
+    key: 'endpoints',
+    getPartialData: (data, modules) => {
+      const buildMethods = require('../../main-handlers/api/build-methods.js')
+      return buildMethods(modules, data.endpoints).map(endpoint => {
+        return {
+          ...endpoint,
+          ...getPartials(endpoint.methods, 'methods')
+        }
+      })
+    }
+  }
+}
+
 module.exports = (modules, data, templatePath, type) => {
   const { fs, path } = modules
   let main = fs.readFileSync(path.join(__dirname, `../../main-handlers/${type}/main-partial.md`), 'utf8')
-  const handlers = {
-    layer: getLayersData,
-    lambda: getLambdasData,
-    api: getEndpointsData
-  }
   const replaceData = {
-    ...handlers[type](data, modules),
+    ...getPartials4Type(modules, data, type),
     tags: getTags(modules, data.tags)
   }
   for (const key in replaceData) {
@@ -23,6 +44,22 @@ module.exports = (modules, data, templatePath, type) => {
   return replaceInFile(fs.readFileSync(templatePath, 'utf8'), 'main', main)
 }
 
+function getPartials4Type (modules, data, type) {
+  let partials = {}
+  for (const typeKey in types) {
+    const key = types[typeKey].key
+    const partialData = types[typeKey].getPartialData(data, modules)
+    partials = {
+      ...partials,
+      ...getPartials(partialData, key)
+    }
+    if (typeKey === type) {
+      break
+    }
+  }
+  return partials
+}
+
 function getTags ({ table }, tags) {
   return table([
     ['Tag', 'Value'],
@@ -30,34 +67,4 @@ function getTags ({ table }, tags) {
   ],
   { align: ['l', 'l'] }
   )
-}
-
-function getLayersData (data) {
-  const { layers } = data
-  return getPartials(layers, 'layers')
-}
-
-function getLambdasData (data, modules) {
-  const addDetails = require('../../main-handlers/lambda/add-details.js')
-  const { functions } = data
-  const lambdas = functions.map(addDetails(modules))
-  return {
-    ...getLayersData(data),
-    ...getPartials(lambdas, 'lambdas')
-  }
-}
-
-function getEndpointsData (data, modules) {
-  const buildMethods = require('../../main-handlers/api/build-methods.js')
-  let { endpoints } = data
-  endpoints = buildMethods(modules, endpoints).map(endpoint => {
-    return {
-      ...endpoint,
-      ...getPartials(endpoint.methods, 'methods')
-    }
-  })
-  return {
-    ...getLambdasData(data, modules),
-    ...getPartials(endpoints, 'endpoints')
-  }
 }
