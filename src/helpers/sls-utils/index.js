@@ -1,8 +1,8 @@
 module.exports = (modules, templatePath, type) => {
-  require('../install-deps')()
   console.log('INFO: retrieving data from serverless.yml file...')
   const meta = require('./get-sls.js')(modules)
   console.log('SUCCESS: extracted meta data!')
+  require('../install-deps')({ deps: meta.plugins }) // install plugins for target repo
   const data = {
     ...require('./get-data.js')(modules, meta, type),
     tags: meta.provider.tags
