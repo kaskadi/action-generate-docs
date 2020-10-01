@@ -4,23 +4,31 @@ module.exports = (modules, meta, type) => {
     lambda: getLambdaData,
     api: getApiData
   }
-  return handlers[type](modules, meta.layers || {}, meta.functions || {})
+  meta = {
+    layers: {},
+    functions: {},
+    ...meta
+  }
+  return handlers[type](modules, meta)
 }
 
-function getLayerData (modules, layers) {
+function getLayerData (modules, meta) {
+  const { layers } = meta
   return {
     layers: require('../../main-handlers/layer/get-packages.js')(modules, layers)
   }
 }
 
-function getLambdaData (modules, layers, functions) {
+function getLambdaData (modules, meta) {
+  const { layers, functions } = meta
   return {
     ...getLayerData(modules, layers),
     functions: require('../../main-handlers/lambda/process-meta.js')(functions, layers)
   }
 }
 
-function getApiData (modules, layers, functions) {
+function getApiData (modules, meta) {
+  const { layers, functions } = meta
   return {
     ...getLambdaData(modules, layers, functions),
     endpoints: require('../../main-handlers/api/get-endpoints.js')(functions)
