@@ -1,4 +1,5 @@
-module.exports = (functions) => {
+module.exports = meta => {
+  const { functions } = meta
   return Object.values(functions).map(processEndpoint)
 }
 
