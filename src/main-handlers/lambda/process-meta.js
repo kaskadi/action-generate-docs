@@ -21,8 +21,7 @@ function processFunction (layersMeta, functions) {
 
 function getDestination (destination, functions) {
   if (typeof destination === 'object' && destination !== null) {
-    const entry = Object.entries(destination)[0]
-    return processIntrinsicFct(entry[0], entry[1], functions, 'lambda')
+    return processIntrinsicFct(destination, functions, 'lambda')
   }
   const regexps = {
     lambda: new RegExp(/arn:[a-zA-Z0-9-]+:lambda:[a-zA-Z0-9-]+:\d{12}:function:([a-zA-Z0-9-_]+)/),
@@ -30,6 +29,11 @@ function getDestination (destination, functions) {
     SNS: new RegExp(/arn:[a-zA-Z0-9-]+:sns:[a-zA-Z0-9-]+:\d{12}:([a-zA-Z0-9-_]+)/),
     eventBridge: new RegExp(/arn:[a-zA-Z0-9-]+:events:[a-zA-Z0-9-]+:\d{12}:event-bus\/([a-zA-Z0-9-_]+)/)
   }
+  const { match, type } = findRegexMatch(destination, regexps)
+  return match ? `${match[1]} _(type: ${camelToSentence(type)}, defined via ARN)_` : `[${functions[destination].name}](#${functions[destination].name})`
+}
+
+function findRegexMatch (destination, regexps) {
   let match = null
   let type = ''
   for (const key in regexps) {
@@ -39,13 +43,12 @@ function getDestination (destination, functions) {
       break
     }
   }
-  return match ? `${match[1]} _(type: ${camelToSentence(type)}, defined via ARN)_` : `[${functions[destination].name}](#${functions[destination].name})`
+  return { match, type }
 }
 
 function getLayerName (layer, layersMeta) {
   if (typeof layer === 'object' && layer !== null) {
-    const entry = Object.entries(layer)[0]
-    return processIntrinsicFct(entry[0], entry[1], layersMeta)
+    return processIntrinsicFct(layer, layersMeta)
   }
   const arnRegex = new RegExp(/arn:[a-zA-Z0-9-]+:lambda:[a-zA-Z0-9-]+:\d{12}:layer:([a-zA-Z0-9-_]+)/)
   const matchArn = layer.match(arnRegex)
@@ -55,8 +58,10 @@ function getLayerName (layer, layersMeta) {
   return layer
 }
 
-function processIntrinsicFct (key, value, meta, type = 'layer') {
-  switch (key) {
+function processIntrinsicFct (intrinsicData, meta, type = 'layer') {
+  const fct = Object.keys(intrinsicData)[0]
+  const value = intrinsicData[fct]
+  switch (fct) {
     case 'Ref': {
       if (type === 'lambda') {
         return `${value} _(referencing to \`${value}\` in CloudFormation stack via \`Ref\` intrinsic function)_`
@@ -67,7 +72,7 @@ function processIntrinsicFct (key, value, meta, type = 'layer') {
     case 'Fn::Join':
       return value[1].join(value[0])
     default:
-      return `\`${key}: ${JSON.stringify(value)}\` _(defined via intrinsic function)_`
+      return `\`${fct}: ${JSON.stringify(value)}\` _(defined via intrinsic function)_`
   }
 }
 
