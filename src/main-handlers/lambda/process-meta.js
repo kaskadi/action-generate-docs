@@ -43,6 +43,7 @@ function findRegexMatch (destination, regexps) {
       break
     }
   }
+  type = capitalizeName(camelToSentence(type))
   return { match, type }
 }
 
@@ -78,5 +79,9 @@ function processIntrinsicFct (intrinsicData, meta, type = 'layer') {
 
 function getEventName (event) {
   const semEvent = camelToSentence(Object.keys(event)[0])
-  return semEvent.split(' ').length === 1 ? semEvent.toUpperCase() : semEvent
+  return capitalizeName(semEvent)
+}
+
+function capitalizeName (str) {
+  return str.split(' ').length === 1 ? str.toUpperCase() : str
 }
