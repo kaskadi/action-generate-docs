@@ -38,7 +38,7 @@
     "report-dir": "./coverage"
   },
   "dependencies": {
-    "@actions/core": "^1.2.5",
+    "@actions/core": "^1.2.6",
     "markshell": "0.0.9"
   }
 }
