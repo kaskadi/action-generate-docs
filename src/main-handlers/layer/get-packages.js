@@ -5,7 +5,7 @@ module.exports = ({ fs, path }, meta) => {
     return {
       description: '', // default description if none provided
       ...layer,
-      dependencies: dependencies.length > 0 ? buildDepList(dependencies) : 'No NPM packages or local utilities found for this layer...'
+      dependencies: dependencies.length > 0 ? buildDepList(dependencies) : 'No NPM packages or local utilities found for this layer.'
     }
   })
 }
