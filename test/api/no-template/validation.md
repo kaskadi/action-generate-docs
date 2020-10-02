@@ -3,7 +3,7 @@
 The following endpoints are defined in this API:
 - [/hello](#/hello)
 
-## `/hello` (target lambda → [hello-world](#hello-world))
+## `/hello` (target lambda → [hello-world](#hello-world)) <a name="/hello"></a>
 
 Supported methods:
 - [GET](#GET)

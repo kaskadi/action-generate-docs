@@ -80,9 +80,9 @@ If the custom domain you wish to use hasn't been created yet (list of custom dom
 # API endpoints
 
 The following endpoints are defined in this API:
-- [/hello](#/hello)
+- [/](#/)
 
-## `/hello` (target lambda → [hello-world](#hello-world))
+## `/` (target lambda → [hello-world](#hello-world)) <a name="/"></a>
 
 Supported methods:
 - [GET](#GET)
@@ -110,7 +110,7 @@ placeholder endpoint
 _Example request:_
 
 ```HTTP
-GET /hello?key1=key1_value&key2=key2_value
+GET /?key1=key1_value&key2=key2_value
 
 {
   "param1": "param1_value",

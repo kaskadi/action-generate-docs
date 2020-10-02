@@ -7,7 +7,7 @@ package:
 events:
   - http:
       method: get
-      path: hello
+      path: /
       cors: true
       kaskadi-docs:
         description: placeholder endpoint
