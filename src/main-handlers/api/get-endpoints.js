@@ -6,7 +6,8 @@ module.exports = meta => {
 function processEndpoint (lambda) {
   const { name, events } = lambda
   const httpEvents = events.filter(event => Object.keys(event)[0] === 'http').map(event => event.http)
-  const path = `/${httpEvents[0].path}` // we cannot have different paths calling the same lambda: bad API design. At best we would have different methods with the same path (DELETE, GET, POST)
+  let path = httpEvents[0].path // we cannot have different paths calling the same lambda: bad API design. At best we would have different methods with the same path (DELETE, GET, POST)
+  path = path === '/' ? path : `/${path}`
   return {
     name: path, // we want to use path here to be able to reference the proper endpoint in the documentation
     'lambda-name': name, // this helps us reference to the lambda attached to this endpoint
