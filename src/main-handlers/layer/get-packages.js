@@ -40,8 +40,9 @@ function getLocalDeps (fs, pjson) {
   const { spawnSync } = require('child_process')
   const tempPjson = { ...pjson }
   delete tempPjson.dependencies
+  delete tempPjson.devDependencies
   fs.writeFileSync('package.json', JSON.stringify(tempPjson, null, 2), 'utf8')
-  spawnSync('npm', ['i', '--only=prod'])
+  spawnSync('npm', ['i'])
   fs.writeFileSync('package.json', JSON.stringify(pjson, null, 2), 'utf8')
   if (!fs.existsSync('node_modules')) {
     return []
