@@ -32,7 +32,7 @@ module.exports = (data, type) => {
 
 function buildPartial (partialDoc, docType) {
   const replaceInFile = require('../replace-in-file.js')
-  return data => Object.keys(data).reduce((partial, key) => replaceInFile(partial, key, data[key] || `No ${camelToSentence(key)} found for this ${docType}...`), partialDoc)
+  return data => Object.keys(data).reduce((partial, key) => replaceInFile(partial, key, data[key] || `No ${camelToSentence(key)} found for this ${docType}.`), partialDoc)
 }
 
 function getPartial (data, partialPath, docType) {
@@ -43,5 +43,5 @@ function getPartial (data, partialPath, docType) {
 function buildList (arr, docType) {
   return arr.length > 0
     ? arr.map(data => `- [${data.name}](#${data.name})`).join('\n')
-    : `_no ${docType} defined in the [configuration file](./serverless.yml)..._`
+    : `_no ${docType} defined in the [configuration file](./serverless.yml)._`
 }
