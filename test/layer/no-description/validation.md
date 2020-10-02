@@ -7,7 +7,7 @@ The following layers are defined in this repository:
 
 ### Description
 
-No Description found for this layer...
+No description found for this layer.
 
 ### Dependencies
 

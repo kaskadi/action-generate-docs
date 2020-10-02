@@ -45,7 +45,7 @@ The following lambda functions are used in this API:
 - [hello-world](#hello-world)
 
 The following layers are used in this API:
-_no layer defined in the [configuration file](./serverless.yml)..._
+_no layer defined in the [configuration file](./serverless.yml)._
 
 ## hello-world <a name="hello-world"></a>
 

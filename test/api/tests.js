@@ -12,12 +12,6 @@ describe('lambda docs generation', function () {
     await runAction(['pre'])
     process.env.INPUT_TYPE = 'api'
   })
-  it('should not generate docs if no serverless configuration file exists', async () => {
-    process.chdir('test/layer/no-config-file')
-    await runAction(['main'])
-    fs.existsSync('README.md').should.equal(false)
-    process.chdir(cwd)
-  })
   it('should generate docs with no template provided', async () => {
     await test('test/api/no-template', 'validation.md')
   })

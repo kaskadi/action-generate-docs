@@ -63,7 +63,7 @@ Layer for template-kaskadi-api
 
 ### Dependencies
 
-No NPM packages or local utilities found for this layer...
+No NPM packages or local utilities found for this layer.
 
 See [configuration file](./serverless.yml) for more details.
 

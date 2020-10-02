@@ -12,15 +12,15 @@ Supported methods:
 
 **Description:**
 
-No Description found for this method...
+No description found for this method.
 
 **Query string parameters:**
 
-No Query String Parameters found for this method...
+No query string parameters found for this method.
 
 **Request body:**
 
-No Body found for this method...
+No body found for this method.
 
 _Example request:_
 
@@ -34,7 +34,7 @@ The following lambda functions are used in this API:
 - [hello-world](#hello-world)
 
 The following layers are used in this API:
-_no layer defined in the [configuration file](./serverless.yml)..._
+_no layer defined in the [configuration file](./serverless.yml)._
 
 ## hello-world <a name="hello-world"></a>
 

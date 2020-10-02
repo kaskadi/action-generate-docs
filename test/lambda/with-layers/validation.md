@@ -18,7 +18,7 @@ See [configuration file](./serverless.yml) for more details.
 
 ### Description
 
-No Description found for this layer...
+No description found for this layer.
 
 ### Dependencies
 
