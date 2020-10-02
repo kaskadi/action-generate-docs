@@ -30,7 +30,7 @@ function getDestination (destination, functions) {
     eventBridge: new RegExp(/arn:[a-zA-Z0-9-]+:events:[a-zA-Z0-9-]+:\d{12}:event-bus\/([a-zA-Z0-9-_]+)/)
   }
   const { match, type } = findRegexMatch(destination, regexps)
-  return match ? `${match[1]} _(type: ${camelToSentence(type)}, defined via ARN)_` : `[${functions[destination].name}](#${functions[destination].name})`
+  return match ? `${match[1]} _(type: ${type}, defined via ARN)_` : `[${functions[destination].name}](#${functions[destination].name})`
 }
 
 function findRegexMatch (destination, regexps) {
