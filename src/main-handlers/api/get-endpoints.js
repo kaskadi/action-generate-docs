@@ -32,7 +32,12 @@ function processEndpoints (endpoints) {
         delete method.path
         return method
       })
-    return { path, methods }
+    path = path === '/' ? path : `/${path}`
+    return {
+      name: path,
+      path,
+      methods
+    }
   })
 }
 
@@ -44,8 +49,9 @@ function getEventData (lambda) {
     const kaskadiDocs = event['kaskadi-docs'] || {}
     method = method.toUpperCase()
     return {
+      name: method,
+      anchor: `${path}-${method}`,
       'lambda-name': name,
-      'method-anchor': `${path}-${method}`,
       path,
       method,
       description: kaskadiDocs.description || '',
