@@ -82,12 +82,12 @@ If the custom domain you wish to use hasn't been created yet (list of custom dom
 The following endpoints are defined in this API:
 - [/](#/)
 
-## `/` (target lambda → [hello-world](#hello-world)) <a name="/"></a>
+## `/` <a name="/"></a>
 
 Supported methods:
-- [GET](#GET)
+- [GET](#/-GET)
 
-### `GET`
+### `GET` (target lambda → [hello-world](#hello-world)) <a name="/-GET"></a>
 
 **Description:**
 

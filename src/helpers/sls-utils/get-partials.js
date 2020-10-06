@@ -42,6 +42,6 @@ function getPartial (data, partialPath, docType) {
 
 function buildList (arr, docType) {
   return arr.length > 0
-    ? arr.map(data => `- [${data.name}](#${data.name})`).join('\n')
+    ? arr.map(data => `- [${data.name}](#${data.anchor || data.name})`).join('\n')
     : `_no ${docType} defined in the [configuration file](./serverless.yml)._`
 }

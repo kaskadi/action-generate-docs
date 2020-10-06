@@ -22,6 +22,9 @@ describe('lambda docs generation', function () {
         delete process.env.INPUT_TEMPLATE
       })
   })
+  it('should generate docs with multiple endpoints (sorting paths alphabetically)', async () => {
+    await test('test/api/multi-endpoints', 'validation.md')
+  })
   it('should generate docs with no endpoints defined', async () => {
     await test('test/api/no-lambda', 'validation.md')
   })
@@ -30,6 +33,12 @@ describe('lambda docs generation', function () {
   })
   it('should generate docs when no kaskadi-docs field has been provided for a given method', async () => {
     await test('test/api/no-custom-field', 'validation.md')
+  })
+  it('should generate docs with multiple events assigned to a lambda', async () => {
+    await test('test/api/multi-events', 'validation.md')
+  })
+  it('should generate docs with multiple lambda assigned to the same path', async () => {
+    await test('test/api/multi-lambda', 'validation.md')
   })
   after(() => {
     delete process.env.INPUT_TYPE

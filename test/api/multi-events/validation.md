@@ -1,14 +1,15 @@
 # API endpoints
 
 The following endpoints are defined in this API:
-- [/hello](#/hello)
+- [/](#/)
+- [/{proxy+}](#/{proxy+})
 
-## `/hello` <a name="/hello"></a>
+## `/` <a name="/"></a>
 
 Supported methods:
-- [GET](#hello-GET)
+- [GET](#/-GET)
 
-### `GET` (target lambda → [hello-world](#hello-world)) <a name="hello-GET"></a>
+### `GET` (target lambda → [hello-world](#hello-world)) <a name="/-GET"></a>
 
 **Description:**
 
@@ -31,7 +32,43 @@ placeholder endpoint
 _Example request:_
 
 ```HTTP
-GET /hello?key1=key1_value&key2=key2_value
+GET /?key1=key1_value&key2=key2_value
+
+{
+  "param1": "param1_value",
+  "param2": "param2_value"
+}
+```
+
+## `/{proxy+}` <a name="/{proxy+}"></a>
+
+Supported methods:
+- [GET](#/{proxy+}-GET)
+
+### `GET` (target lambda → [hello-world](#hello-world)) <a name="/{proxy+}-GET"></a>
+
+**Description:**
+
+placeholder endpoint
+
+**Query string parameters:**
+
+|   Key  | Default | Description |
+| :----: | :-----: | :---------- |
+| `key1` |         | first key   |
+| `key2` |   `35`  | second key  |
+
+**Request body:**
+
+|    Key   | Default | Description       |
+| :------: | :-----: | :---------------- |
+| `param1` | `hello` | first body param  |
+| `param2` |  `true` | second body param |
+
+_Example request:_
+
+```HTTP
+GET /{proxy+}?key1=key1_value&key2=key2_value
 
 {
   "param1": "param1_value",
@@ -49,9 +86,9 @@ _no layer defined in the [configuration file](./serverless.yml)._
 
 ## hello-world <a name="hello-world"></a>
 
-|     Name    | Sources                | Timeout |                  Handler                  |
-| :---------: | :--------------------- | :-----: | :---------------------------------------: |
-| hello-world | <ul><li>HTTP</li></ul> | default | [handler](./lambdas/hello-world/index.js) |
+|     Name    | Sources                             | Timeout |                  Handler                  |
+| :---------: | :---------------------------------- | :-----: | :---------------------------------------: |
+| hello-world | <ul><li>HTTP</li><li>HTTP</li></ul> | default | [handler](./lambdas/hello-world/index.js) |
 
 See [configuration file](./serverless.yml) for more details.
 
