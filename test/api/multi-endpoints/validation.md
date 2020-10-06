@@ -6,12 +6,12 @@ The following endpoints are defined in this API:
 - [/again/hello](#/again/hello)
 - [/hello/again](#/hello/again)
 
-## `/again` (target lambda → [again](#again)) <a name="/again"></a>
+## `/again` <a name="/again"></a>
 
 Supported methods:
-- [GET](#GET)
+- [GET](#again-GET)
 
-### `GET`
+### `GET` (target lambda → [again](#again)) <a name="again-GET"></a>
 
 **Description:**
 
@@ -42,12 +42,12 @@ GET /again?key1=key1_value&key2=key2_value
 }
 ```
 
-## `/hello` (target lambda → [hello-world](#hello-world)) <a name="/hello"></a>
+## `/hello` <a name="/hello"></a>
 
 Supported methods:
-- [GET](#GET)
+- [GET](#hello-GET)
 
-### `GET`
+### `GET` (target lambda → [hello-world](#hello-world)) <a name="hello-GET"></a>
 
 **Description:**
 
@@ -78,12 +78,12 @@ GET /hello?key1=key1_value&key2=key2_value
 }
 ```
 
-## `/again/hello` (target lambda → [again-hello-world](#again-hello-world)) <a name="/again/hello"></a>
+## `/again/hello` <a name="/again/hello"></a>
 
 Supported methods:
-- [GET](#GET)
+- [GET](#again/hello-GET)
 
-### `GET`
+### `GET` (target lambda → [again-hello-world](#again-hello-world)) <a name="again/hello-GET"></a>
 
 **Description:**
 
@@ -114,12 +114,12 @@ GET /again/hello?key1=key1_value&key2=key2_value
 }
 ```
 
-## `/hello/again` (target lambda → [hello-world-again](#hello-world-again)) <a name="/hello/again"></a>
+## `/hello/again` <a name="/hello/again"></a>
 
 Supported methods:
-- [GET](#GET)
+- [GET](#hello/again-GET)
 
-### `GET`
+### `GET` (target lambda → [hello-world-again](#hello-world-again)) <a name="hello/again-GET"></a>
 
 **Description:**
 
