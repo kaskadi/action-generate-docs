@@ -1,0 +1,27 @@
+handler: lambdas/delete-item/index.handler
+name: delete-item
+package:
+  include:
+    - lambdas/delete-item/index.js
+    - lambdas/delete-item/node_modules/**
+events:
+  - http:
+      method: delete
+      path: '/{id}'
+      cors: true
+      kaskadi-docs:
+        description: placeholder endpoint
+        queryStringParameters:
+          - key: key1
+            description: first key
+          - key: key2
+            description: second key
+            default: 35 
+        # doesn't make sense with GET but that's just for testing here
+        body:
+          - key: param1
+            description: first body param
+            default: 'hello'
+          - key: param2
+            description: second body param
+            default: true
