@@ -1,6 +1,20 @@
 module.exports = meta => {
   const { functions } = meta
-  return Object.values(functions).map(processEndpoint)
+  return Object.values(functions)
+    .map(processEndpoint)
+    .sort(sortEndpoints)
+}
+
+function sortEndpoints (a, b) {
+  const pathA = a.path.toUpperCase()
+  const pathB = b.path.toUpperCase()
+  if (pathA < pathB) {
+    return -1
+  }
+  if (pathA > pathB) {
+    return 1
+  }
+  return 0
 }
 
 function processEndpoint (lambda) {
