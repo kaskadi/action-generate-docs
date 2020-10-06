@@ -1,0 +1,27 @@
+handler: lambdas/hello-world-again/index.handler
+name: hello-world-again
+package:
+  include:
+    - lambdas/hello-world-again/index.js
+    - lambdas/hello-world-again/node_modules/**
+events:
+  - http:
+      method: get
+      path: hello/again
+      cors: true
+      kaskadi-docs:
+        description: placeholder endpoint
+        queryStringParameters:
+          - key: key1
+            description: first key
+          - key: key2
+            description: second key
+            default: 35 
+        # doesn't make sense with GET but that's just for testing here
+        body:
+          - key: param1
+            description: first body param
+            default: 'hello'
+          - key: param2
+            description: second body param
+            default: true

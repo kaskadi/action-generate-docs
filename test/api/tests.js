@@ -22,6 +22,9 @@ describe('lambda docs generation', function () {
         delete process.env.INPUT_TEMPLATE
       })
   })
+  it('should generate docs with multiple endpoints (sorting paths alphabetically)', async () => {
+    await test('test/api/multi-endpoints', 'validation.md')
+  })
   it('should generate docs with no endpoints defined', async () => {
     await test('test/api/no-lambda', 'validation.md')
   })
