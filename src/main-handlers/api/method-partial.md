@@ -1,4 +1,4 @@
-### `{{>method}}`
+### `{{>method}}` (target lambda → [{{>lambda-name}}](#{{>lambda-name}})) <a name="{{>method-anchor}}"></a>
 
 **Description:**
 

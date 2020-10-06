@@ -45,7 +45,7 @@ function getEventData (lambda) {
     method = method.toUpperCase()
     return {
       'lambda-name': name,
-      name: method,
+      'method-anchor': `${path}-${method}`,
       path,
       method,
       description: kaskadiDocs.description || '',
