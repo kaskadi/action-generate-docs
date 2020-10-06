@@ -8,13 +8,12 @@ module.exports = meta => {
 function sortEndpoints (a, b) {
   const pathA = a.path.toUpperCase()
   const pathB = b.path.toUpperCase()
-  if (pathA < pathB) {
-    return -1
+  const pathALength = pathA.split('/').length
+  const pathBLength = pathB.split('/').length
+  if (pathALength === pathBLength) {
+    return pathA < pathB ? -1 : pathA > pathB ? 1 : 0
   }
-  if (pathA > pathB) {
-    return 1
-  }
-  return 0
+  return pathALength < pathBLength ? -1 : pathALength > pathBLength ? 1 : 0
 }
 
 function processEndpoint (lambda) {
