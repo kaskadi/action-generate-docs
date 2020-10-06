@@ -34,6 +34,12 @@ describe('lambda docs generation', function () {
   it('should generate docs when no kaskadi-docs field has been provided for a given method', async () => {
     await test('test/api/no-custom-field', 'validation.md')
   })
+  it('should generate docs with multiple events assigned to a lambda', async () => {
+    await test('test/api/multi-events', 'validation.md')
+  })
+  it('should generate docs with multiple lambda assigned to the same path', async () => {
+    await test('test/api/multi-lambda', 'validation.md')
+  })
   after(() => {
     delete process.env.INPUT_TYPE
   })
