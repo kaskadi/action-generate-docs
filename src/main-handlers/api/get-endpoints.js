@@ -32,7 +32,7 @@ function processEndpoints (endpoints) {
         delete method.path
         return method
       })
-    path = path === '/' ? path : `/${path}`
+    path = path.charAt(0) === '/' ? path : `/${path}`
     return {
       name: path,
       path,
