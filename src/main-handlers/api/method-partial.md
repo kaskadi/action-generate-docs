@@ -12,6 +12,6 @@
 
 {{>body}}
 
-_Example request:_
+**Examples:**
 
-{{>example}}
+{{>examples}}

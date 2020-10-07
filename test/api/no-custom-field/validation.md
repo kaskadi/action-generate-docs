@@ -22,11 +22,9 @@ No query string parameters found for this method.
 
 No body found for this method.
 
-_Example request:_
+**Examples:**
 
-```HTTP
-GET /hello
-```
+No examples found for this method.
 
 # API resources
 
