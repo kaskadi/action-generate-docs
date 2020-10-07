@@ -17,19 +17,37 @@ function processMethod (modules, endpoint) {
       ...method,
       queryStringParameters: method.queryStringParameters.length > 0 ? buildTable(modules, method.queryStringParameters) : '',
       body: method.body.length > 0 ? buildTable(modules, method.body) : '',
-      example: buildExample(method, endpoint)
+      ...buildExample(method, endpoint)
     }
   }
 }
 
 function buildExample (methodData, endpoint) {
-  const { method, queryStringParameters, body } = methodData
-  let qs = queryStringParameters.map(param => `${param.key}=${param.key}_value`).join('&')
-  qs = qs.length > 0 ? `?${qs}` : qs
-  const payload = Object.fromEntries(body.map(param => [param.key, `${param.key}_value`]))
-  const reqBody = Object.keys(payload).length > 0 ? `\n\n${JSON.stringify(payload, null, 2)}` : ''
-  const example = `${method} ${endpoint.path}${qs}${reqBody}`
-  return `\`\`\`HTTP\n${example}\n\`\`\``
+  const { request, response } = methodData.example
+  const getBody = body => body ? typeof body === 'string' ? body : JSON.stringify(body, null, 2) : ''
+  const getHeaders = headers => headers ? Object.entries(headers).map(entry => `${entry[0]}: ${entry[1]}`).join('\n') : ''
+  const formatBlock = (heading, data) => data.length > 0 ? `\n\n${heading}:\n${data}` : ''
+  const formatExample = example => `\`\`\`HTTP\n${example}\n\`\`\``
+  let example = {}
+  if (request) {
+    const { body, queryStringParameters, headers } = request
+    let qs = queryStringParameters ? Object.entries(queryStringParameters).map(entry => `${entry[0]}=${entry[1]}`).join('&') : ''
+    qs = qs.length > 0 ? `?${qs}` : qs
+    const exampleReq = formatExample(`${methodData.method} ${endpoint.path}${qs}${formatBlock('Headers', getHeaders(headers))}${formatBlock('Body', getBody(body))}`)
+    example = {
+      ...example,
+      'example-request': exampleReq
+    }
+  }
+  if (response) {
+    const { body, statusCode, headers } = response
+    const exampleRes = formatExample(`Status code:\n${statusCode}${formatBlock('Headers', getHeaders(headers))}${formatBlock('Body', getBody(body))}`)
+    example = {
+      ...example,
+      'example-response': exampleRes
+    }
+  }
+  return example
 }
 
 function buildTable ({ table }, params) {

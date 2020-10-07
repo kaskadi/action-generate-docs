@@ -14,4 +14,8 @@
 
 _Example request:_
 
-{{>example}}
+{{>example-request}}
+
+_Example response:_
+
+{{>example-response}}
