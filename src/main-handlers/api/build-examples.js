@@ -19,7 +19,7 @@ function getExample (method, endpoint) {
 function exampleBuilders () {
   const getBody = body => body ? typeof body === 'string' ? body : JSON.stringify(body, null, 2) : ''
   const getHeaders = headers => headers ? Object.entries(headers).map(entry => `${entry[0]}: ${entry[1]}`).join('\n') : ''
-  const formatNamedData = (heading, data) => data.length > 0 ? `${heading}:\n${data}` : ''
+  const formatNamedData = (heading, data) => data && String(data).length > 0 ? `${heading}:\n${data}` : ''
   const formatBlock = block => `\`\`\`HTTP\n${block}\n\`\`\``
   return {
     getExampleRequest: (method, endpoint, request) => {
@@ -29,14 +29,14 @@ function exampleBuilders () {
       const { body, queryStringParameters, headers } = request
       let qs = queryStringParameters ? Object.entries(queryStringParameters).map(entry => `${entry[0]}=${entry[1]}`).join('&') : ''
       qs = qs.length > 0 ? `?${qs}` : qs
-      return formatBlock(`${method.method} ${endpoint.path}${qs}\n\n${formatNamedData('Headers', getHeaders(headers))}\n\n${formatNamedData('Body', getBody(body))}`)
+      return formatBlock(`${method.method} ${endpoint.path}${qs}\n\n${formatNamedData('Headers', getHeaders(headers))}\n\n${formatNamedData('Body', getBody(body))}`.trim())
     },
     getExampleResponse: (response) => {
       if (!response) {
         return ''
       }
       const { body, statusCode, headers } = response
-      return formatBlock(`Status code:\n${statusCode}\n\n${formatNamedData('Headers', getHeaders(headers))}\n\n${formatNamedData('Body', getBody(body))}`)
+      return formatBlock(`${formatNamedData('Status code', statusCode)}\n\n${formatNamedData('Headers', getHeaders(headers))}\n\n${formatNamedData('Body', getBody(body))}`.trim())
     }
   }
 }
