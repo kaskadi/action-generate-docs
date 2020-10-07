@@ -8,7 +8,7 @@ module.exports = async (cwd, testFolder, validationFile) => {
   const docs = readFileSync('README.md', 'utf8')
   const validation = readFileSync(validationFile, 'utf8')
   // cleanup
-  // unlinkSync('README.md')
+  unlinkSync('README.md')
   if (existsSync('package-lock.json')) {
     unlinkSync('package-lock.json')
   }

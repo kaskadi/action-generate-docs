@@ -1,6 +1,6 @@
 /* eslint-env mocha */
 const runAction = require('../helpers/run-action.js')
-const fs = require('fs')
+const test = require('../helpers/test.js')
 const chai = require('chai')
 chai.should()
 
@@ -13,44 +13,72 @@ describe('lambda docs generation', function () {
     process.env.INPUT_TYPE = 'api'
   })
   it('should generate docs with no template provided', async () => {
-    await test('test/api/no-template', 'validation.md')
+    await test(cwd, 'test/api/no-template', 'validation.md')
   })
   it('should generate docs with a template provided', async () => {
     process.env.INPUT_TEMPLATE = '../template.md'
-    await test('test/api/with-template', 'validation.md')
+    await test(cwd, 'test/api/with-template', 'validation.md')
       .finally(() => {
         delete process.env.INPUT_TEMPLATE
       })
   })
+  describe('example builder', function () {
+    it('should generate docs with no example', async () => {
+      await test(cwd, 'test/api/examples/no-example', 'validation.md')
+    })
+    it('should generate docs with no example request', async () => {
+      await test(cwd, 'test/api/examples/no-request', 'validation.md')
+    })
+    it('should generate docs with no example response', async () => {
+      await test(cwd, 'test/api/examples/no-response', 'validation.md')
+    })
+    it('should generate docs without query string in example request', async () => {
+      await test(cwd, 'test/api/examples/no-qs', 'validation.md')
+    })
+    it('should generate docs without body in example request', async () => {
+      await test(cwd, 'test/api/examples/no-request-body', 'validation.md')
+    })
+    it('should generate docs without headers in example request', async () => {
+      await test(cwd, 'test/api/examples/no-request-headers', 'validation.md')
+    })
+    it('should generate docs without status code in example response', async () => {
+      await test(cwd, 'test/api/examples/no-status-code', 'validation.md')
+    })
+    it('should generate docs without body in example response', async () => {
+      await test(cwd, 'test/api/examples/no-response-body', 'validation.md')
+    })
+    it('should generate docs without headers in example response', async () => {
+      await test(cwd, 'test/api/examples/no-response-headers', 'validation.md')
+    })
+    it('should generate docs with a text body', async () => {
+      await test(cwd, 'test/api/examples/text-body', 'validation.md')
+    })
+    it('should generate docs with a given example', async () => {
+      await test(cwd, 'test/api/examples/single-example', 'validation.md')
+    })
+    it('should generate docs with multiple examples', async () => {
+      await test(cwd, 'test/api/examples/multi-example', 'validation.md')
+    })
+  })
   it('should generate docs with multiple endpoints (sorting paths alphabetically)', async () => {
-    await test('test/api/multi-endpoints', 'validation.md')
+    await test(cwd, 'test/api/multi-endpoints', 'validation.md')
   })
   it('should generate docs with no endpoints defined', async () => {
-    await test('test/api/no-lambda', 'validation.md')
+    await test(cwd, 'test/api/no-lambda', 'validation.md')
   })
   it('should generate docs with layers attached to an endpoint', async () => {
-    await test('test/api/with-layer', 'validation.md')
+    await test(cwd, 'test/api/with-layer', 'validation.md')
   })
   it('should generate docs when no kaskadi-docs field has been provided for a given method', async () => {
-    await test('test/api/no-custom-field', 'validation.md')
+    await test(cwd, 'test/api/no-custom-field', 'validation.md')
   })
   it('should generate docs with multiple events assigned to a lambda', async () => {
-    await test('test/api/multi-events', 'validation.md')
+    await test(cwd, 'test/api/multi-events', 'validation.md')
   })
   it('should generate docs with multiple lambda assigned to the same path', async () => {
-    await test('test/api/multi-lambda', 'validation.md')
+    await test(cwd, 'test/api/multi-lambda', 'validation.md')
   })
   after(() => {
     delete process.env.INPUT_TYPE
   })
 })
-
-async function test (testFolder, validationFile) {
-  process.chdir(testFolder)
-  await runAction(['main'])
-  const docs = fs.readFileSync('README.md', 'utf8')
-  const validation = fs.readFileSync(validationFile, 'utf8')
-  fs.unlinkSync('README.md')
-  process.chdir(cwd)
-  docs.should.equal(validation)
-}

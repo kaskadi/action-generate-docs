@@ -29,16 +29,9 @@ placeholder endpoint
 | `param1` | `hello` | first body param  |
 | `param2` |  `true` | second body param |
 
-_Example request:_
+**Examples:**
 
-```HTTP
-GET /?key1=key1_value&key2=key2_value
-
-{
-  "param1": "param1_value",
-  "param2": "param2_value"
-}
-```
+No examples found for this method.
 
 ## `/{proxy+}` <a name="/{proxy+}"></a>
 
@@ -65,16 +58,9 @@ placeholder endpoint
 | `param1` | `hello` | first body param  |
 | `param2` |  `true` | second body param |
 
-_Example request:_
+**Examples:**
 
-```HTTP
-GET /{proxy+}?key1=key1_value&key2=key2_value
-
-{
-  "param1": "param1_value",
-  "param2": "param2_value"
-}
-```
+No examples found for this method.
 
 # API resources
 
