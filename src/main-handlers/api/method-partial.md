@@ -12,10 +12,6 @@
 
 {{>body}}
 
-_Example request:_
+**Examples:**
 
-{{>example-request}}
-
-_Example response:_
-
-{{>example-response}}
+{{>examples}}

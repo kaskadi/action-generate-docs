@@ -57,7 +57,7 @@ function getEventData (lambda) {
       description: kaskadiDocs.description || '',
       queryStringParameters: kaskadiDocs.queryStringParameters || [],
       body: kaskadiDocs.body || [],
-      example: kaskadiDocs.example || {}
+      examples: kaskadiDocs.examples || []
     }
   }
 }
