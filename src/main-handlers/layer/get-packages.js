@@ -30,7 +30,7 @@ function getLocalDeps (fs) {
   if (!fs.existsSync('node_modules')) {
     return []
   }
-  const fullNpmDeps = [...new Set(getNpmDeps().map(dep => dep.name))]
+  const fullNpmDeps = [...new Set(getNpmDeps().map(dep => dep.name.split('/')[0]))]
   return fs.readdirSync('node_modules', { withFileTypes: true })
     .filter(dirent => dirent.isDirectory())
     .map(dirent => dirent.name)
