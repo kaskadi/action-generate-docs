@@ -11,9 +11,8 @@ No description found for this layer.
 
 ### Dependencies
 
-- `chai`, version: `^4.2.0` ([see on NPM](https://www.npmjs.com/package/chai))
-- `mocha`, version: `^8.1.3` ([see on NPM](https://www.npmjs.com/package/mocha))
-- `standard`, version: `^14.3.4` ([see on NPM](https://www.npmjs.com/package/standard))
+- `node-fetch`, version: `^2.6.1` ([see on NPM](https://www.npmjs.com/package/node-fetch))
+- `yaml`, version: `^1.10.0` ([see on NPM](https://www.npmjs.com/package/yaml))
 
 See [configuration file](./serverless.yml) for more details.
 
