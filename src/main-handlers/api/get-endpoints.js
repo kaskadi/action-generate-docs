@@ -12,7 +12,7 @@ function sortEndpoints (a, b) {
   if (pathALength === pathBLength) {
     return pathA < pathB ? -1 : pathA > pathB ? 1 : 0
   }
-  return pathALength < pathBLength ? -1 : pathALength > pathBLength ? 1 : 0
+  return pathALength < pathBLength ? -1 : 1
 }
 
 function getEndpoints (functions) {
