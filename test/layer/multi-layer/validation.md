@@ -12,8 +12,8 @@ This is a template layer
 
 ### Dependencies
 
-- `node-fetch`, version: `^2.6.1` ([see on NPM](https://www.npmjs.com/package/node-fetch))
-- `yaml`, version: `^1.10.0` ([see on NPM](https://www.npmjs.com/package/yaml))
+- `node-fetch`, version: `2.6.1` ([see on NPM](https://www.npmjs.com/package/node-fetch))
+- `yaml`, version: `1.10.0` ([see on NPM](https://www.npmjs.com/package/yaml))
 
 See [configuration file](./serverless.yml) for more details.
 
@@ -25,8 +25,8 @@ This is a template layer
 
 ### Dependencies
 
-- `node-fetch`, version: `^2.6.1` ([see on NPM](https://www.npmjs.com/package/node-fetch))
-- `yaml`, version: `^1.10.0` ([see on NPM](https://www.npmjs.com/package/yaml))
+- `node-fetch`, version: `2.6.1` ([see on NPM](https://www.npmjs.com/package/node-fetch))
+- `yaml`, version: `1.10.0` ([see on NPM](https://www.npmjs.com/package/yaml))
 
 See [configuration file](./serverless.yml) for more details.
 
