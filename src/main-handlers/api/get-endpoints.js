@@ -12,7 +12,7 @@ function sortEndpoints (a, b) {
   const pathALength = pathA.split('/').length
   const pathBLength = pathB.split('/').length
   if (pathALength === pathBLength) {
-    return pathA < pathB ? -1 : pathA > pathB ? 1 : 0
+    return pathA < pathB ? -1 : 1 // paths will never be equal because we're grouping all similar paths under the same endpoint
   }
   return pathALength < pathBLength ? -1 : 1
 }
