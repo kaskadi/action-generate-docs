@@ -6,6 +6,7 @@ module.exports = (moduleDir, templatePath, type) => {
   console.log('SUCCESS: extracted meta data!')
   const data = {
     ...require('./get-data.js')(modules, meta, type),
+    ...require('./get-base-url.js')(meta),
     tags: meta.provider.tags
   }
   console.log('INFO: generating documentation...')
