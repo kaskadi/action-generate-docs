@@ -33,7 +33,7 @@ module.exports = (modules, data, templatePath, type) => {
   const baseUrl = data['base-url']
   const replaceData = {
     ...getPartials4Type(modules, data, type),
-    'base-url': baseUrl.length > 0 ? `The origin and root path for this API is: \`${baseUrl}\`` : '',
+    'base-url': `The origin and root path for this API is: \`${baseUrl}\``,
     tags: getTags(modules, data.tags)
   }
   for (const key in replaceData) {
