@@ -6,7 +6,7 @@ chai.should()
 
 const cwd = process.cwd()
 
-describe('lambda docs generation', function () {
+describe('api docs generation', function () {
   this.timeout(120000)
   before(async () => {
     await runAction(['pre'])
@@ -21,6 +21,17 @@ describe('lambda docs generation', function () {
       .finally(() => {
         delete process.env.INPUT_TEMPLATE
       })
+  })
+  describe('base URL getter', function () {
+    it('should generate docs without hostname specified', async () => {
+      await test(cwd, 'test/api/base-url/no-hostname', 'validation.md')
+    })
+    it('should generate docs without root specified', async () => {
+      await test(cwd, 'test/api/base-url/no-root', 'validation.md')
+    })
+    it('should generate docs with a base URL when specified', async () => {
+      await test(cwd, 'test/api/base-url/regular', 'validation.md')
+    })
   })
   describe('example builder', function () {
     it('should generate docs with no example', async () => {

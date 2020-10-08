@@ -1,5 +1,7 @@
 # API endpoints
 
+The origin and root path for this API is: `https://API_DOMAIN`
+
 The following endpoints are defined in this API:
 - [/hello](#/hello)
 
@@ -36,7 +38,7 @@ placeholder endpoint
 _Request:_
 
 ```HTTP
-GET /hello?key1=hello&key2=test
+GET https://API_DOMAIN/hello?key1=hello&key2=test
 
 Headers:
 Content-Type: application/json
@@ -71,7 +73,7 @@ Body:
 _Request:_
 
 ```HTTP
-GET /hello?key1=hello&key2=test
+GET https://API_DOMAIN/hello?key1=hello&key2=test
 
 Headers:
 Content-Type: application/json

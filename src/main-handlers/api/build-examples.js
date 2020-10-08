@@ -29,7 +29,7 @@ function exampleBuilders () {
       const { body, queryStringParameters, headers } = request
       let qs = queryStringParameters ? Object.entries(queryStringParameters).map(entry => `${entry[0]}=${entry[1]}`).join('&') : ''
       qs = qs.length > 0 ? `?${qs}` : qs
-      return formatBlock(`${method.method} ${endpoint.path}${qs}\n\n${formatNamedData('Headers', getHeaders(headers))}\n\n${formatNamedData('Body', getBody(body))}`.trim())
+      return formatBlock(`${method.method} ${method['base-url']}${endpoint.path}${qs}\n\n${formatNamedData('Headers', getHeaders(headers))}\n\n${formatNamedData('Body', getBody(body))}`.trim())
     },
     getExampleResponse: (response) => {
       if (!response) {

@@ -20,41 +20,50 @@ function buildDepList (dependencies) {
 function getDeps (fs, path, layerPath) {
   const cwd = process.cwd()
   process.chdir(path.join(cwd, `${layerPath}/nodejs`))
-  const pjson = JSON.parse(fs.readFileSync('package.json', 'utf8'))
-  const dependencies = pjson.dependencies || {}
-  const npmDeps = Object.entries(dependencies).map(getNpmDepData)
-  const localDeps = getLocalDeps(fs, pjson)
+  const npmDeps = getNpmDeps(0)
+  const localDeps = getLocalDeps(fs)
   process.chdir(cwd)
   return [...npmDeps, ...localDeps]
 }
 
-function getNpmDepData (dep) {
-  return {
-    name: dep[0],
-    version: dep[1],
-    type: 'npm'
-  }
-}
-
-function getLocalDeps (fs, pjson) {
-  const { spawnSync } = require('child_process')
-  const tempPjson = { ...pjson }
-  delete tempPjson.dependencies
-  delete tempPjson.devDependencies
-  fs.writeFileSync('package.json', JSON.stringify(tempPjson, null, 2), 'utf8')
-  spawnSync('npm', ['i'])
-  fs.writeFileSync('package.json', JSON.stringify(pjson, null, 2), 'utf8')
+function getLocalDeps (fs) {
   if (!fs.existsSync('node_modules')) {
     return []
   }
+  const fullNpmDeps = [...new Set(getNpmDeps().map(dep => dep.name.split('/')[0]))]
   return fs.readdirSync('node_modules', { withFileTypes: true })
     .filter(dirent => dirent.isDirectory())
     .map(dirent => dirent.name)
-    .filter(module => module !== '.bin')
+    .filter(module => module !== '.bin' && !fullNpmDeps.includes(module))
     .map(module => {
       return {
         name: module,
         type: 'local'
       }
     })
+}
+
+function getNpmDeps (depth) {
+  const { spawnSync } = require('child_process')
+  let args = ['ls', '--json=true', '--prod=true']
+  args = typeof depth !== 'undefined' ? [...args, `--depth=${depth}`] : args // we check here for undefined via typeof because !depth when depth === 0 would result into true (0 coerce to false)
+  return extractDeps(JSON.parse(spawnSync('npm', args).stdout).dependencies)
+}
+
+function extractDeps (deps) {
+  let npmDeps = []
+  for (const dep in deps) {
+    npmDeps = [
+      ...npmDeps,
+      {
+        name: dep,
+        version: deps[dep].version,
+        type: 'npm'
+      }
+    ]
+    if (deps[dep].dependencies) {
+      npmDeps = [...npmDeps, ...extractDeps(deps[dep].dependencies)]
+    }
+  }
+  return npmDeps
 }

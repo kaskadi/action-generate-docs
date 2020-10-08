@@ -1,7 +1,6 @@
 const core = require('@actions/core')
 const path = require('path')
 const fs = require('fs')
-const markshell = require('markshell')
 
 const test = process.env.TEST_ENV ? JSON.parse(process.env.TEST_ENV) : false
 
@@ -17,12 +16,6 @@ const modulePath = `main-handlers/${type}`
 
 require('./helpers/install-deps.js')(path.join(__dirname, modulePath))
 require(`./${modulePath}/index.js`)(templatePath)
-try {
-  console.log('\n********* Documentation preview *********\n')
-  markshell.toConsole('README.md')
-  console.log('\n********* END Documentation preview *********\n')
-} catch (err) {
-  console.log('ERROR: was not able to generate new documentation preview... This shouldn\'t impact the actual documentation.')
-  console.log(err)
+if (!test) {
+  require('./helpers/push-docs.js')()
 }
-require('./helpers/push-docs.js')(test)

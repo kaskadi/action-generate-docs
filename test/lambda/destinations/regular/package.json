@@ -22,11 +22,5 @@
   "bugs": {
     "url": "https://github.com/kaskadi/template-kaskadi-lambda/issues"
   },
-  "homepage": "https://github.com/kaskadi/template-kaskadi-lambda#readme",
-  "devDependencies": {
-    "chai": "^4.2.0",
-    "mocha": "^8.1.1",
-    "nyc": "^15.1.0",
-    "standard": "^14.3.4"
-  }
+  "homepage": "https://github.com/kaskadi/template-kaskadi-lambda#readme"
 }

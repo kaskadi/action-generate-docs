@@ -1,6 +1,8 @@
 module.exports = meta => {
+  const getBaseUrl = require('../../helpers/sls-utils/get-base-url.js')
   const { functions } = meta
-  return processEndpoints(getEndpoints(functions))
+  const baseUrl = getBaseUrl(meta)
+  return processEndpoints(getEndpoints(functions, baseUrl))
     .sort(sortEndpoints)
 }
 
@@ -10,16 +12,16 @@ function sortEndpoints (a, b) {
   const pathALength = pathA.split('/').length
   const pathBLength = pathB.split('/').length
   if (pathALength === pathBLength) {
-    return pathA < pathB ? -1 : pathA > pathB ? 1 : 0
+    return pathA < pathB ? -1 : 1 // paths will never be equal because we're grouping all similar paths under the same endpoint
   }
-  return pathALength < pathBLength ? -1 : pathALength > pathBLength ? 1 : 0
+  return pathALength < pathBLength ? -1 : 1
 }
 
-function getEndpoints (functions) {
+function getEndpoints (functions, baseUrl) {
   return Object.values(functions).flatMap(lambda => {
     const { events } = lambda
     const httpEvents = events.filter(event => Object.keys(event)[0] === 'http').map(event => event.http)
-    return httpEvents.map(getEventData(lambda))
+    return httpEvents.map(getEventData(lambda, baseUrl))
   })
 }
 
@@ -41,7 +43,7 @@ function processEndpoints (endpoints) {
   })
 }
 
-function getEventData (lambda) {
+function getEventData (lambda, baseUrl) {
   return event => {
     const { name } = lambda
     const { path } = event
@@ -57,7 +59,8 @@ function getEventData (lambda) {
       description: kaskadiDocs.description || '',
       queryStringParameters: kaskadiDocs.queryStringParameters || [],
       body: kaskadiDocs.body || [],
-      examples: kaskadiDocs.examples || []
+      examples: kaskadiDocs.examples || [],
+      'base-url': baseUrl
     }
   }
 }
