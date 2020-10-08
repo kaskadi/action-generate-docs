@@ -79,6 +79,8 @@ If the custom domain you wish to use hasn't been created yet (list of custom dom
 
 # API endpoints
 
+The origin and root path for this API is: `https://API_DOMAIN`
+
 The following endpoints are defined in this API:
 - [/](#/)
 

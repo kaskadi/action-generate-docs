@@ -1,5 +1,7 @@
 # API endpoints
 
+The origin and root path for this API is: `https://API_DOMAIN`
+
 The following endpoints are defined in this API:
 - [/{id}](#/{id})
 
