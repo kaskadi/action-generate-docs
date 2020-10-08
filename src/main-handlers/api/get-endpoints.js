@@ -60,7 +60,7 @@ function getEventData (lambda, baseUrl) {
       queryStringParameters: kaskadiDocs.queryStringParameters || [],
       body: kaskadiDocs.body || [],
       examples: kaskadiDocs.examples || [],
-      ...baseUrl
+      'base-url': baseUrl
     }
   }
 }

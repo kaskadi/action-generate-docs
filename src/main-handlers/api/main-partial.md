@@ -1,6 +1,6 @@
 # API endpoints
 
-The origin and root path for this API is: `{{>base-url}}`
+{{>base-url}}
 
 The following endpoints are defined in this API:
 {{>endpoints-list}}

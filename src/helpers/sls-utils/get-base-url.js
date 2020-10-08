@@ -4,6 +4,5 @@ module.exports = meta => {
   const { hostname, root } = kaskadiDocs
   const origin = hostname && hostname.length > 0 ? `https://${hostname}` : ''
   const path = root && root.length > 0 ? `/${root}` : ''
-  const baseUrl = origin + path
-  return baseUrl.length > 0 ? { 'base-url': baseUrl } : {}
+  return origin + path
 }
