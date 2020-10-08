@@ -46,7 +46,7 @@ function getLocalDeps (fs) {
 function getNpmDeps (depth) {
   const { spawnSync } = require('child_process')
   let args = ['ls', '--json=true', '--prod=true']
-  args = !depth ? [...args, `--depth=${depth}`] : args
+  args = typeof depth !== 'undefined' ? [...args, `--depth=${depth}`] : args // we check here for undefined via typeof because !depth when depth === 0 would result into true (0 coerce to false)
   return extractDeps(JSON.parse(spawnSync('npm', args).stdout).dependencies)
 }
 
