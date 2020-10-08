@@ -16,4 +16,6 @@ const modulePath = `main-handlers/${type}`
 
 require('./helpers/install-deps.js')(path.join(__dirname, modulePath))
 require(`./${modulePath}/index.js`)(templatePath)
-require('./helpers/push-docs.js')(test)
+if (!test) {
+  require('./helpers/push-docs.js')()
+}
