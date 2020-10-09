@@ -19,6 +19,10 @@ Supported methods:
 
 placeholder endpoint
 
+**Authorization:**
+
+No authorizer found for this method.
+
 **Query string parameters:**
 
 |   Key  | Default | Description |
@@ -47,6 +51,10 @@ Supported methods:
 **Description:**
 
 placeholder endpoint
+
+**Authorization:**
+
+No authorizer found for this method.
 
 **Query string parameters:**
 
@@ -77,6 +85,10 @@ Supported methods:
 
 placeholder endpoint
 
+**Authorization:**
+
+No authorizer found for this method.
+
 **Query string parameters:**
 
 |   Key  | Default | Description |
@@ -105,6 +117,10 @@ Supported methods:
 **Description:**
 
 placeholder endpoint
+
+**Authorization:**
+
+No authorizer found for this method.
 
 **Query string parameters:**
 
