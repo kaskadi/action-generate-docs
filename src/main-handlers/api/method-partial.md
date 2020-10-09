@@ -4,6 +4,10 @@
 
 {{>description}}
 
+**Authorization:**
+
+{{>authorizer}}
+
 **Query string parameters:**
 
 {{>queryStringParameters}}
