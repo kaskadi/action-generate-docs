@@ -19,6 +19,9 @@ function getExample (method, endpoint, authorizerData) {
 }
 
 function addAuthorizerData (request, authorizerData) {
+  if (Object.keys(authorizerData).length === 0) {
+    return request
+  }
   let heading
   let { headers, queryStringParameters } = request
   const { type } = authorizerData
