@@ -1,5 +1,5 @@
 const camelToSentence = require('../../helpers/camel-to-sentence.js')
-const { layer: layerArnRegexp, destinations: destArnRegexps } = require('../../helpers/regexps.js')
+const { layer: layerArnRegexp, destinations: destArnRegexps } = require('../../helpers/sls-utils/regexps.js')
 
 module.exports = meta => {
   const { layers, functions } = meta
