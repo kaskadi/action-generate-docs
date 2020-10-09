@@ -23,7 +23,7 @@ function processMethod (modules, endpoint) {
       authorizer: buildAuthorizer(modules, authorizerData),
       queryStringParameters: queryStringParameters.length > 0 ? buildTable(modules, queryStringParameters) : '',
       body: body.length > 0 ? buildTable(modules, body) : '',
-      examples: buildExamples(method, endpoint)
+      examples: buildExamples(method, endpoint, authorizerData)
     }
   }
 }
