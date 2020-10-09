@@ -14,11 +14,15 @@ function processEndpoint (modules) {
 function processMethod (modules, endpoint) {
   const buildTable = require('./build-table.js')
   const buildExamples = require('./build-examples.js')
+  const buildAuthorizer = require('./build-authorizer.js')
   return method => {
+    const { authorizer, queryStringParameters, body } = method
+    const authorizerData = require('./process-authorizer.js')(authorizer)
     return {
       ...method,
-      queryStringParameters: method.queryStringParameters.length > 0 ? buildTable(modules, method.queryStringParameters) : '',
-      body: method.body.length > 0 ? buildTable(modules, method.body) : '',
+      authorizer: buildAuthorizer(modules, authorizerData),
+      queryStringParameters: queryStringParameters.length > 0 ? buildTable(modules, queryStringParameters) : '',
+      body: body.length > 0 ? buildTable(modules, body) : '',
       examples: buildExamples(method, endpoint)
     }
   }
