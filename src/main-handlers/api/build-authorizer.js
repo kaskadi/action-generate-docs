@@ -4,9 +4,12 @@ module.exports = ({ table }, authorizerData) => {
   if (Object.keys(authorizerData).length === 0) {
     return ''
   }
-  const data = { ...authorizerData }
+  let data = { ...authorizerData }
   if (data.identitySource) {
-    data.identitySource = `<ul>\n${data.identitySource.split(', ').map(source => `<li>${source}</li>`).join('\n')}\n</ul>`
+    data = {
+      ...data,
+      identitySource: `<ul>\n${data.identitySource.split(', ').map(source => `<li>${source}</li>`).join('\n')}\n</ul>`
+    }
   }
   return table(
     Object.entries(data)
