@@ -10,22 +10,18 @@ module.exports = authorizer => {
 }
 
 function getAuthorizerData (type, authorizer) {
-  switch (type) {
-    case 'Lambda':
-      return {
-        identitySource: authorizer.identitySource
-          ? `<ul>\n${authorizer.identitySource.split(', ').map(source => `<li>${source}</li>`).join('\n')}\n</ul>`
-          : 'method.request.header.Authorization',
-        identityValidationExpression: authorizer.identityValidationExpression || ''
-      }
-    case 'Cognito':
-      return {
-        identitySource: '<ul>\n<li>method.request.header.Authorization</li>\n</ul>'
-      }
-    case 'IAM':
-    default:
-      return {}
+  if (type === 'IAM') {
+    return {}
   }
+  let identitySource = 'method.request.header.Authorization'
+  if (type === 'Cognito') {
+    return { identitySource }
+  }
+  const identityValidationExpression = authorizer.identityValidationExpression || ''
+  if (typeof authorizer !== 'string' && authorizer.identitySource) {
+    identitySource = authorizer.identitySource
+  }
+  return { identitySource, identityValidationExpression }
 }
 
 function getAuthorizerType (authorizer) {
