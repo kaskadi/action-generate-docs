@@ -41,8 +41,8 @@ function addAuthorizerData (request, authorizerData) {
 }
 
 function exampleBuilders () {
-  const getBody = body => body ? typeof body === 'string' ? body : JSON.stringify(body, null, 2) : ''
-  const getHeaders = headers => headers ? Object.entries(headers).map(entry => `${entry[0]}: ${entry[1]}`).join('\n') : ''
+  const getBody = (body = '') => typeof body === 'string' ? body : JSON.stringify(body, null, 2)
+  const mapToString = (obj = {}, sep, col) => Object.entries(obj).map(entry => entry[0] + sep + entry[1]).join(col)
   const formatNamedData = (heading, data) => data && String(data).length > 0 ? `${heading}:\n${data}` : ''
   const formatBlock = (block, heading) => `${heading ? `${heading}\n\n` : ''}\`\`\`HTTP\n${block.trim()}\n\`\`\``
   return {
@@ -51,9 +51,9 @@ function exampleBuilders () {
         return ''
       }
       const { body, queryStringParameters, headers } = request
-      let qs = queryStringParameters ? Object.entries(queryStringParameters).map(entry => `${entry[0]}=${entry[1]}`).join('&') : ''
+      let qs = mapToString(queryStringParameters, '=', '&')
       qs = qs.length > 0 ? `?${qs}` : qs
-      const exampleReq = `${method.method} ${method['base-url']}${endpoint.path}${qs}\n\n${formatNamedData('Headers', getHeaders(headers))}\n\n${formatNamedData('Body', getBody(body))}`
+      const exampleReq = `${method.method} ${method['base-url']}${endpoint.path}${qs}\n\n${formatNamedData('Headers', mapToString(headers, ': ', '\n'))}\n\n${formatNamedData('Body', getBody(body))}`
       return formatBlock(exampleReq, request.heading)
     },
     getExampleResponse: (response) => {
@@ -61,7 +61,7 @@ function exampleBuilders () {
         return ''
       }
       const { body, statusCode, headers } = response
-      const exampleRes = `${formatNamedData('Status code', statusCode)}\n\n${formatNamedData('Headers', getHeaders(headers))}\n\n${formatNamedData('Body', getBody(body))}`
+      const exampleRes = `${formatNamedData('Status code', statusCode)}\n\n${formatNamedData('Headers', mapToString(headers, ': ', '\n'))}\n\n${formatNamedData('Body', getBody(body))}`
       return formatBlock(exampleRes)
     }
   }
