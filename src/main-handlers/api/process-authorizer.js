@@ -20,7 +20,7 @@ function getAuthorizerData (type, authorizer) {
       }
     case 'Cognito':
       return {
-        identitySource: 'method.request.header.Authorization'
+        identitySource: '<ul>\n<li>method.request.header.Authorization</li>\n</ul>'
       }
     case 'IAM':
     default:
