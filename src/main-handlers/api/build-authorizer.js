@@ -11,6 +11,9 @@ module.exports = ({ table }, authorizerData) => {
         key = key.charAt(0).toUpperCase() + key.slice(1)
         return [key, entry[1]]
       }),
-    { align: Object.keys(authorizerData).map(() => 'c') }
+    {
+      align: Object.keys(authorizerData)
+        .map(key => key === 'identitySource' ? 'l' : 'c')
+    }
   )
 }
