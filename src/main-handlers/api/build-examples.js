@@ -6,14 +6,13 @@ module.exports = (method, endpoint, authorizerData) => {
 }
 
 function getExample (method, endpoint, authorizerData) {
-  const { getExampleRequest, getExampleResponse } = exampleBuilders()
   return example => {
     let { request } = example
     const { response } = example
     request = addAuthorizerData(request, authorizerData)
     const formatExample = (type, example) => example.length > 0 ? `_${type}:_\n\n${example}\n\n` : ''
-    const exampleRequest = formatExample('Request', getExampleRequest(method, endpoint, request))
-    const exampleResponse = formatExample('Response', getExampleResponse(response))
+    const exampleRequest = formatExample('Request', buildExampleRequest(method, endpoint, request))
+    const exampleResponse = formatExample('Response', buildExampleResponse(response))
     return exampleRequest + exampleResponse
   }
 }
@@ -40,29 +39,40 @@ function addAuthorizerData (request, authorizerData) {
   return { ...request, headers, queryStringParameters, heading }
 }
 
-function exampleBuilders () {
-  const getBody = (body = '') => typeof body === 'string' ? body : JSON.stringify(body, null, 2)
-  const mapToString = (obj = {}, sep, col) => Object.entries(obj).map(entry => entry[0] + sep + entry[1]).join(col)
-  const formatNamedData = (heading, data) => data && String(data).length > 0 ? `${heading}:\n${data}` : ''
-  const formatBlock = (block, heading) => `${heading ? `${heading}\n\n` : ''}\`\`\`HTTP\n${block.trim()}\n\`\`\``
-  return {
-    getExampleRequest: (method, endpoint, request) => {
-      if (!request) {
-        return ''
-      }
-      const { body, queryStringParameters, headers } = request
-      let qs = mapToString(queryStringParameters, '=', '&')
-      qs = qs.length > 0 ? `?${qs}` : qs
-      const exampleReq = `${method.method} ${method['base-url']}${endpoint.path}${qs}\n\n${formatNamedData('Headers', mapToString(headers, ': ', '\n'))}\n\n${formatNamedData('Body', getBody(body))}`
-      return formatBlock(exampleReq, request.heading)
-    },
-    getExampleResponse: (response) => {
-      if (!response) {
-        return ''
-      }
-      const { body, statusCode, headers } = response
-      const exampleRes = `${formatNamedData('Status code', statusCode)}\n\n${formatNamedData('Headers', mapToString(headers, ': ', '\n'))}\n\n${formatNamedData('Body', getBody(body))}`
-      return formatBlock(exampleRes)
-    }
+// helpers for building example request and response
+function getBody (body = '') {
+  return typeof body === 'string' ? body : JSON.stringify(body, null, 2)
+}
+
+function mapToString (obj = {}, sep, col) {
+  return Object.entries(obj).map(entry => entry[0] + sep + entry[1]).join(col)
+}
+
+function formatNamedData (heading, data) {
+  return data && String(data).length > 0 ? `${heading}:\n${data}` : ''
+}
+
+function formatBlock (block, heading) {
+  const formattedBlock = `\`\`\`HTTP\n${block.trim()}\n\`\`\``
+  return heading ? `${heading}\n\n${formattedBlock}` : formattedBlock
+}
+
+function buildExampleRequest (method, endpoint, request) {
+  if (!request) {
+    return ''
   }
+  const { body, queryStringParameters, headers } = request
+  let qs = mapToString(queryStringParameters, '=', '&')
+  qs = qs.length > 0 ? `?${qs}` : qs
+  const exampleReq = `${method.method} ${method['base-url']}${endpoint.path}${qs}\n\n${formatNamedData('Headers', mapToString(headers, ': ', '\n'))}\n\n${formatNamedData('Body', getBody(body))}`
+  return formatBlock(exampleReq, request.heading)
+}
+
+function buildExampleResponse (response) {
+  if (!response) {
+    return ''
+  }
+  const { body, statusCode, headers } = response
+  const exampleRes = `${formatNamedData('Status code', statusCode)}\n\n${formatNamedData('Headers', mapToString(headers, ': ', '\n'))}\n\n${formatNamedData('Body', getBody(body))}`
+  return formatBlock(exampleRes)
 }
