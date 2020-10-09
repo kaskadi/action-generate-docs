@@ -5,7 +5,9 @@ module.exports = ({ table }, authorizerData) => {
     return ''
   }
   const data = { ...authorizerData }
-  data.identitySource = `<ul>\n${data.identitySource.split(', ').map(source => `<li>${source}</li>`).join('\n')}\n</ul>`
+  if (data.identitySource) {
+    data.identitySource = `<ul>\n${data.identitySource.split(', ').map(source => `<li>${source}</li>`).join('\n')}\n</ul>`
+  }
   return table(
     Object.entries(data)
       .map(entry => {
