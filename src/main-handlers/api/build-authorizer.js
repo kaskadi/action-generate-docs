@@ -12,10 +12,12 @@ module.exports = ({ table }, authorizerData) => {
     }
   }
   return table([
-    Object.keys(data).map(key => {
-      key = camelToSentence(key)
-      return key.charAt(0).toUpperCase() + key.slice(1)
-    }),
+    Object.keys(data)
+      .filter(key => key.length > 0)
+      .map(key => {
+        key = camelToSentence(key)
+        return key.charAt(0).toUpperCase() + key.slice(1)
+      }),
     Object.values(data)
   ],
   {
