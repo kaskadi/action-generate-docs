@@ -24,9 +24,17 @@ function getAuthorizerData (type, authorizer) {
   return { identitySource, identityValidationExpression }
 }
 
+// authorizer type retrieval helpers
 function getAuthorizerType (authorizer) {
   if (typeof authorizer === 'string') return authorizer === 'aws_iam' ? 'IAM' : 'Lambda'
-  const { type } = authorizer
+  const authType = analyzeTypeField(authorizer)
+  if (authType.length > 0) return authType
+  const { name, arn } = authorizer
+  if (name && !arn) return 'Lambda'
+  return analyzeArn(arn)
+}
+
+function analyzeTypeField ({ type }) {
   switch (type) {
     case 'aws_iam':
       return 'IAM'
@@ -36,14 +44,14 @@ function getAuthorizerType (authorizer) {
     case 'COGNITO_USER_POOLS':
       return 'Cognito'
     default:
-      break
+      return ''
   }
-  const { name, arn } = authorizer
-  if (name && !arn) return 'Lambda'
+}
+
+function analyzeArn (arn) {
   const { lambda } = require('../../helpers/sls-utils/regexps.js')
   if (typeof arn === 'string' && arn.match(lambda)) {
     return 'Lambda'
-  } else {
-    return 'Cognito'
   }
+  return 'Cognito'
 }
