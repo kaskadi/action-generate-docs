@@ -26,7 +26,7 @@ function addAuthorizerData (request, authorizerData) {
   if (type === 'IAM') {
     heading = '**Warning:** the example request shown below does not include authorization via IAM. It gives you the base request expected by this endpoint (if it was not protected). You need to connect to this endpoint using an AWS signed request built with the proper IAM role. To know more about how to sign a request see [here](https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html).'
   } else if (type === 'Cognito') {
-    headers = { ...headers, Authorization: 'Bearer COGNITO_ACCESS_TOKEN' }
+    headers = { ...headers, Authorization: 'Bearer COGNITO_ACCESS_TOKEN' } // lgtm [js/hardcoded-credentials]
   } else {
     const { identitySource } = authorizerData
     const sources = identitySource.split(', ')
