@@ -11,13 +11,12 @@ module.exports = ({ table }, authorizerData) => {
       identitySource: `<ul>${data.identitySource.split(', ').map(source => `<li>${source}</li>`).join('')}</ul>`
     }
   }
+  data = Object.fromEntries(Object.entries(data).filter(entry => entry[1].length > 0))
   return table([
-    Object.keys(data)
-      .filter(key => key.length > 0)
-      .map(key => {
-        key = camelToSentence(key)
-        return key.charAt(0).toUpperCase() + key.slice(1)
-      }),
+    Object.keys(data).map(key => {
+      key = camelToSentence(key)
+      return key.charAt(0).toUpperCase() + key.slice(1)
+    }),
     Object.values(data)
   ],
   {
