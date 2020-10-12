@@ -16,6 +16,10 @@ Supported methods:
 
 No description found for this method.
 
+**Authorization:**
+
+No authorizer found for this method.
+
 **Query string parameters:**
 
 No query string parameters found for this method.

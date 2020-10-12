@@ -1,0 +1,45 @@
+handler: lambdas/hello-world/index.handler
+name: hello-world
+package:
+  include:
+    - lambdas/hello-world/index.js
+    - lambdas/hello-world/node_modules/**
+events:
+  - http:
+      method: get
+      path: hello
+      cors: true
+      authorizer: customAuthorizer
+      kaskadi-docs:
+        description: placeholder endpoint
+        queryStringParameters:
+          - key: key1
+            description: first key
+          - key: key2
+            description: second key
+            default: 35 
+        # doesn't make sense with GET but that's just for testing here
+        body:
+          - key: param1
+            description: first body param
+            default: 'hello'
+          - key: param2
+            description: second body param
+            default: true
+        examples:
+          - request:
+              queryStringParameters:
+                key1: hello
+                key2: test
+              body:
+                param1: does not make sense in GET
+                param2: but this is a test
+              headers:
+                'Content-Type': 'application/json'
+            response:
+              body:
+                resParam1: hello
+                resParam2: test
+              statusCode: 200
+              headers:
+                'x-kaskadi-data': some data

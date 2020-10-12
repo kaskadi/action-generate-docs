@@ -33,6 +33,41 @@ describe('api docs generation', function () {
       await test(cwd, 'test/api/base-url/regular', 'validation.md')
     })
   })
+  describe('authorization parser', function () {
+    it('should generate docs when using IAM authorizer (string)', async () => {
+      await test(cwd, 'test/api/authorizer/IAM-string', 'validation.md')
+    })
+    it('should generate docs when using IAM authorizer (object)', async () => {
+      await test(cwd, 'test/api/authorizer/IAM-object', 'validation.md')
+    })
+    it('should generate docs when using a custom authorizer in the same stack (string)', async () => {
+      await test(cwd, 'test/api/authorizer/custom-string', 'validation.md')
+    })
+    it('should generate docs when using a custom authorizer in the same stack (object)', async () => {
+      await test(cwd, 'test/api/authorizer/custom-object', 'validation.md')
+    })
+    it('should generate docs when using a lambda authorizer of type token', async () => {
+      await test(cwd, 'test/api/authorizer/lambda-token', 'validation.md')
+    })
+    it('should generate docs when using a lambda authorizer of type request', async () => {
+      await test(cwd, 'test/api/authorizer/lambda-request', 'validation.md')
+    })
+    it('should generate docs when using a cognito authorizer via ARN', async () => {
+      await test(cwd, 'test/api/authorizer/cognito-arn', 'validation.md')
+    })
+    it('should generate docs when using a lambda authorizer via ARN', async () => {
+      await test(cwd, 'test/api/authorizer/lambda-arn', 'validation.md')
+    })
+    it('should generate docs when using a cognito authorizer with user pool in the same stack', async () => {
+      await test(cwd, 'test/api/authorizer/cognito', 'validation.md')
+    })
+    it('should generate docs with multiple identity sources', async () => {
+      await test(cwd, 'test/api/authorizer/multi-identity-sources', 'validation.md')
+    })
+    it('should generate docs with an identity validation expression', async () => {
+      await test(cwd, 'test/api/authorizer/identity-validation', 'validation.md')
+    })
+  })
   describe('example builder', function () {
     it('should generate docs with no example', async () => {
       await test(cwd, 'test/api/examples/no-example', 'validation.md')

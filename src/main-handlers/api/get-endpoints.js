@@ -46,7 +46,7 @@ function processEndpoints (endpoints) {
 function getEventData (lambda, baseUrl) {
   return event => {
     const { name } = lambda
-    const { path } = event
+    const { path, authorizer } = event
     let { method } = event
     const kaskadiDocs = event['kaskadi-docs'] || {}
     method = method.toUpperCase()
@@ -56,6 +56,7 @@ function getEventData (lambda, baseUrl) {
       'lambda-name': name,
       path,
       method,
+      authorizer,
       description: kaskadiDocs.description || '',
       queryStringParameters: kaskadiDocs.queryStringParameters || [],
       body: kaskadiDocs.body || [],
