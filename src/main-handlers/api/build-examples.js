@@ -10,9 +10,8 @@ function getExample (method, endpoint, authorizerData) {
     let { request } = example
     const { response } = example
     request = addAuthorizerData(request, authorizerData)
-    const formatExample = (type, example) => example.length > 0 ? `_${type}:_\n\n${example}\n\n` : ''
-    const exampleRequest = formatExample('Request', buildExampleRequest(method, endpoint, request))
-    const exampleResponse = formatExample('Response', buildExampleResponse(response))
+    const exampleRequest = buildExampleRequest(method, endpoint, request)
+    const exampleResponse = buildExampleResponse(response)
     return exampleRequest + exampleResponse
   }
 }
@@ -52,9 +51,12 @@ function formatNamedData (heading, data) {
   return data && String(data).length > 0 ? `${heading}:\n${data}` : ''
 }
 
-function formatBlock (block, heading) {
-  const formattedBlock = `\`\`\`HTTP\n${block.trim()}\n\`\`\``
-  return heading ? `${heading}\n\n${formattedBlock}` : formattedBlock
+function formatBlock (type, block) {
+  return block.length > 0 ? `_${type}:_\n\n\`\`\`HTTP\n${block.trim()}\n\`\`\`\n\n` : ''
+}
+
+function formatExample (example, heading) {
+  return heading ? `${heading}\n\n${example}` : example
 }
 
 function buildExampleRequest (method, endpoint, request) {
@@ -65,7 +67,7 @@ function buildExampleRequest (method, endpoint, request) {
   let qs = mapToString(queryStringParameters, '=', '&')
   qs = qs.length > 0 ? `?${qs}` : qs
   const exampleReq = `${method.method} ${method['base-url']}${endpoint.path}${qs}\n\n${formatNamedData('Headers', mapToString(headers, ': ', '\n'))}\n\n${formatNamedData('Body', getBody(body))}`
-  return formatBlock(exampleReq, request.heading)
+  return formatExample(formatBlock('Request', exampleReq), request.heading)
 }
 
 function buildExampleResponse (response) {
@@ -74,5 +76,5 @@ function buildExampleResponse (response) {
   }
   const { body, statusCode, headers } = response
   const exampleRes = `${formatNamedData('Status code', statusCode)}\n\n${formatNamedData('Headers', mapToString(headers, ': ', '\n'))}\n\n${formatNamedData('Body', getBody(body))}`
-  return formatBlock(exampleRes)
+  return formatExample(formatBlock('Response', exampleRes))
 }
