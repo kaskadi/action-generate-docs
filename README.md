@@ -121,6 +121,75 @@ The documentation generation for AWS Lambda functions is using the main `serverl
 
 The documentation generation for AWS API Gateway is using the main `serverless.yml` configuration file. It extracts the meta data for all endpoints found in this file and generate its documentation based on those data.
 
+This module uses a custom field `kaskadi-docs` inside of the `custom` field and every lambda function `events` fields.
+- `custom.kaskadi-docs`: allows users to define the API origin and its root path:
+```YAML
+# this will print the API base URl as https://example.com/logical-unit
+custom:
+  kaskadi-docs:
+    hostname: example.com
+    root: logical-unit
+```
+- `functions.SOME_LAMBDA.events.kaskadi-docs`: allows users to describe an endpoint as well as provide examples.
+```YAML
+# inside of a given endpoint
+events:
+  - http:
+      method: post
+      path: hello
+      cors: true
+      kaskadi-docs:
+        # from here we describe the endpoint and what query string/request body parameters it should expect (as well as any default values)
+        description: placeholder endpoint
+        queryStringParameters:
+          - key: key1
+            description: first key
+          - key: key2
+            description: second key
+            default: 35
+        body:
+          - key: param1
+            description: first body param
+            default: 'hello'
+          - key: param2
+            description: second body param
+            default: true
+        # this field allows users to define multiple examples of request/response
+        examples:
+          - request:
+              queryStringParameters:
+                key1: hello
+                key2: test
+              body:
+                param1: a param
+                param2: another one
+              headers:
+                'Content-Type': 'application/json'
+            response:
+              body:
+                resParam1: hello
+                resParam2: test
+              statusCode: 200
+              headers:
+                'x-kaskadi-data': some data
+          - request:
+              queryStringParameters:
+                key1: hello
+                key2: test
+              body:
+                param1: a param
+                param2: another one
+              headers:
+                'Content-Type': 'application/json'
+            response:
+              body:
+                resParam1: hello
+                resParam2: test
+              statusCode: 200
+              headers:
+                'x-kaskadi-data': some data
+```
+
 **Notes:**
 - **Warning:** if you are using environment variables inside of your `serverless.yml` file, you should also add those as an `env` for the step that generates the documentation (see action configuration above)
 - supports lambdas and layers the same way as the [`lambda` module](#lambda) and the [`layer` module](#layer) do
