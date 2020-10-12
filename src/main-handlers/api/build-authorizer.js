@@ -5,13 +5,9 @@ module.exports = ({ table }, authorizerData) => {
     return ''
   }
   let data = { ...authorizerData }
-  if (data.identitySource) {
-    data = {
-      ...data,
-      identitySource: `<ul>${data.identitySource.split(', ').map(source => `<li>${source}</li>`).join('')}</ul>`
-    }
-  }
   data = Object.fromEntries(Object.entries(data).filter(entry => entry[1].length > 0))
+  data = updateField('identitySource', idSource => `<ul>${idSource.split(', ').map(source => `<li>${source}</li>`).join('')}</ul>`, data)
+  data = updateField('identityValidationExpression', idValidation => `\`${idValidation}\``, data)
   return table([
     Object.keys(data).map(key => {
       key = camelToSentence(key)
@@ -24,4 +20,15 @@ module.exports = ({ table }, authorizerData) => {
       .map(key => key === 'identitySource' ? 'l' : 'c')
   }
   )
+}
+
+function updateField (field, transform, obj) {
+  const data = obj[field]
+  if (!data) {
+    return obj
+  }
+  return {
+    ...obj,
+    [field]: transform(data)
+  }
 }
