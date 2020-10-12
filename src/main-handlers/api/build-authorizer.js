@@ -8,7 +8,7 @@ module.exports = ({ table }, authorizerData) => {
   if (data.identitySource) {
     data = {
       ...data,
-      identitySource: `<ul>\n${data.identitySource.split(', ').map(source => `<li>${source}</li>`).join('\n')}\n</ul>`
+      identitySource: `<ul>${data.identitySource.split(', ').map(source => `<li>${source}</li>`).join('')}</ul>`
     }
   }
   return table([
