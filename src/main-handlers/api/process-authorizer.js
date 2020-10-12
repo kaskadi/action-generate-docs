@@ -41,7 +41,7 @@ function getAuthorizerType (authorizer) {
   const { name, arn } = authorizer
   if (name && !arn) return 'Lambda'
   const { lambda } = require('../../helpers/sls-utils/regexps.js')
-  if (arn.match(lambda)) {
+  if (typeof arn === 'string' && arn.match(lambda)) {
     return 'Lambda'
   } else {
     return 'Cognito'
