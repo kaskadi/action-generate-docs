@@ -43,16 +43,16 @@ _Response:_
 
 ```HTTP
 Status code:
-200
+  200
 
 Headers:
-x-kaskadi-data: some data
+  x-kaskadi-data: some data
 
 Body:
-{
-  "resParam1": "hello",
-  "resParam2": "test"
-}
+  {
+    "resParam1": "hello",
+    "resParam2": "test"
+  }
 ```
 </details>
 
