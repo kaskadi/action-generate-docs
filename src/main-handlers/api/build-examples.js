@@ -47,8 +47,9 @@ function mapToString (obj = {}, sep, col) {
   return Object.entries(obj).map(entry => entry[0] + sep + entry[1]).join(col)
 }
 
-function formatNamedData (heading, data) {
-  return data && String(data).length > 0
+function formatNamedData (heading, data = '') {
+  data = String(data)
+  return data.length > 0
     ? `${heading}:\n${data.split('\n').map(line => '\t' + line).join('\n')}`
     : ''
 }
