@@ -43,13 +43,13 @@ _Response:_
 
 ```HTTP
 Headers:
-x-kaskadi-data: some data
+  x-kaskadi-data: some data
 
 Body:
-{
-  "resParam1": "hello",
-  "resParam2": "test"
-}
+  {
+    "resParam1": "hello",
+    "resParam2": "test"
+  }
 ```
 </details>
 

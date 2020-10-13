@@ -45,7 +45,7 @@ _Request:_
 GET https://API_DOMAIN/hello?key1=hello&key2=test
 
 Headers:
-Content-Type: application/json
+  Content-Type: application/json
 ```
 </details>
 

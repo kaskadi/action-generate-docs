@@ -45,13 +45,13 @@ _Request:_
 GET https://API_DOMAIN/hello?key1=hello&key2=test
 
 Headers:
-Content-Type: application/json
+  Content-Type: application/json
 
 Body:
-{
-  "param1": "does not make sense in GET",
-  "param2": "but this is a test"
-}
+  {
+    "param1": "does not make sense in GET",
+    "param2": "but this is a test"
+  }
 ```
 </details>
 
