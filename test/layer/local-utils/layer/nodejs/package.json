@@ -15,7 +15,9 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "node-fetch": "^2.6.1",
+    "node-fetch": "^2.6.1"
+  },
+  "devDependencies": {
     "yaml": "^1.10.0"
   }
 }
