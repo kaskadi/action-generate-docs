@@ -48,7 +48,7 @@ function mapToString (obj = {}, sep, col) {
 }
 
 function formatNamedData (heading, data = '') {
-  data = String(data).replace('\\n', '\n')
+  data = String(data).replace(/\\n/g, '\n')
   return data.length > 0
     ? `${heading}:\n${data.split('\n').map(line => '  ' + line).join('\n')}`
     : ''
