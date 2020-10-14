@@ -30,6 +30,6 @@ events:
               queryStringParameters:
                 key1: hello
                 key2: test
-              body: this is a body
+              body: this is a body\n"hello"
               headers:
                 'Content-Type': 'application/json'
