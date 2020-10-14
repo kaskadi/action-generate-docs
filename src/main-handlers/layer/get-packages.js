@@ -20,7 +20,7 @@ function buildDepList (dependencies) {
 function getDeps (fs, path, layerPath) {
   const cwd = process.cwd()
   process.chdir(path.join(cwd, `${layerPath}/nodejs`))
-  const npmDeps = getNpmDeps(0)
+  const npmDeps = getNpmDeps({ depth: 0 })
   const localDeps = getLocalDeps(fs)
   process.chdir(cwd)
   return [...npmDeps, ...localDeps]
@@ -30,7 +30,10 @@ function getLocalDeps (fs) {
   if (!fs.existsSync('node_modules')) {
     return []
   }
-  const fullNpmDeps = [...new Set(getNpmDeps().map(dep => dep.name.split('/')[0]))]
+  const fullNpmDeps = removeDuplicateDeps([
+    ...getNpmDeps(),
+    ...getNpmDeps({ type: 'dev' })
+  ])
   return fs.readdirSync('node_modules', { withFileTypes: true })
     .filter(dirent => dirent.isDirectory())
     .map(dirent => dirent.name)
@@ -43,9 +46,16 @@ function getLocalDeps (fs) {
     })
 }
 
-function getNpmDeps (depth) {
+function removeDuplicateDeps (deps) {
+  return [...new Set(deps.map(dep => dep.name.split('/')[0]))]
+}
+
+function getNpmDeps (opts) {
   const { spawnSync } = require('child_process')
-  let args = ['ls', '--json=true', '--prod=true']
+  const defaults = { type: 'prod' }
+  opts = { ...defaults, ...opts }
+  const { depth, type } = opts
+  let args = ['ls', '--json=true', `--${type}=true`]
   args = typeof depth !== 'undefined' ? [...args, `--depth=${depth}`] : args // we check here for undefined via typeof because !depth when depth === 0 would result into true (0 coerce to false)
   return extractDeps(JSON.parse(spawnSync('npm', args).stdout).dependencies)
 }
