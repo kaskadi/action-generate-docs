@@ -120,37 +120,47 @@ events:
         # this field allows users to define multiple examples of request/response
         examples:
           - request:
+              pathParameters: # any path parameters specified in here will be swapped by their respective value in the example request
+                id: 123
+                some-param: true
+                another_param: hey
+                proxy+: hello
+              headers:
+                'Content-Type': 'application/json'
               queryStringParameters:
                 key1: hello
                 key2: test
               body:
                 param1: a param
                 param2: another one
-              headers:
-                'Content-Type': 'application/json'
             response:
-              body:
-                resParam1: hello
-                resParam2: test
               statusCode: 200
               headers:
                 'x-kaskadi-data': some data
+              body:
+                resParam1: hello
+                resParam2: test
           - request:
+              pathParameters: # any path parameters specified in here will be swapped by their respective value in the example request
+                id: 123
+                some-param: true
+                another_param: hey
+                proxy+: hello
+              headers:
+                'Content-Type': 'application/json'
               queryStringParameters:
                 key1: hello
                 key2: test
               body:
                 param1: a param
                 param2: another one
-              headers:
-                'Content-Type': 'application/json'
             response:
-              body:
-                resParam1: hello
-                resParam2: test
               statusCode: 200
               headers:
                 'x-kaskadi-data': some data
+              body:
+                resParam1: hello
+                resParam2: test
 ```
 
 **Notes:**
