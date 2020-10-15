@@ -39,6 +39,14 @@ function addAuthorizerData (request, authorizerData) {
 }
 
 // helpers for building example request and response
+function replacePathParams (path, pathParams = {}) {
+  return Object.entries(pathParams)
+    .reduce((acc, entry) => {
+      const regExp = new RegExp(`{${entry[0]}}`, 'g')
+      return acc.replace(regExp, entry[1])
+    }, path)
+}
+
 function getBody (body = '') {
   return typeof body === 'string' ? body : JSON.stringify(body, null, 2)
 }
@@ -69,7 +77,7 @@ function buildExampleRequest (method, endpoint, request) {
   const { body, queryStringParameters, headers } = request
   let qs = mapToString(queryStringParameters, '=', '&')
   qs = qs.length > 0 ? `?${qs}` : qs
-  const exampleReq = `${method.method} ${method['base-url']}${endpoint.path}${qs}\n\n${formatNamedData('Headers', mapToString(headers, ': ', '\n'))}\n\n${formatNamedData('Body', getBody(body))}`
+  const exampleReq = `${method.method} ${method['base-url']}${replacePathParams(endpoint.path, endpoint.pathParameters)}${qs}\n\n${formatNamedData('Headers', mapToString(headers, ': ', '\n'))}\n\n${formatNamedData('Body', getBody(body))}`
   return formatExample(formatBlock('Request', exampleReq), request.heading)
 }
 
