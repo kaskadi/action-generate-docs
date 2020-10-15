@@ -39,6 +39,15 @@ function addAuthorizerData (request, authorizerData) {
 }
 
 // helpers for building example request and response
+function replacePathParams (path, pathParams = {}) {
+  return Object.entries(pathParams)
+    .reduce((reducedPath, entry) => {
+      const param = entry[0].replace(/[+]/g, '\\+')
+      const regExp = new RegExp(`{${param}}`, 'g')
+      return reducedPath.replace(regExp, entry[1])
+    }, path)
+}
+
 function getBody (body = '') {
   return typeof body === 'string' ? body : JSON.stringify(body, null, 2)
 }
@@ -66,10 +75,10 @@ function buildExampleRequest (method, endpoint, request) {
   if (!request) {
     return ''
   }
-  const { body, queryStringParameters, headers } = request
+  const { body, queryStringParameters, pathParameters, headers } = request
   let qs = mapToString(queryStringParameters, '=', '&')
   qs = qs.length > 0 ? `?${qs}` : qs
-  const exampleReq = `${method.method} ${method['base-url']}${endpoint.path}${qs}\n\n${formatNamedData('Headers', mapToString(headers, ': ', '\n'))}\n\n${formatNamedData('Body', getBody(body))}`
+  const exampleReq = `${method.method} ${method['base-url']}${replacePathParams(endpoint.path, pathParameters)}${qs}\n\n${formatNamedData('Headers', mapToString(headers, ': ', '\n'))}\n\n${formatNamedData('Body', getBody(body))}`
   return formatExample(formatBlock('Request', exampleReq), request.heading)
 }
 

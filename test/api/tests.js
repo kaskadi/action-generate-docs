@@ -99,6 +99,9 @@ describe('api docs generation', function () {
     it('should generate docs with a text body', async () => {
       await test(cwd, 'test/api/examples/text-body', 'validation.md')
     })
+    it('should generate docs with URL path parameters provided', async () => {
+      await test(cwd, 'test/api/examples/path-params', 'validation.md')
+    })
     it('should generate docs with a given example', async () => {
       await test(cwd, 'test/api/examples/single-example', 'validation.md')
     })
