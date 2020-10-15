@@ -42,7 +42,7 @@ function addAuthorizerData (request, authorizerData) {
 function replacePathParams (path, pathParams = {}) {
   return Object.entries(pathParams)
     .reduce((reducedPath, entry) => {
-      const param = entry[0].replace(/\+/g, '\\+')
+      const param = entry[0].replace(/[+]/g, '\\+')
       const regExp = new RegExp(`{${param}}`, 'g')
       return reducedPath.replace(regExp, entry[1])
     }, path)
