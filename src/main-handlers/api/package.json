@@ -1,5 +1,5 @@
 {
-  "name": "lambda-module",
+  "name": "api-module",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",

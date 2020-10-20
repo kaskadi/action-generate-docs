@@ -1,0 +1,3 @@
+# Custom element documentation
+
+{{>main}}
