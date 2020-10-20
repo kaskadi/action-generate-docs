@@ -8,6 +8,7 @@
     "test": "npm run lint && export TEST_ENV=\"true\" && mocha test/action.test.js --require test/mocha-color-setter.js",
     "test:action": "npm run lint && export TEST_ENV=\"true\" && mocha test/action/tests.js --require test/mocha-color-setter.js",
     "test:package": "npm run lint && export TEST_ENV=\"true\" && mocha test/package/tests.js --require test/mocha-color-setter.js",
+    "test:element": "npm run lint && export TEST_ENV=\"true\" && mocha test/element/tests.js --require test/mocha-color-setter.js",
     "test:layer": "npm run lint && export TEST_ENV=\"true\" && mocha test/layer/tests.js --require test/mocha-color-setter.js",
     "test:lambda": "npm run lint && export TEST_ENV=\"true\" && mocha test/lambda/tests.js --require test/mocha-color-setter.js",
     "test:api": "npm run lint && export TEST_ENV=\"true\" && mocha test/api/tests.js --require test/mocha-color-setter.js",
