@@ -93,7 +93,7 @@ custom:
     hostname: example.com
     root: logical-unit
 ```
-- `functions.SOME_LAMBDA.events.kaskadi-docs`: allows users to describe an endpoint as well as provide examples.
+- `functions.SOME_LAMBDA.events.EVENT_TYPE.kaskadi-docs`: allows users to describe an endpoint as well as provide examples.
 ```YAML
 # inside of a given endpoint
 events:
