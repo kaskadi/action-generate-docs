@@ -8,9 +8,9 @@ _no layer defined in the [configuration file](./serverless.yml)._
 
 ## template-kaskadi-lambda <a name="template-kaskadi-lambda"></a>
 
-|           Name          | Sources                                     | Timeout |                 Handler                 |
-| :---------------------: | :------------------------------------------ | :-----: | :-------------------------------------: |
-| template-kaskadi-lambda | <ul><li>HTTP</li><li>event bridge</li></ul> | default | [handler](./template-kaskadi-lambda.js) |
+|           Name          | Sources                                           | Timeout |                 Handler                 |
+| :---------------------: | :------------------------------------------------ | :-----: | :-------------------------------------: |
+| template-kaskadi-lambda | <ul><li>HTTP (GET)</li><li>event bridge</li></ul> | default | [handler](./template-kaskadi-lambda.js) |
 
 See [configuration file](./serverless.yml) for more details.
 
