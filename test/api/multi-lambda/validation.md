@@ -108,25 +108,25 @@ _no layer defined in the [configuration file](./serverless.yml)._
 
 ## get-item <a name="get-item"></a>
 
-|   Name   | Sources                | Timeout |                 Handler                |
-| :------: | :--------------------- | :-----: | :------------------------------------: |
-| get-item | <ul><li>HTTP</li></ul> | default | [handler](./lambdas/get-item/index.js) |
+|   Name   | Sources                      | Timeout |                 Handler                |
+| :------: | :--------------------------- | :-----: | :------------------------------------: |
+| get-item | <ul><li>HTTP (GET)</li></ul> | default | [handler](./lambdas/get-item/index.js) |
 
 See [configuration file](./serverless.yml) for more details.
 
 ## delete-item <a name="delete-item"></a>
 
-|     Name    | Sources                | Timeout |                  Handler                  |
-| :---------: | :--------------------- | :-----: | :---------------------------------------: |
-| delete-item | <ul><li>HTTP</li></ul> | default | [handler](./lambdas/delete-item/index.js) |
+|     Name    | Sources                         | Timeout |                  Handler                  |
+| :---------: | :------------------------------ | :-----: | :---------------------------------------: |
+| delete-item | <ul><li>HTTP (DELETE)</li></ul> | default | [handler](./lambdas/delete-item/index.js) |
 
 See [configuration file](./serverless.yml) for more details.
 
 ## post-item <a name="post-item"></a>
 
-|    Name   | Sources                | Timeout |                 Handler                 |
-| :-------: | :--------------------- | :-----: | :-------------------------------------: |
-| post-item | <ul><li>HTTP</li></ul> | default | [handler](./lambdas/post-item/index.js) |
+|    Name   | Sources                       | Timeout |                 Handler                 |
+| :-------: | :---------------------------- | :-----: | :-------------------------------------: |
+| post-item | <ul><li>HTTP (POST)</li></ul> | default | [handler](./lambdas/post-item/index.js) |
 
 See [configuration file](./serverless.yml) for more details.
 
