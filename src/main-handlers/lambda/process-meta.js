@@ -72,8 +72,9 @@ function processIntrinsicFct (intrinsicData, meta, type = 'layer') {
 }
 
 function getEventName (event) {
-  const semEvent = camelToSentence(Object.keys(event)[0])
-  return capitalizeName(semEvent)
+  let displayedEvent = camelToSentence(Object.keys(event)[0])
+  displayedEvent = capitalizeName(displayedEvent)
+  return displayedEvent === 'HTTP' ? `${displayedEvent} (${event.method.toUpperCase()})` : displayedEvent
 }
 
 function capitalizeName (str) {
