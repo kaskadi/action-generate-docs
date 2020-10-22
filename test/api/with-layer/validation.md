@@ -48,9 +48,9 @@ The following layers are used in this API:
 
 ## hello-world <a name="hello-world"></a>
 
-|     Name    | Sources                | Timeout |                  Handler                  | Layers                                                                      |
-| :---------: | :--------------------- | :-----: | :---------------------------------------: | :-------------------------------------------------------------------------- |
-| hello-world | <ul><li>HTTP</li></ul> | default | [handler](./lambdas/hello-world/index.js) | <ul><li>[template-kaskadi-api-layer](#template-kaskadi-api-layer)</li></ul> |
+|     Name    | Sources                      | Timeout |                  Handler                  | Layers                                                                      |
+| :---------: | :--------------------------- | :-----: | :---------------------------------------: | :-------------------------------------------------------------------------- |
+| hello-world | <ul><li>HTTP (GET)</li></ul> | default | [handler](./lambdas/hello-world/index.js) | <ul><li>[template-kaskadi-api-layer](#template-kaskadi-api-layer)</li></ul> |
 
 See [configuration file](./serverless.yml) for more details.
 

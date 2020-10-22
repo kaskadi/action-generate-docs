@@ -153,33 +153,33 @@ _no layer defined in the [configuration file](./serverless.yml)._
 
 ## hello-world <a name="hello-world"></a>
 
-|     Name    | Sources                | Timeout |                  Handler                  |
-| :---------: | :--------------------- | :-----: | :---------------------------------------: |
-| hello-world | <ul><li>HTTP</li></ul> | default | [handler](./lambdas/hello-world/index.js) |
+|     Name    | Sources                      | Timeout |                  Handler                  |
+| :---------: | :--------------------------- | :-----: | :---------------------------------------: |
+| hello-world | <ul><li>HTTP (GET)</li></ul> | default | [handler](./lambdas/hello-world/index.js) |
 
 See [configuration file](./serverless.yml) for more details.
 
 ## again <a name="again"></a>
 
-|  Name | Sources                | Timeout |               Handler               |
-| :---: | :--------------------- | :-----: | :---------------------------------: |
-| again | <ul><li>HTTP</li></ul> | default | [handler](./lambdas/again/index.js) |
+|  Name | Sources                      | Timeout |               Handler               |
+| :---: | :--------------------------- | :-----: | :---------------------------------: |
+| again | <ul><li>HTTP (GET)</li></ul> | default | [handler](./lambdas/again/index.js) |
 
 See [configuration file](./serverless.yml) for more details.
 
 ## again-hello-world <a name="again-hello-world"></a>
 
-|        Name       | Sources                | Timeout |                     Handler                     |
-| :---------------: | :--------------------- | :-----: | :---------------------------------------------: |
-| again-hello-world | <ul><li>HTTP</li></ul> | default | [handler](./lambdas/again-hello-world/index.js) |
+|        Name       | Sources                      | Timeout |                     Handler                     |
+| :---------------: | :--------------------------- | :-----: | :---------------------------------------------: |
+| again-hello-world | <ul><li>HTTP (GET)</li></ul> | default | [handler](./lambdas/again-hello-world/index.js) |
 
 See [configuration file](./serverless.yml) for more details.
 
 ## hello-world-again <a name="hello-world-again"></a>
 
-|        Name       | Sources                | Timeout |                     Handler                     |
-| :---------------: | :--------------------- | :-----: | :---------------------------------------------: |
-| hello-world-again | <ul><li>HTTP</li></ul> | default | [handler](./lambdas/hello-world-again/index.js) |
+|        Name       | Sources                      | Timeout |                     Handler                     |
+| :---------------: | :--------------------------- | :-----: | :---------------------------------------------: |
+| hello-world-again | <ul><li>HTTP (GET)</li></ul> | default | [handler](./lambdas/hello-world-again/index.js) |
 
 See [configuration file](./serverless.yml) for more details.
 

@@ -127,9 +127,9 @@ _no layer defined in the [configuration file](./serverless.yml)._
 
 ## hello-world <a name="hello-world"></a>
 
-|     Name    | Sources                | Timeout |                  Handler                  |
-| :---------: | :--------------------- | :-----: | :---------------------------------------: |
-| hello-world | <ul><li>HTTP</li></ul> | default | [handler](./lambdas/hello-world/index.js) |
+|     Name    | Sources                      | Timeout |                  Handler                  |
+| :---------: | :--------------------------- | :-----: | :---------------------------------------: |
+| hello-world | <ul><li>HTTP (GET)</li></ul> | default | [handler](./lambdas/hello-world/index.js) |
 
 See [configuration file](./serverless.yml) for more details.
 
