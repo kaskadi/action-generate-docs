@@ -32,6 +32,20 @@ describe('element docs generation', function () {
         delete process.env.INPUT_TEMPLATE
       })
   })
+  describe('usage instructions printing', function () {
+    it('should handle absence of match with main file', async () => {
+      await test(cwd, 'test/element/usage/no-match', 'validation.md')
+    })
+    it('should handle absence of files in kaskadi.s3-push inside of package.json', async () => {
+      await test(cwd, 'test/element/usage/no-files', 'validation.md')
+    })
+    it('should handle absence of s3-push in kaskadi inside of package.json', async () => {
+      await test(cwd, 'test/element/usage/no-s3-push', 'validation.md')
+    })
+    it('should handle absence of kaskadi field inside of package.json', async () => {
+      await test(cwd, 'test/element/usage/no-kaskadi', 'validation.md')
+    })
+  })
   after(() => {
     delete process.env.INPUT_TYPE
   })

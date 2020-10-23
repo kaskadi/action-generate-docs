@@ -1,14 +1,9 @@
 module.exports = (moduleDir, templatePath, type) => {
   const modules = loadModuleDeps(moduleDir)
   console.log('INFO: generating documentation from provided template and all JS files in repository...')
-  let data = {
-    ...require('./get-data.js')(modules)
-  }
-  if (type === 'package') {
-    data = {
-      ...data,
-      ...require(`${moduleDir}/get-data.js`)(modules)
-    }
+  const data = {
+    ...require('./get-data.js')(modules, type),
+    ...require(`${moduleDir}/get-data.js`)(modules)
   }
   const docs = require('./build-docs.js')(modules, data, `${moduleDir}/${type}-partial.md`, templatePath)
   console.log('SUCCESS: documentation successfully generated!')

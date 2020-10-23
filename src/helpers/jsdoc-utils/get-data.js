@@ -1,9 +1,13 @@
 const { spawnSync } = require('child_process')
 
-module.exports = ({ glob, jsdoc2md }) => {
+module.exports = ({ fs, glob, jsdoc2md }, type) => {
   const opts = {
-    files: glob.sync('**/*.js', { ignore: 'node_modules/**' }),
-    'example-lang': 'js',
+    files: type === 'package'
+      ? glob.sync('**/*.js', { ignore: 'node_modules/**' })
+      : JSON.parse(fs.readFileSync('package.json', 'utf8')).main,
+    'example-lang': type === 'package'
+      ? 'js'
+      : 'html',
     'no-cache': true,
     'heading-depth': 2,
     plugin: '@godaddy/dmd'

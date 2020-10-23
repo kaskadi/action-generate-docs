@@ -1,0 +1,36 @@
+{
+  "name": "kaskadi-custom-element",
+  "version": "1.0.0",
+  "description": "",
+  "main": "kaskadi-custom-element.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kaskadi/kaskadi-custom-element.git"
+  },
+  "keywords": [],
+  "author": "Klimapartner GmbH <kontakt@klimapartner.de> (https://klimapartner.de)",
+  "contributors": [
+    "Holger Will <h.will@klimapartner.de>",
+    "Alexis Lemaire <a.lemaire@klimapartner.de>"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kaskadi/kaskadi-custom-element/issues"
+  },
+  "homepage": "https://github.com/kaskadi/kaskadi-custom-element#readme",
+  "kaskadi": {
+    "s3-push": {
+      "files": [
+        {
+          "src": "kaskadi-custom-element.js",
+          "dest": "modules/@kaskadi/kaskadi-custom-element/{branch}kaskadi-custom-element.js"
+        },
+        {
+          "src": "example/index.html",
+          "dest": "modules/@kaskadi/kaskadi-custom-element/{branch}example/index.html"
+        }
+      ]
+    }
+  },
+  "dependencies": {}
+}
