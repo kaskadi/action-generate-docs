@@ -17,7 +17,7 @@ module.exports = ({ fs }) => {
     releasePath: transformPath(path, 'release/v1.0.0/')
   }
   return {
-    instructions: `${getElementInstructions(path)}\n\n${getBrowserInstructions(paths)}`
+    instructions: `${getElementInstructions(paths)}\n\n${getBrowserInstructions(paths)}`
   }
 }
 
