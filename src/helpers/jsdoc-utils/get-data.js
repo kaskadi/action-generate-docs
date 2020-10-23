@@ -1,9 +1,9 @@
 const { spawnSync } = require('child_process')
 
-module.exports = ({ glob, jsdoc2md }) => {
+module.exports = ({ glob, jsdoc2md }, type) => {
   const opts = {
     files: glob.sync('**/*.js', { ignore: 'node_modules/**' }),
-    'example-lang': 'js',
+    'example-lang': type === 'package' ? 'js' : 'html',
     'no-cache': true,
     'heading-depth': 2,
     plugin: '@godaddy/dmd'
