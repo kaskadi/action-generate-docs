@@ -42,8 +42,12 @@ function addAuthorizerData (request, authorizerData) {
 function replacePathParams (path, pathParams = {}) {
   return Object.entries(pathParams)
     .reduce((reducedPath, entry) => {
-      const param = entry[0].replace(/[+]/g, '\\+')
-      const regExp = new RegExp(`{${param}}`, 'g')
+      let key = entry[0]
+      if (key.slice(-1) === '+') {
+        // if the parameters ends with + that means we're dealing with a proxy so we will have to escape + to avoid any errors when replacing
+        key = key.slice(0, -1) + '\\' + key.slice(-1)
+      }
+      const regExp = new RegExp(`{${key}}`, 'g')
       return reducedPath.replace(regExp, entry[1])
     }, path)
 }
