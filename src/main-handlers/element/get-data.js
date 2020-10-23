@@ -14,7 +14,7 @@ module.exports = ({ fs }) => {
     : ''
   const paths = {
     masterPath: transformPath(path),
-    releasePath: transformPath(path, 'release/v1.0.0')
+    releasePath: transformPath(path, 'release/v1.0.0/')
   }
   return {
     instructions: `${getElementInstructions(path)}\n\n${getBrowserInstructions(paths)}`
