@@ -10,7 +10,7 @@ module.exports = ({ fs }) => {
   const matchingFiles = files.filter(file => file.dest.includes(pjson.main))
   if (matchingFiles.length === 0) {
     return {
-      instructions: 'Usage instructions unavailable: no published files were matching the _main_ file provided in [`package.json`](./package.json). You may want to have a look at the definition of `kaskadi.s3-push.files` custom field definition in [`package.json`](./package.json).'
+      instructions: '**Usage instructions unavailable:** none of the published files were matching the _main_ file provided in [`package.json`](./package.json). You may want to have a look at the definition of `kaskadi.s3-push.files` custom field definition in [`package.json`](./package.json).'
     }
   }
   const path = matchingFiles[0].dest
