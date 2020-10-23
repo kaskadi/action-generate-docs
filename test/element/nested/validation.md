@@ -1,37 +1,35 @@
+# Usage instructions
+
+In another element:
+```js
+// using the latest version
+import 'https://cdn.klimapartner.net/modules/@kaskadi/kaskadi-custom-element/kaskadi-custom-element.js'
+// using a specific version (here v1)
+import 'https://cdn.klimapartner.net/modules/@kaskadi/kaskadi-custom-element/release/v1.0.0/kaskadi-custom-element.js'
+```
+
+In the browser:
+```html
+<!-- using the latest version -->
+<script type="module" src="https://cdn.klimapartner.net/modules/@kaskadi/kaskadi-custom-element/kaskadi-custom-element.js"></script>
+<!-- using the latest version -->
+<script type="module" src="https://cdn.klimapartner.net/modules/@kaskadi/kaskadi-custom-element/release/v1.0.0/kaskadi-custom-element.js"></script>
+```
+
 # Custom element documentation
 
-## Functions
+## kaskadi-custom-element
 
-Name | Description
------- | -----------
-[protection(cloak, dagger)] | A quite wonderful function.
-[help(message, destination)] | A function to call for help.
+Template element for the Kaskadi application
 
-
-## protection(cloak, dagger)
-
-A quite wonderful function.
-
-**Kind**: global function  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| cloak | `object` | Privacy gown |
-| dagger | `object` | Security |
+| lang | `string` | element's language |
+| title | `string` | element's title |
 
-
-## help(message, destination)
-
-A function to call for help.
-
-**Kind**: global function  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| message | `string` | Message to send |
-| destination | `object` | Destination for message |
-
+**Example**  
+```html
+<kaskadi-custom-element title="Welcome!" lang="en"></kaskadi-custom-element>
+```
 <!-- LINKS -->
-
-[protection(cloak, dagger)]:#protectioncloak-dagger
-[help(message, destination)]:#helpmessage-destination

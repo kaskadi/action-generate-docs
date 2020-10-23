@@ -1,14 +1,35 @@
+# Usage instructions
+
+In another element:
+```js
+// using the latest version
+import 'https://cdn.klimapartner.net/modules/@kaskadi/kaskadi-custom-element/kaskadi-custom-element.js'
+// using a specific version (here v1)
+import 'https://cdn.klimapartner.net/modules/@kaskadi/kaskadi-custom-element/release/v1.0.0/kaskadi-custom-element.js'
+```
+
+In the browser:
+```html
+<!-- using the latest version -->
+<script type="module" src="https://cdn.klimapartner.net/modules/@kaskadi/kaskadi-custom-element/kaskadi-custom-element.js"></script>
+<!-- using the latest version -->
+<script type="module" src="https://cdn.klimapartner.net/modules/@kaskadi/kaskadi-custom-element/release/v1.0.0/kaskadi-custom-element.js"></script>
+```
+
 # Custom element documentation
 
-## protection(cloak, dagger)
+## kaskadi-custom-element
 
-A quite wonderful function.
+Template element for the Kaskadi application
 
-**Kind**: global function  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| cloak | `object` | Privacy gown |
-| dagger | `object` | Security |
+| lang | `string` | element's language |
+| title | `string` | element's title |
 
+**Example**  
+```html
+<kaskadi-custom-element title="Welcome!" lang="en"></kaskadi-custom-element>
+```
 <!-- LINKS -->
