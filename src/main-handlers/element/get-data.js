@@ -8,7 +8,9 @@ module.exports = ({ fs }) => {
       : undefined
     : undefined
   const path = uploadData
-    ? uploadData.filter(data => data.dest.includes(pjson.main))[0]
+    ? uploadData
+      .filter(data => data.dest.includes(pjson.main))[0]
+      .dest
     : ''
   const paths = {
     masterPath: transformPath(path),
