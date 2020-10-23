@@ -144,8 +144,8 @@ No examples found for this method.
 
 The following lambda functions are used in this API:
 - [hello-world](#hello-world)
-- [again](#again)
 - [again-hello-world](#again-hello-world)
+- [again](#again)
 - [hello-world-again](#hello-world-again)
 
 The following layers are used in this API:
@@ -159,19 +159,19 @@ _no layer defined in the [configuration file](./serverless.yml)._
 
 See [configuration file](./serverless.yml) for more details.
 
-## again <a name="again"></a>
-
-|  Name | Sources                      | Timeout |               Handler               |
-| :---: | :--------------------------- | :-----: | :---------------------------------: |
-| again | <ul><li>HTTP (GET)</li></ul> | default | [handler](./lambdas/again/index.js) |
-
-See [configuration file](./serverless.yml) for more details.
-
 ## again-hello-world <a name="again-hello-world"></a>
 
 |        Name       | Sources                      | Timeout |                     Handler                     |
 | :---------------: | :--------------------------- | :-----: | :---------------------------------------------: |
 | again-hello-world | <ul><li>HTTP (GET)</li></ul> | default | [handler](./lambdas/again-hello-world/index.js) |
+
+See [configuration file](./serverless.yml) for more details.
+
+## again <a name="again"></a>
+
+|  Name | Sources                      | Timeout |               Handler               |
+| :---: | :--------------------------- | :-----: | :---------------------------------: |
+| again | <ul><li>HTTP (GET)</li></ul> | default | [handler](./lambdas/again/index.js) |
 
 See [configuration file](./serverless.yml) for more details.
 

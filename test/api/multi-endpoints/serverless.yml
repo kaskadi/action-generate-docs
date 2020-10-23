@@ -32,6 +32,6 @@ provider:
     type: s3, sns, etc.
 functions:
   HelloWorld: ${file(./lambdas/hello-world/serverless.yml)}
-  Again: ${file(./lambdas/again/serverless.yml)}
   AgainHelloWorld: ${file(./lambdas/again-hello-world/serverless.yml)}
+  Again: ${file(./lambdas/again/serverless.yml)}
   HelloWorldAgain: ${file(./lambdas/hello-world-again/serverless.yml)}
