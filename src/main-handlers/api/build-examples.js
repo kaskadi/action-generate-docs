@@ -64,7 +64,7 @@ function formatNamedData (heading, data = '') {
 }
 
 function formatBlock (type, block) {
-  return block.length > 0 ? `_${type}:_\n\n\`\`\`HTTP\n${block.trim()}\n\`\`\`\n\n` : ''
+  return `_${type}:_\n\n\`\`\`HTTP\n${block.trim()}\n\`\`\`\n\n`
 }
 
 function formatExample (example, heading) {
