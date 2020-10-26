@@ -28,7 +28,7 @@ function getElementInstructions ({ masterPath, releasePath }) {
 \`\`\`js
 // using the latest version
 import '${masterPath}'
-// using a specific version (here v1)
+// using a specific version
 import '${releasePath}'
 \`\`\``
 }
@@ -38,7 +38,7 @@ function getBrowserInstructions ({ masterPath, releasePath }) {
 \`\`\`html
 <!-- using the latest version -->
 <script type="module" src="${masterPath}"></script>
-<!-- using the latest version -->
+<!-- using a specific version -->
 <script type="module" src="${releasePath}"></script>
 \`\`\``
 }
