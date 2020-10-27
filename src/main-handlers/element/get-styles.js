@@ -16,7 +16,7 @@ function getCustomVars (fs, main) {
 
 function buildStylesDocs (cssVars) {
   if (cssVars.length === 0) {
-    return 'No custom CSS properties found in this element...'
+    return 'No custom CSS properties found in this element.'
   }
   const cssVarsList = cssVars.map(cssVar => `- \`${cssVar}\``).join('\n')
   return `The following custom CSS properties are available for this element:\n\n${cssVarsList}`

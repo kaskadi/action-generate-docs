@@ -22,4 +22,4 @@ Template element for the Kaskadi application
 
 ## Custom styles
 
-No custom CSS properties found in this element...
+No custom CSS properties found in this element.
