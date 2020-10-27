@@ -1,15 +1,19 @@
 module.exports = ({ fs }) => {
-  const pjson = JSON.parse(fs.readFileSync('package.json', 'utf8'))
+  const { main, kaskadi } = JSON.parse(fs.readFileSync('package.json', 'utf8'))
   // TODO: below is my original approach for the code. This works only in Node 14+ and Node 14 will move to LTS on 27.10.2020 with Node 12 going to maintenance on 30.11.2020. This means we won't be using this syntax for now but may want to enable node14 in the action at some point in the future
-  // const files = pjson?.kaskadi?.['s3-push']?.files || []
-  const files = pjson.kaskadi
-    ? pjson.kaskadi['s3-push']
-      ? pjson.kaskadi['s3-push'].files || []
+  // const files = kaskadi?.['s3-push']?.files || []
+  const files = kaskadi
+    ? kaskadi['s3-push']
+      ? kaskadi['s3-push'].files || []
       : []
     : []
-  const matchingFiles = files.filter(file => file.dest.includes(pjson.main))
+  const matchingFiles = files.filter(file => file.dest.includes(main))
+  const baseData = {
+    'custom-styles': require('./get-styles.js')(fs, main)
+  }
   if (matchingFiles.length === 0) {
     return {
+      ...baseData,
       instructions: '**Usage instructions unavailable:** none of the published files were matching the _main_ file provided in [`package.json`](./package.json). You may want to have a look at the definition of `kaskadi.s3-push.files` custom field definition in [`package.json`](./package.json).'
     }
   }
@@ -19,6 +23,7 @@ module.exports = ({ fs }) => {
     releasePath: transformPath(path, 'release/v1.0.0/')
   }
   return {
+    ...baseData,
     instructions: `${getElementInstructions(paths)}\n\n${getBrowserInstructions(paths)}`
   }
 }
