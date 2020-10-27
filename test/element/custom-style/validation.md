@@ -36,4 +36,12 @@ Template element for the Kaskadi application
 
 ## Custom styles
 
-No custom CSS properties found in this element...
+The following custom CSS properties are available for this element:
+
+- `--icon-size`
+- `--background-color`
+- `--outline-color`
+- `--head-color`
+- `--day-color`
+- `--month-color`
+- `--name-color`

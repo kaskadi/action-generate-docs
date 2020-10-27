@@ -75,6 +75,10 @@ Template element for the Kaskadi application
 <kaskadi-custom-element title="Welcome!" lang="en"></kaskadi-custom-element>
 ```
 <!-- LINKS -->
+
+## Custom styles
+
+No custom CSS properties found in this element...
 <!-- automatically generated documentation will be placed in here -->
 
 <!-- You can customize this template as you'd like! -->

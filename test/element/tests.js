@@ -32,6 +32,12 @@ describe('element docs generation', function () {
         delete process.env.INPUT_TEMPLATE
       })
   })
+  it('should generate docs including custom style information', async () => {
+    await test(cwd, 'test/element/custom-style', 'validation.md')
+  })
+  it('should generate docs if no file matches the main file found in package.json', async () => {
+    await test(cwd, 'test/element/no-file', 'validation.md')
+  })
   describe('usage instructions printing', function () {
     it('should handle absence of match with main file', async () => {
       await test(cwd, 'test/element/usage/no-match', 'validation.md')

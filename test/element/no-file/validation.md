@@ -18,22 +18,8 @@ In the browser:
 
 # Custom element documentation
 
-## kaskadi-custom-element
-
-Template element for the Kaskadi application
-
-
-| Param | Type | Description |
-| --- | --- | --- |
-| lang | `string` | element's language |
-| title | `string` | element's title |
-
-**Example**  
-```html
-<kaskadi-custom-element title="Welcome!" lang="en"></kaskadi-custom-element>
-```
-<!-- LINKS -->
+No file is matching the main file (`kaskadi-custom-element.js`) provided in `package.json`...
 
 ## Custom styles
 
-No custom CSS properties found in this element...
+No file is matching the main file (`kaskadi-custom-element.js`) provided in `package.json`...
