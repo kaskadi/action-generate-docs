@@ -19,3 +19,7 @@ Template element for the Kaskadi application
 <kaskadi-custom-element title="Welcome!" lang="en"></kaskadi-custom-element>
 ```
 <!-- LINKS -->
+
+## Custom styles
+
+No custom CSS properties found in this element...
