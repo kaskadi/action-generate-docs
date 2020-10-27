@@ -58,7 +58,7 @@ The documentation generation for NPM packages is using `JSDOC`. It reads all `.j
 ---
 **Element (`lit-element`) documentation generation:**
 
-The documentation generation for custom element developed with `lit-element` is using `JSDOC`. It reads the file specified under the `main` field found in `package.json` and if it finds some `JSDOC`-style comments it will output the corresponding documentation.
+The documentation generation for custom element developed with `lit-element` is using `JSDOC`. It reads the file specified under the `main` field found in `package.json` and if it finds some `JSDOC`-style comments it will output the corresponding documentation. It also checks for any CSS custom variables and lists them in the documentation.
 
 It also uses `package.json` to extract information about the published component (under `kaskadi.s3-push.files`) in order to document how to use this element inside of another element or inside of the browser directly.
 
