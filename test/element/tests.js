@@ -52,6 +52,14 @@ describe('element docs generation', function () {
       await test(cwd, 'test/element/usage/no-kaskadi', 'validation.md')
     })
   })
+  describe('custom example language', function () {
+    it('should default to HTML example highlighting', async () => {
+      await test(cwd, 'test/element/example-lang/no-example-lang', 'validation.md')
+    })
+    it('should use the code highlighting specified under kaskadi.docs.example-lang for example highlighting', async () => {
+      await test(cwd, 'test/element/example-lang/regular', 'validation.md')
+    })
+  })
   after(() => {
     delete process.env.INPUT_TYPE
   })
