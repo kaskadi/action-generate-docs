@@ -1,7 +1,7 @@
-module.exports = ({ fs }) => {
-  const pjson = JSON.parse(fs.readFileSync('package.json', 'utf8'))
+module.exports = () => {
+  const { bin, name } = require(`${process.cwd()}/package.json`)
   return {
-    flags: pjson.bin ? '-g ' : '',
-    'repo-name': pjson.name
+    flags: bin ? '-g ' : '',
+    'repo-name': name
   }
 }

@@ -9,7 +9,7 @@ module.exports = ({ fs, glob, jsdoc2md }, type) => {
   }
   let files
   if (type !== 'package') {
-    const { main } = JSON.parse(fs.readFileSync('package.json', 'utf8'))
+    const { main } = require(`${process.cwd()}/package.json`)
     if (!fs.existsSync(main)) {
       return {
         main: `No file is matching the main file (\`${main}\`) provided in \`package.json\`...`
