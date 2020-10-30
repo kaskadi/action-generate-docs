@@ -7,9 +7,28 @@ module.exports = ({ fs, table }, main) => {
 
 function getCustomVars (fs, main) {
   const { readFileSync } = fs
-  const elem = readFileSync(main, 'utf8')
-  const customVars = findCustomVars(elem)
+  const styles = getStyles(readFileSync(main, 'utf8'))
+  const customVars = findCustomVars(styles)
   return filterCustomVars(customVars)
+}
+
+function getStyles (file) {
+  // this function extracts from the file the lines which are dedicated to styling only
+  const fileLines = file.split('\n')
+  const getLines = (fileLines, startToken, endToken) => {
+    const start = fileLines.findIndex(line => line.includes(startToken))
+    if (start === -1) return { start, end: -1 }
+    let startIndent = 0
+    for (const char of fileLines[start].split('')) {
+      if (char !== ' ') break
+      startIndent++
+    }
+    const end = fileLines.slice(start, -1).findIndex(line => line.startsWith(endToken, startIndent)) + start
+    return { start, end }
+  }
+  const staticLines = getLines(fileLines, 'static get styles', '}')
+  const dynamicLines = getLines(fileLines, '<style>', '</style>')
+  return [...fileLines.slice(staticLines.start, staticLines.end + 1), ...fileLines.slice(dynamicLines.start, dynamicLines.end + 1)].join('\n')
 }
 
 function findCustomVars (elem) {
