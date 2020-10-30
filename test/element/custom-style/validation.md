@@ -38,10 +38,12 @@ Template element for the Kaskadi application
 
 The following custom CSS properties are available for this element:
 
-- `--icon-size`
-- `--background-color`
-- `--outline-color`
-- `--head-color`
-- `--day-color`
-- `--month-color`
-- `--name-color`
+| CSS property name  | Default |
+| :----------------- | :-----: |
+| --icon-size        |  `56px` |
+| --background-color |         |
+| --outline-color    |         |
+| --head-color       |         |
+| --day-color        |         |
+| --month-color      |         |
+| --name-color       |         |

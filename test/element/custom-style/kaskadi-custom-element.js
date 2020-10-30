@@ -26,6 +26,7 @@ class KaskadiCustomElement extends KaskadiElement {
   static get styles () {
     return css`
       :host, svg{
+        --icon-size: 56px;
         width:var(--icon-size, 48px);
         height:var(--icon-size, 48px);
         display: inline-block;
