@@ -42,9 +42,9 @@ function buildStylesDocs (table, cssVars) {
     return 'No custom CSS properties found in this element.'
   }
   const cssVarsTable = table([
-    ['CSS variable', 'Default'],
+    ['CSS property name', 'Default'],
     ...cssVars.map(variable => [variable.name, variable.default ? `\`${variable.default}\`` : ''])
   ]
-  , { align: ['c', 'c'] })
+  , { align: ['l', 'c'] })
   return `The following custom CSS properties are available for this element:\n\n${cssVarsTable}`
 }
