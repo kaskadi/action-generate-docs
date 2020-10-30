@@ -17,6 +17,7 @@ function getStyles (file) {
   const fileLines = file.split('\n')
   const getLines = (fileLines, startToken, endToken) => {
     const start = fileLines.findIndex(line => line.includes(startToken))
+    if (start === -1) return { start, end: -1 }
     let startIndent = 0
     for (const char of fileLines[start].split('')) {
       if (char !== ' ') break
