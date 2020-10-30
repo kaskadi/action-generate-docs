@@ -1,8 +1,8 @@
-module.exports = (fs, main) => {
+module.exports = ({ fs, table }, main) => {
   if (!fs.existsSync(main)) {
     return `No file is matching the main file (\`${main}\`) provided in \`package.json\`...`
   }
-  return buildStylesDocs(getCustomVars(fs, main))
+  return buildStylesDocs(table, getCustomVars(fs, main))
 }
 
 function getCustomVars (fs, main) {
@@ -30,7 +30,6 @@ function findCustomVars (elem) {
 
 function filterCustomVars (customVars) {
   const uniqueVars = [...new Set(customVars.map(variable => variable.name))]
-  console.log(uniqueVars)
   return uniqueVars.map(variable => {
     const matchingVars = customVars.filter(customVariable => customVariable.name === variable)
     const matchingVarsWithDefault = matchingVars.filter(customVariable => customVariable.default)
@@ -38,10 +37,14 @@ function filterCustomVars (customVars) {
   })
 }
 
-function buildStylesDocs (cssVars) {
+function buildStylesDocs (table, cssVars) {
   if (cssVars.length === 0) {
     return 'No custom CSS properties found in this element.'
   }
-  const cssVarsList = cssVars.map(cssVar => `- \`${cssVar}\``).join('\n')
-  return `The following custom CSS properties are available for this element:\n\n${cssVarsList}`
+  const cssVarsTable = table([
+    ['CSS variable', 'Default'],
+    ...cssVars.map(variable => [variable.name, variable.default ? `\`${variable.default}\`` : ''])
+  ]
+  , { align: ['c', 'c'] })
+  return `The following custom CSS properties are available for this element:\n\n${cssVarsTable}`
 }

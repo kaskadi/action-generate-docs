@@ -1,5 +1,5 @@
 module.exports = (moduleDir, templatePath, type) => {
-  const modules = loadModuleDeps(moduleDir)
+  const modules = loadModuleDeps(moduleDir, type)
   console.log('INFO: generating documentation from provided template and all JS files in repository...')
   const data = {
     ...require('./get-data.js')(modules, type),
@@ -10,12 +10,13 @@ module.exports = (moduleDir, templatePath, type) => {
   modules.fs.writeFileSync('README.md', docs, 'utf8')
 }
 
-function loadModuleDeps (moduleDir) {
+function loadModuleDeps (moduleDir, type) {
   const modules = {
     fs: require('fs'),
     replaceInFile: require('../replace-in-file.js'),
     glob: require(`${moduleDir}/node_modules/glob`),
-    jsdoc2md: require(`${moduleDir}/node_modules/jsdoc-to-markdown`)
+    jsdoc2md: require(`${moduleDir}/node_modules/jsdoc-to-markdown`),
+    ...(type === 'element' && { table: require(`${moduleDir}/node_modules/markdown-table`) })
   }
   return modules
 }

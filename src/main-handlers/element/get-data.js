@@ -1,4 +1,4 @@
-module.exports = ({ fs }) => {
+module.exports = (modules) => {
   const { main, kaskadi } = require(`${process.cwd()}/package.json`)
   // TODO: below is my original approach for the code. This works only in Node 14+ and Node 14 will move to LTS on 27.10.2020 with Node 12 going to maintenance on 30.11.2020. This means we won't be using this syntax for now but may want to enable node14 in the action at some point in the future
   // const files = kaskadi?.['s3-push']?.files || []
@@ -9,7 +9,7 @@ module.exports = ({ fs }) => {
     : []
   const matchingFiles = files.filter(file => file.dest.includes(main))
   const baseData = {
-    'custom-styles': require('./get-styles.js')(fs, main)
+    'custom-styles': require('./get-styles.js')(modules, main)
   }
   if (matchingFiles.length === 0) {
     return {
