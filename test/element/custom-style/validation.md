@@ -42,7 +42,7 @@ The following custom CSS properties are available for this element:
 | :----------------- | :-----: |
 | --icon-size        |  `56px` |
 | --background-color |  `red`  |
-| --outline-color    |         |
+| --outline-color    |  `red`  |
 | --head-color       |         |
 | --day-color        |         |
 | --month-color      |         |

@@ -44,6 +44,11 @@ class KaskadiCustomElement extends KaskadiElement {
 
   render () {
     return html`
+      <style>
+        :host {
+          --outline-color: red;
+        }
+      </style>
       <h1>${this.title}</h1>
       <p>Current language is ${this.lang}</p>
     `
