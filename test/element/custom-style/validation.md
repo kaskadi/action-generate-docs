@@ -41,7 +41,7 @@ The following custom CSS properties are available for this element:
 | CSS property name  | Default |
 | :----------------- | :-----: |
 | --icon-size        |  `56px` |
-| --background-color |         |
+| --background-color |  `red`  |
 | --outline-color    |         |
 | --head-color       |         |
 | --day-color        |         |

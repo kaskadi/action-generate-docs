@@ -13,10 +13,10 @@ function getCustomVars (fs, main) {
 }
 
 function findCustomVars (elem) {
-  const customVarsRegex = new RegExp(/(--.[^:,)]+)(?:(:)(.[^;)]+))?/, 'g')
+  const customVarsRegex = new RegExp(/(--.[^:,)]+)(?:(:)(.[^;\n]+))?/, 'g')
   // Regexp explanation:
   // - (--.[^:,)]+): have a capture group which matches a custom property (-- followed by any characters except colon and comma)
-  // - (?:(:)(.[^;)]+))?: we match up to 1 time a group consisting of a colon followed by anything which is not a semi-colon or a closing round bracket. The only part captured from this match is everything after the colon
+  // - (?:(:)(.[^;)\n]+))?: we match up to 1 time a group consisting of a colon followed by anything which is not a semi-colon or a line feed. The only part captured from this match is everything after the colon
   const matches = Array.from(elem.matchAll(customVarsRegex)) // we use here matchAll because we do a global match and unfortunately .match() doesn't return the individual capture groups. .matchAll() returns an iteratble, so we have to turn it into an Array
   return matches.map(match => {
     const name = match[1]

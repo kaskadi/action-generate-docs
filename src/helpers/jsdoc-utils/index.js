@@ -1,6 +1,6 @@
 module.exports = (moduleDir, templatePath, type) => {
   const modules = loadModuleDeps(moduleDir, type)
-  console.log('INFO: generating documentation from provided template and all JS files in repository...')
+  console.log('INFO: generating documentation from provided template and appropriated JS files in repository...')
   const data = {
     ...require('./get-data.js')(modules, type),
     ...require(`${moduleDir}/get-data.js`)(modules)
