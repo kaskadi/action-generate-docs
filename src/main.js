@@ -1,4 +1,4 @@
-const { getInput, startGroup, endGroup, warning } = require('@actions/core')
+const { getInput, startGroup, endGroup, error } = require('@actions/core')
 const path = require('path')
 const fs = require('fs')
 
@@ -6,9 +6,9 @@ const type = getInput('type', { required: true })
 const templatePath = getInput('template')
 
 if (!fs.existsSync(`${__dirname}/main-handlers/${type}`)) {
-  const warningMsg = `${type} is not a supported repository type... Please see action documentation for more information.`
-  warning(warningMsg)
-  console.log(`WARNING: ${warningMsg} Aborting job...`)
+  const errorMsg = `${type} is not a supported repository type... Please see action documentation for more information.`
+  error(errorMsg)
+  console.log(`ERROR: ${errorMsg} Aborting job...`)
   process.exit(0)
 }
 
