@@ -9,6 +9,9 @@ module.exports = () => {
 }
 
 function spawnGit (args) {
+  if (process.env.TEST_ENV) {
+    args = addFlag(args, '--dry-run')
+  }
   spawnSync('git', args, { stdio: 'inherit' })
 }
 
